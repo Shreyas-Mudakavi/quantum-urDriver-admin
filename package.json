@@ -1,7 +1,6 @@
 {
   "name": "test",
   "version": "0.1.0",
-  "proxy": "http://3.239.229.120:5000",
   "private": true,
   "dependencies": {
     "@react-google-maps/api": "^2.18.1",

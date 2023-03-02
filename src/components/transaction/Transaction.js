@@ -58,7 +58,7 @@ export default function Transaction() {
       try {
         setDel(true);
         const res = await axios.delete(
-          `/api/admin/category/${id}`,
+          `http://3.239.229.120:5000/api/admin/category/${id}`,
 
           {
             headers: { Authorization: token },
@@ -79,7 +79,7 @@ export default function Transaction() {
       try {
         if (searchInput) {
           const res = await axios.get(
-            `/api/admin?search=${searchInput}&in=shops`,
+            `http://3.239.229.120:5000/api/admin?search=${searchInput}&in=shops`,
             {
               headers: { Authorization: token },
             }
@@ -88,7 +88,7 @@ export default function Transaction() {
           navigate("/admin/shops?page=1");
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });
         } else {
-          const res = await axios.get("/api/wallet/getAlltransactions", {
+          const res = await axios.get("http://3.239.229.120:5000/api/wallet/getAlltransactions", {
             headers: { Authorization: token },
           });
           console.log("transaction", res.data);

@@ -38,7 +38,7 @@ const ViewDriver = () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
 
-        const { data } = await axios.get(`/api/admin/user/${id}`, {
+        const { data } = await axios.get(`http://3.239.229.120:5000/api/admin/user/${id}`, {
           headers: { Authorization: token },
         });
         console.log("driver", data.data);

@@ -55,7 +55,7 @@ export default function Wallet() {
       try {
         setDel(true);
         const res = await axios.delete(
-          `/api/admin/user/${id}`,
+          `http://3.239.229.120:5000/api/admin/user/${id}`,
 
           {
             headers: { Authorization: token },
@@ -76,7 +76,7 @@ export default function Wallet() {
       try {
         if (searchInput) {
           const res = await axios.get(
-            `/api/admin?search=${searchInput}&in=users`,
+            `http://3.239.229.120:5000/api/admin?search=${searchInput}&in=users`,
 
             {
               headers: { Authorization: token },
@@ -87,7 +87,7 @@ export default function Wallet() {
           dispatch({ type: "FETCH_SUCCESS", payload: res.data });
         } else {
           const res = await axios.get(
-            "/api/wallet/getAllWallets",
+            "http://3.239.229.120:5000/api/wallet/getAllWallets",
 
             {
               headers: { Authorization: token },

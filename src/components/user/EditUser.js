@@ -52,7 +52,7 @@ export default function EditUserModel(props) {
         dispatch({ type: "FETCH_REQUEST" });
 
         const { data } = await axios.get(
-          `/api/admin/user/${id}`,
+          `http://3.239.229.120:5000/api/admin/user/${id}`,
           {
             headers: { Authorization: token },
           }
@@ -88,7 +88,7 @@ export default function EditUserModel(props) {
       dispatch({ type: "UPDATE_REQUEST" });
 
       const { data } = await axios.put(
-        `/api/admin/user/${id}`,
+        `http://3.239.229.120:5000/api/admin/user/${id}`,
         {
           firstname,
           lastname,

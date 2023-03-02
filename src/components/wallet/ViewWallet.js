@@ -39,7 +39,7 @@ const Viewwallet = () => {
         dispatch({ type: "FETCH_REQUEST" });
 
         const { data } = await axios.get(
-          `/api/admin/wallet/${id}`,
+          `http://3.239.229.120:5000/api/admin/wallet/${id}`,
           {
             headers: { Authorization: token },
           }

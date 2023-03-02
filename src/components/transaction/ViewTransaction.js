@@ -42,7 +42,7 @@ const ViewTransaction = () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
 
-        const { data } = await axios.get(`/api/admin/transaction/${id}`, {
+        const { data } = await axios.get(`http://3.239.229.120:5000/api/admin/transaction/${id}`, {
           headers: { Authorization: token },
         });
         console.log("transaction", data.data);

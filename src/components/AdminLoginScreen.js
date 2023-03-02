@@ -36,7 +36,7 @@ export default function AdminLoginScreen() {
     try {
       dispatch({ type: "FETCH_REQUEST" });
       const { data } = await axios.post(
-        "/api/admin/login",
+        "http://3.239.229.120:5000/api/admin/login",
         {
           email: username,
           password: password,
@@ -69,7 +69,7 @@ export default function AdminLoginScreen() {
       <div className="login-box">
         <div className="login-logo">
           <Link to="/">
-            <b>Boston George</b>
+            <b>UR Driver</b>
           </Link>
         </div>
         <div className="card">

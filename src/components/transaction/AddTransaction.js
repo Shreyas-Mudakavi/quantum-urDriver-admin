@@ -52,7 +52,7 @@ export default function AddTransaction() {
 
     try {
       const { data } = await axios.post(
-        "/api/admin/category/create",
+        "http://3.239.229.120:5000/api/admin/category/create",
         {
           name,
           description,
