@@ -16,7 +16,7 @@ function reducer(state, action) {
     case "USER_SIGNIN":
       return {
         ...state,
-        userInfo: action.payload.user,
+        userInfo: action.payload.user_profile.user,
         token: action.payload.token,
       };
     case "USER_SIGNOUT":

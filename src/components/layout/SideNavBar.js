@@ -49,7 +49,7 @@ export default function SideNavbar() {
                 <a href="index3.html" className="brand-link">
                   {/* <img src={logo} alt="" width={"50px"} height="auto" /> */}
                   <span className="brand-text ml-2 font-weight-light">
-                    Boston George
+                    UR-Driver
                   </span>
                 </a>
               )}
@@ -80,9 +80,7 @@ export default function SideNavbar() {
                       )}
                       <span className="info-text">
                         Welcome{" "}
-                        {userInfo
-                          ? `${userInfo.firstname} ${userInfo.lastname}`
-                          : "Back"}
+                        {userInfo ? userInfo.name : "Back"}
                       </span>
                     </Link>
                   )}

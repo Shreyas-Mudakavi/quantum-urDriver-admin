@@ -43,14 +43,14 @@ export default function AdminLoginScreen() {
         }
       );
 
-      console.log("data", data.data);
-      if (data.data.token) {
-        ctxDispatch({ type: "USER_SIGNIN", payload: data.data.user_profile });
+      console.log("login data", data.data);
+      if (data.data) {
+        ctxDispatch({ type: "USER_SIGNIN", payload: data.data });
         localStorage.setItem("userInfo", JSON.stringify(data.data.user_profile.user));
         localStorage.setItem("token", JSON.stringify(data.data.token));
 
-        navigate("/admin/dashboard");
         dispatch({ type: "FETCH_SUCCESS" });
+        navigate("/admin/dashboard");
       } else {
         toast.error(data, { position: toast.POSITION.TOP_CENTER });
       }
