@@ -39,10 +39,14 @@ export default function AccountPopover() {
   const handleClose = () => {
     setOpen(null);
 
-    dispatch(logOut());
-
-    navigate('/login', { replace: true });
   };
+  
+  const handleLogout = () => {
+    dispatch(logOut());
+  
+    navigate('/login', { replace: true });
+
+  }
 
   return (
     <>
@@ -78,7 +82,7 @@ export default function AccountPopover() {
             p: 0,
             mt: 1.5,
             ml: 0.75,
-            width: 180,
+            // width: 180,
             '& .MuiMenuItem-root': {
               typography: 'body2',
               borderRadius: 0.75,
@@ -107,7 +111,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </Popover>
