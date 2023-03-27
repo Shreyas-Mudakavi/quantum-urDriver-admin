@@ -15,65 +15,58 @@ import {
   Avatar,
   Switch,
   FormControlLabel,
-} from '@mui/material';
-import { Helmet } from 'react-helmet-async';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import moment from 'moment';
+} from "@mui/material";
+import { Helmet } from "react-helmet-async";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import moment from "moment";
 
 const EditUser = () => {
   const { token } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
-  const [openVerify, setOpenVerify] = useState(false);
-  const [openViewPanCard, setOpenViewPanCard] = useState(false);
-  const [openViewRegis, setOpenViewRegis] = useState(false);
   const [expiryDate, setExpiryDate] = useState();
   const [values, setValues] = useState({
-    name: '',
-    city: '',
-    profile_image: '',
-    phone: '',
-    verified: '',
-    createdAt: '',
-    updatedAt: '',
-    sex: '',
+    name: "",
+    city: "",
+    profile_image: "",
+    phone: "",
+    verified: "",
+    createdAt: "",
+    updatedAt: "",
+    sex: "",
     age: 0,
-    email: '',
+    email: "",
   });
-  const [role, setRole] = useState('');
-  const [activate, setActivate] = useState();
+  const [role, setRole] = useState("");
+  const [deactivated, setDeactivated] = useState();
   const params = useParams();
 
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: 'background.paper',
+    bgcolor: "background.paper",
     // border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    height: '30rem',
-    overflow: 'scroll',
-    borderRadius: '0.6rem',
+    height: "30rem",
+    overflow: "scroll",
+    borderRadius: "0.6rem",
   };
 
-  const styleTwo = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    // border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    // height: '40rem',
-    borderRadius: '0.6rem',
+  const toastOptions = {
+    position: "bottom-center",
+    autoClose: 3000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "colored",
   };
 
   const handleSelectChange = (e) => {
@@ -81,7 +74,7 @@ const EditUser = () => {
   };
 
   const handleDeactivateChange = (e) => {
-    setActivate(e.target.checked);
+    setDeactivated(e.target.checked);
   };
 
   const handleDateChange = (e) => {
@@ -89,66 +82,38 @@ const EditUser = () => {
   };
 
   const handleEditClose = () => setOpenEdit(false);
-  const handleVerifyClose = () => setOpenVerify(false);
-  const handleViewPanCardClose = () => setOpenViewPanCard(false);
-  const handleViewRegisClose = () => setOpenViewRegis(false);
-
-  const handleViewPanCardOpen = () => setOpenViewPanCard(true);
-  const handleViewRegisOpen = () => setOpenViewRegis(true);
 
   const handleEditOpen = () => {
     setOpenEdit(true);
   };
 
-  const handleVerifyOpen = () => {
-    setOpenVerify(true);
-  };
-
   const handleEditSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('update');
+    console.log("update");
 
     editUser(params?.id);
 
     setOpenEdit(false);
   };
 
-  const verifyUser = async () => {
-    const userId = params?.id;
-
-    try {
-      const { data } = await axios.put(
-        `http://localhost:5000/api/admin/verify-user/${params?.id}`,
-        { expiryDate, userId: userId },
-        { headers: { Authorization: token } }
-      );
-
-      console.log(data);
-      getUser();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleVerify = async (e) => {
-    e.preventDefault();
-
-    verifyUser();
-
-    setOpenVerify(false);
-  };
-
-  console.log(activate);
+  console.log(deactivated);
 
   const editUser = async (id) => {
-    const { firstname, city, lastname, license, panCard, profilePic, registration } = values;
+    const {
+      firstname,
+      city,
+      lastname,
+      license,
+      panCard,
+      profilePic,
+      registration,
+    } = values;
 
     const account_type = role;
-    const deactivated = activate;
 
     try {
-      console.log('deac', deactivated);
+      console.log("deac", deactivated);
       const { data } = await axios.put(
         `http://3.239.229.120:5000/api/admin/user/${id}`,
         { account_type, deactivated },
@@ -157,26 +122,32 @@ const EditUser = () => {
         }
       );
 
-      console.log('upadted! ', data);
+      console.log("upadted! ", data);
 
+      toast.success("User updated!", toastOptions);
       getUser();
       //   fetchUsers();
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong. Please try again later", toastOptions);
     }
   };
 
   const getUser = async (id) => {
     setLoading(true);
     try {
-      const { data } = await axios.get(`http://3.239.229.120:5000/api/admin/user/${params?.id}`, {
-        headers: { Authorization: token },
-      });
+      const { data } = await axios.get(
+        `http://3.239.229.120:5000/api/admin/user/${params?.id}`,
+        {
+          headers: { Authorization: token },
+        }
+      );
 
-      console.log('user ', data);
+      console.log("user ", data);
 
       setValues({
         name: data?.data?.user?.name,
+        email: data?.data?.user?.email,
         city: data?.data?.user?.city,
         profile_image: data?.data?.user?.profile_image,
         phone: data?.data?.user?.phone,
@@ -188,7 +159,7 @@ const EditUser = () => {
       });
 
       setRole(data?.data?.user?.account_type);
-      setActivate(data?.data?.user?.deactivated);
+      setDeactivated(data?.data?.user?.deactivated);
     } catch (error) {
       console.log(error);
     }
@@ -218,7 +189,7 @@ const EditUser = () => {
             strokeWidth={1.5}
             stroke="currentColor"
             // className="w-6 h-6"
-            style={{ width: '2rem', marginLeft: '1rem', cursor: 'pointer' }}
+            style={{ width: "2rem", marginLeft: "1rem", cursor: "pointer" }}
             onClick={() => handleEditOpen()}
           >
             <path
@@ -229,16 +200,37 @@ const EditUser = () => {
           </svg>
         </>
         <Divider />
-        <Box component="div" sx={{ border: '1px solid #E8EBEE', width: '100%', height: '100%', p: 2 }}>
-          <Grid container spacing={{ xs: 2, md: 4 }} direction={{ xs: 'column', md: 'row' }}>
+        <Box
+          component="div"
+          sx={{
+            border: "1px solid #E8EBEE",
+            width: "100%",
+            height: "100%",
+            p: 2,
+          }}
+        >
+          <Grid
+            container
+            spacing={{ xs: 2, md: 4 }}
+            direction={{ xs: "column", md: "row" }}
+          >
             <Grid item xs={12} md={5}>
               <div>
                 {loading ? (
-                  <Skeleton variant="circular" animation="wave" width={100} height={100}>
+                  <Skeleton
+                    variant="circular"
+                    animation="wave"
+                    width={100}
+                    height={100}
+                  >
                     <Avatar />
                   </Skeleton>
                 ) : (
-                  <img src={values?.profile_image} alt={values?.name} style={{ width: '12rem' }} />
+                  <img
+                    src={values?.profile_image}
+                    alt={values?.name}
+                    style={{ width: "12rem" }}
+                  />
                 )}
               </div>
             </Grid>
@@ -253,9 +245,10 @@ const EditUser = () => {
                     </div>
                     <p>{values?.name}</p>
                   </div>
+
                   <div>
                     <div>
-                      <b>Role</b>
+                      <b>Account type</b>
                     </div>
                     <p>{role}</p>
                   </div>
@@ -264,7 +257,15 @@ const EditUser = () => {
                     <div>
                       <b>Updated At</b>
                     </div>
-                    <p>{moment(values?.updatedAt).utc().format('MMMM DD, YYYY')}</p>
+                    <p>
+                      {moment(values?.updatedAt).utc().format("MMMM DD, YYYY")}
+                    </p>
+                  </div>
+                  <div>
+                    <div>
+                      <b>Sex</b>
+                    </div>
+                    <p>{values?.sex}</p>
                   </div>
                   {/* {values?.license && (
                 <div>
@@ -278,38 +279,52 @@ const EditUser = () => {
                 <Grid item md={2}>
                   <div>
                     <div>
+                      <b>Email</b>
+                    </div>
+                    <p>{values?.email}</p>
+                  </div>
+                  <div>
+                    <div>
                       <b>City</b>
                     </div>
                     <p>{values?.city}</p>
                   </div>
                   <div>
                     <div>
-                      <b>Verified</b>
+                      <b>Deactivated</b>
                     </div>
                     <p>
-                      {activate ? (
+                      {deactivated ? (
                         <svg
-                          style={{ width: '2rem' }}
+                          style={{ width: "2rem" }}
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-2 h-2"
+                          // className="not-verified"
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M4.5 12.75l6 6 9-13.5"
+                          />
                         </svg>
                       ) : (
                         <svg
-                          style={{ width: '2rem' }}
+                          style={{ width: "2rem" }}
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="not-verified"
+                          // className="w-2 h-2"
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
                         </svg>
                       )}
                     </p>
@@ -327,7 +342,16 @@ const EditUser = () => {
                     <div>
                       <b>Created At</b>
                     </div>
-                    <p>{moment(values?.createdAt).utc().format('MMMM DD, YYYY')}</p>
+                    <p>
+                      {moment(values?.createdAt).utc().format("MMMM DD, YYYY")}
+                    </p>
+                  </div>
+
+                  <div>
+                    <div>
+                      <b>Age</b>
+                    </div>
+                    <p>{values?.age}</p>
                   </div>
                 </Grid>
               </>
@@ -350,7 +374,7 @@ const EditUser = () => {
           </Typography> */}
             <Stack direction="column" spacing={3}>
               <form onSubmit={handleEditSubmit}>
-                <div style={{ margin: '2rem 0rem' }}>
+                <div style={{ margin: "2rem 0rem" }}>
                   <TextField
                     fullWidth
                     disabled
@@ -363,7 +387,7 @@ const EditUser = () => {
                     value={values?.name}
                   />
                 </div>
-                <div style={{ margin: '2rem 0rem' }}>
+                <div style={{ margin: "2rem 0rem" }}>
                   <TextField
                     fullWidth
                     disabled
@@ -376,7 +400,7 @@ const EditUser = () => {
                     value={values?.city}
                   />
                 </div>
-                <div style={{ margin: '2rem 0rem' }}>
+                <div style={{ margin: "2rem 0rem" }}>
                   <TextField
                     fullWidth
                     disabled
@@ -389,7 +413,7 @@ const EditUser = () => {
                     value={values?.sex}
                   />
                 </div>
-                <div style={{ margin: '2rem 0rem' }}>
+                <div style={{ margin: "2rem 0rem" }}>
                   <TextField
                     fullWidth
                     disabled
@@ -403,8 +427,10 @@ const EditUser = () => {
                   />
                 </div>
 
-                <div style={{ margin: '2rem 0rem' }}>
-                  <InputLabel id="demo-simple-select-helper-label">Account type</InputLabel>
+                <div style={{ margin: "2rem 0rem" }}>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Account type
+                  </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
@@ -418,15 +444,29 @@ const EditUser = () => {
                   </Select>
                 </div>
 
-                {/* <div style={{ margin: '2rem 0rem' }}>
+                {/* <div style={{ margin: "2rem 0rem" }}>
                   <FormControlLabel
-                    control={<Switch checked={activate} onChange={handleDeactivateChange} />}
-                    label={`Deactivate ${role}`}
+                    control={
+                      <Switch
+                        checked={deactivated}
+                        onChange={handleDeactivateChange}
+                      />
+                    }
+                    label={`Deactivate this user`}
                   />
-                  {activate && <p style={{ color: 'red' }}>You are deactivating this user!</p>}
+                  {deactivated && (
+                    <p style={{ color: "red" }}>
+                      You are deactivating this user!
+                    </p>
+                  )}
                 </div> */}
 
-                <Button type="submit" variant="contained" color="primary" size="medium">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  size="medium"
+                >
                   Update
                 </Button>
 
@@ -436,7 +476,7 @@ const EditUser = () => {
                   color="error"
                   size="medium"
                   onClick={handleEditClose}
-                  style={{ marginLeft: '1rem' }}
+                  style={{ marginLeft: "1rem" }}
                 >
                   Cancel
                 </Button>
@@ -445,6 +485,8 @@ const EditUser = () => {
           </Box>
         </Modal>
       </Container>
+
+      <ToastContainer />
     </>
   );
 };

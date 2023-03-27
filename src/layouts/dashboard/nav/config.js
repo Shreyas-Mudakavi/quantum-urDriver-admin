@@ -1,40 +1,45 @@
 // component
-import SvgColor from '../../../components/svg-color';
+import SvgColor from "../../../components/svg-color";
 
 // ----------------------------------------------------------------------
 
-const icon = (name) => <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />;
+const icon = (name) => (
+  <SvgColor
+    src={`/assets/icons/navbar/${name}.svg`}
+    sx={{ width: 1, height: 1 }}
+  />
+);
 
 const navConfig = [
   {
-    title: 'dashboard',
-    path: '/dashboard/app',
-    icon: icon('ic_analytics'),
+    title: "dashboard",
+    path: "/dashboard/app",
+    icon: icon("ic_analytics"),
   },
   {
-    title: 'user',
-    path: '/dashboard/user',
-    icon: icon('ic_user'),
+    title: "user",
+    path: "/dashboard/user",
+    icon: icon("ic_user"),
   },
   {
-    title: 'Drivers',
-    path: '/dashboard/driver',
-    icon: icon('ic_user'),
+    title: "Drivers",
+    path: "/dashboard/driver",
+    icon: icon("ic_user"),
   },
   {
-    title: 'Wallet',
-    path: '/dashboard/wallet',
-    icon: icon('ic_wallet'),
+    title: "Wallet",
+    path: "/dashboard/wallet",
+    icon: icon("ic_wallet"),
   },
   {
-    title: 'Transactions',
-    path: '/dashboard/transaction',
-    icon: icon('ic_transaction'),
+    title: "Transactions",
+    path: "/dashboard/transaction",
+    icon: icon("ic_transaction"),
   },
   {
-    title: 'Trips',
-    path: '/dashboard/trip',
-    icon: icon('ic_trip'),
+    title: "Rides",
+    path: "/dashboard/trip",
+    icon: icon("ic_trip"),
   },
 
   // {

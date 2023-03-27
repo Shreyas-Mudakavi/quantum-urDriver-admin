@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 // @mui
-import { styled, alpha } from '@mui/material/styles';
+import { styled, alpha } from "@mui/material/styles";
 import {
   Toolbar,
   Tooltip,
@@ -11,31 +11,31 @@ import {
   Select,
   MenuItem,
   Divider,
-} from '@mui/material';
+} from "@mui/material";
 // component
-import Iconify from '../../../components/iconify';
-import { useLocation } from 'react-router-dom';
+import Iconify from "../../../components/iconify";
+import { useLocation } from "react-router-dom";
 
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled(Toolbar)(({ theme }) => ({
   height: 96,
-  display: 'flex',
-  justifyContent: 'space-between',
+  display: "flex",
+  justifyContent: "space-between",
   padding: theme.spacing(0, 1, 0, 3),
 }));
 
 const StyledSearch = styled(OutlinedInput)(({ theme }) => ({
   width: 240,
-  transition: theme.transitions.create(['box-shadow', 'width'], {
+  transition: theme.transitions.create(["box-shadow", "width"], {
     easing: theme.transitions.easing.easeInOut,
     duration: theme.transitions.duration.shorter,
   }),
-  '&.Mui-focused': {
+  "&.Mui-focused": {
     width: 320,
     boxShadow: theme.customShadows.z8,
   },
-  '& fieldset': {
+  "& fieldset": {
     borderWidth: `1px !important`,
     borderColor: `${alpha(theme.palette.grey[500], 0.32)} !important`,
   },
@@ -49,15 +49,25 @@ UserListToolbar.propTypes = {
   onFilterName: PropTypes.func,
 };
 
-export default function UserListToolbar({ numSelected, filterName, onFilterName, filterRole, onFilterRole }) {
+export default function UserListToolbar({
+  numSelected,
+  filterName,
+  onFilterName,
+  filterType,
+  onFilterType,
+  fetchTransactions,
+  filterStatus,
+  onFilterStatus,
+  fetchTrips,
+}) {
   const location = useLocation();
 
   return (
     <StyledRoot
       sx={{
         ...(numSelected > 0 && {
-          color: 'primary.main',
-          bgcolor: 'primary.lighter',
+          color: "primary.main",
+          bgcolor: "primary.lighter",
         }),
       }}
     >
@@ -73,32 +83,57 @@ export default function UserListToolbar({ numSelected, filterName, onFilterName,
             placeholder="Search user..."
             startAdornment={
               <InputAdornment position="start">
-                <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', width: 20, height: 20 }} />
+                <Iconify
+                  icon="eva:search-fill"
+                  sx={{ color: "text.disabled", width: 20, height: 20 }}
+                />
               </InputAdornment>
             }
           />
-          {/* {location.pathname === '/dashboard/user' && (
+          {location.pathname === "/dashboard/transaction" && (
             <>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                value={filterRole}
+                value={filterType}
                 label="role"
-                onChange={onFilterRole}
+                onChange={onFilterType}
                 displayEmpty
               >
-                <MenuItem value="">Select role</MenuItem>
+                <MenuItem value="" onClick={() => fetchTransactions()}>
+                  Select Type
+                </MenuItem>
                 <Divider as="div" />
-                <MenuItem value="admin">Admin</MenuItem>
-                <MenuItem value="partner-driver">Partner Driver</MenuItem>
-                <MenuItem value="buraq moto">Buraq moto</MenuItem>
-                <MenuItem value="car-owner">Car owner</MenuItem>
-                <MenuItem value="passenger">Passenger</MenuItem>
+                <MenuItem value="Credit" onClick={() => fetchTransactions()}>
+                  Credit
+                </MenuItem>
+                <MenuItem value="Debit" onClick={() => fetchTransactions()}>
+                  Debit
+                </MenuItem>
               </Select>
             </>
-          )} */}
+          )}
+          {location.pathname === "/dashboard/trip" && (
+            <>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={filterStatus}
+                label="role"
+                onChange={onFilterStatus}
+                displayEmpty
+              >
+                <MenuItem value="" onClick={() => fetchTrips()}>
+                  Select Status
+                </MenuItem>
+                <Divider as="div" />
+                <MenuItem value="ongoing">On-going</MenuItem>
+                <MenuItem value="completed">Completed</MenuItem>
+                <MenuItem value="cancelled">Cancelled</MenuItem>
+              </Select>
+            </>
+          )}
         </>
-       
       )}
 
       {numSelected > 0 && (

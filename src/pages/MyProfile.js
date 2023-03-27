@@ -13,8 +13,8 @@ import {
   Modal,
   Skeleton,
   Avatar,
-  FormControlLabel,
   Switch,
+  FormControlLabel,
 } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
@@ -25,28 +25,32 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 
-const EditDriver = () => {
+const MyProfile = () => {
   const { token } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [values, setValues] = useState({
     name: "",
-    email: "",
     city: "",
-    license_no: "",
-    license_image: "",
-    vehicle: "",
     profile_image: "",
     phone: "",
     verified: "",
     createdAt: "",
     updatedAt: "",
     sex: "",
-    age: "",
+    age: 0,
+    email: "",
+    license: "",
+    vehicle: "",
   });
   const [role, setRole] = useState("");
   const [deactivated, setDeactivated] = useState();
   const params = useParams();
+  const [updatedDetails, setUpdatedDetails] = useState({
+    name: "",
+    profile_image: "",
+    phone: "",
+  });
 
   const style = {
     position: "absolute",
@@ -71,14 +75,6 @@ const EditDriver = () => {
     theme: "colored",
   };
 
-  const handleSelectChange = (e) => {
-    setRole(e.target.value);
-  };
-
-  const handleDeactivateChange = (e) => {
-    setDeactivated(e.target.checked);
-  };
-
   const handleEditClose = () => setOpenEdit(false);
 
   const handleEditOpen = () => {
@@ -90,33 +86,30 @@ const EditDriver = () => {
 
     console.log("update");
 
-    editDriver(params?.id);
+    editUser(params?.id);
 
     setOpenEdit(false);
   };
 
-  const editDriver = async (id) => {
-    const account_type = role;
+  console.log(deactivated);
 
+  const editUser = async (id) => {
+    const { name, profile_image, phone } = values;
     try {
       const { data } = await axios.put(
-        `http://3.239.229.120:5000/api/admin/user/${id}`,
-        { account_type, deactivated },
+        `http://3.239.229.120:5000/api/users`,
+        { name, profile_image, phone },
         {
           headers: { Authorization: token },
         }
       );
 
-      console.log("upadted! ", data);
-      toast.success("Driver details updated!", toastOptions);
+      toast.success("Details updated!", toastOptions);
       getUser();
-      //   fetchUsers();
     } catch (error) {
       console.log(error);
-      toast.success(
-        "Something went wrong. Please try again later.",
-        toastOptions
-      );
+      toast.error("Something went wrong. Please try again later", toastOptions);
+      getUser();
     }
   };
 
@@ -124,7 +117,7 @@ const EditDriver = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `http://3.239.229.120:5000/api/admin/user/${params?.id}`,
+        `http://3.239.229.120:5000/api/users/authenticate`,
         {
           headers: { Authorization: token },
         }
@@ -133,22 +126,21 @@ const EditDriver = () => {
       console.log("user ", data);
 
       setValues({
-        name: data?.data?.user?.name,
-        email: data?.data?.user?.email,
-        city: data?.data?.user?.city,
-        profile_image: data?.data?.user?.profile_image,
-        license_image: data?.data?.user?.license?.image,
-        license_no: data?.data?.user?.license?.license_no,
-        phone: data?.data?.user?.phone,
-        createdAt: data?.data?.user?.createdAt,
-        updatedAt: data?.data?.user?.updatedAt,
-        sex: data?.data?.user?.sex,
-        age: data?.data?.user?.age,
-        vehicle: data?.data?.user?.vehicle,
+        name: data?.data?.userInfo?.name,
+        email: data?.data?.userInfo?.email,
+        city: data?.data?.userInfo?.city,
+        profile_image: data?.data?.userInfo?.profile_image,
+        phone: data?.data?.userInfo?.phone,
+        createdAt: data?.data?.userInfo?.createdAt,
+        updatedAt: data?.data?.userInfo?.updatedAt,
+        sex: data?.data?.userInfo?.sex,
+        age: data?.data?.userInfo?.age,
+        license: data?.data?.userInfo?.license,
+        vehicle: data?.data?.userInfo?.vehicle,
       });
 
-      setRole(data?.data?.user?.account_type);
-      setDeactivated(data?.data?.user?.deactivated);
+      setRole(data?.data?.userInfo?.account_type);
+      setDeactivated(data?.data?.userInfo?.deactivated);
     } catch (error) {
       console.log(error);
     }
@@ -163,7 +155,7 @@ const EditDriver = () => {
   return (
     <>
       <Helmet>
-        <title> Edit Driver | UR DRIVER </title>
+        <title> Admin details | UR DRIVER </title>
       </Helmet>
 
       <Container>
@@ -218,7 +210,7 @@ const EditDriver = () => {
                   <img
                     src={values?.profile_image}
                     alt={values?.name}
-                    style={{ width: "12rem" }}
+                    style={{ width: "15rem", borderRadius: "1.5rem" }}
                   />
                 )}
               </div>
@@ -234,18 +226,12 @@ const EditDriver = () => {
                     </div>
                     <p>{values?.name}</p>
                   </div>
+
                   <div>
                     <div>
                       <b>Account type</b>
                     </div>
                     <p>{role}</p>
-                  </div>
-
-                  <div>
-                    <div>
-                      <b>Sex</b>
-                    </div>
-                    <p>{values?.sex}</p>
                   </div>
 
                   <div>
@@ -256,14 +242,12 @@ const EditDriver = () => {
                       {moment(values?.updatedAt).utc().format("MMMM DD, YYYY")}
                     </p>
                   </div>
-                  {/* {values?.license && (
                   <div>
-                    <Button variant="contained" size="sm" onClick={handleVerifyOpen}>
-                      Verify!
-                    </Button>
-                    <img src={values?.license} alt={values?.firstname} style={{ width: '12rem' }} />
+                    <div>
+                      <b>Sex</b>
+                    </div>
+                    <p>{values?.sex}</p>
                   </div>
-                )} */}
                 </Grid>
                 <Grid item md={2}>
                   <div>
@@ -335,6 +319,7 @@ const EditDriver = () => {
                       {moment(values?.createdAt).utc().format("MMMM DD, YYYY")}
                     </p>
                   </div>
+
                   <div>
                     <div>
                       <b>Age</b>
@@ -345,95 +330,6 @@ const EditDriver = () => {
               </>
             )}
           </Grid>
-          {loading ? (
-            <Skeleton animation="wave" width="40%" />
-          ) : (
-            <>
-              <div style={{ marginTop: "5rem" }}>
-                <div style={{ marginBottom: "2rem" }}>
-                  <div>
-                    <b>License Details</b>
-                  </div>
-                  <Divider component="div" />
-                </div>
-                <Grid
-                  container
-                  spacing={{ xs: 2, md: 4 }}
-                  alignItems={{ xs: "flex-start", md: "center" }}
-                  direction={{ sm: "column", md: "row" }}
-                >
-                  <Grid item xs={12} md={3}>
-                    <img
-                      src={values?.license_image}
-                      alt={values?.name}
-                      style={{ width: "12rem" }}
-                    />
-                  </Grid>
-                  <Grid item xs="auto" md={2}>
-                    <div>
-                      <b>License No.</b>
-                      <p>{values?.license_no}</p>
-                    </div>
-                  </Grid>
-                </Grid>
-              </div>
-              <div style={{ marginTop: "5rem" }}>
-                <div style={{ marginBottom: "3rem" }}>
-                  <div>
-                    <b>Vehicle Details</b>
-                  </div>
-                  <Divider component="div" />
-                </div>
-                <Grid
-                  container
-                  spacing={{ xs: 2, md: 4 }}
-                  alignItems={{ xs: "flex-start", md: "center" }}
-                  direction={{ sm: "column", md: "row" }}
-                >
-                  <Grid item xs="auto" md={2}>
-                    <div>
-                      <div>
-                        <b>Brand</b>
-                      </div>
-                      <p>{values?.vehicle?.information?.brand}</p>
-                    </div>
-                  </Grid>
-                  <Grid item xs="auto" md={2}>
-                    <div>
-                      <div>
-                        <b>Model</b>
-                      </div>
-                      <p>{values?.vehicle?.information?.model}</p>
-                    </div>
-                  </Grid>
-                  <Grid item xs="auto" md={2}>
-                    <div>
-                      <div>
-                        <b>Registration No.</b>
-                      </div>
-                      <p>{values?.vehicle?.information?.registration_no}</p>
-                    </div>
-                  </Grid>
-                  <Grid item xs="auto" md={2}>
-                    <div>
-                      <div>
-                        <b>Wheels</b>
-                      </div>
-                      <p>{values?.vehicle?.wheels}</p>
-                    </div>
-                  </Grid>
-                  <Grid item xs="auto" md={2}>
-                    <div>
-                      <div>
-                        <b>Type</b>
-                      </div>
-                      <p>{values?.vehicle?.type}</p>
-                    </div>
-                  </Grid>
-                </Grid>
-              </div>
-            </>
-          )}
         </Box>
 
         <Modal
@@ -444,105 +340,67 @@ const EditDriver = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Edit Driver
+              Edit your details
             </Typography>
-            {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography> */}
             <Stack direction="column" spacing={3}>
               <form onSubmit={handleEditSubmit}>
                 <div style={{ margin: "2rem 0rem" }}>
+                  <b>Account type</b>
+                  <p>{role}</p>
+                </div>
+
+                <div style={{ margin: "2rem 0rem" }}>
                   <TextField
-                    disabled
                     fullWidth
                     id="outlined-name"
                     label="Your name"
                     type="text"
+                    name="name"
                     InputLabelProps={{
                       shrink: true,
                     }}
                     value={values?.name}
+                    onChange={(e) =>
+                      setValues({
+                        ...values,
+                        [e.target.name]: e.target.value,
+                      })
+                    }
                   />
                 </div>
 
                 <div style={{ margin: "2rem 0rem" }}>
                   <TextField
-                    disabled
                     fullWidth
-                    id="outlined-city"
-                    label="City"
-                    type="text"
+                    id="outlined-phone"
+                    label="Phone"
+                    type="number"
+                    name="phone"
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    value={values?.city}
-                  />
-                </div>
-                <div style={{ margin: "2rem 0rem" }}>
-                  <b>License</b>
-                  <img
-                    src={values?.license_image}
-                    alt={values?.name}
-                    width={150}
-                  />
-                </div>
-                <div style={{ margin: "2rem 0rem" }}>
-                  <b>License no.</b>
-                  <p>{values?.license_no}</p>
-                </div>
-                <div style={{ margin: "2rem 0rem" }}>
-                  <b>Vehicle brand</b>
-                  <p>{values?.vehicle?.information?.brand}</p>
-                </div>
-                <div style={{ margin: "2rem 0rem" }}>
-                  <b>Vehicle model</b>
-                  <p>{values?.vehicle?.information?.model}</p>
-                </div>
-                <div style={{ margin: "2rem 0rem" }}>
-                  <b>Vehicle registration no</b>
-                  <p>{values?.vehicle?.information?.registration_no}</p>
-                </div>
-                <div style={{ margin: "2rem 0rem" }}>
-                  <b>Vehicle wheels</b>
-                  <p>{values?.vehicle?.wheels}</p>
-                </div>
-                <div style={{ margin: "2rem 0rem" }}>
-                  <b>Vehicle type</b>
-                  <p>{values?.vehicle?.type}</p>
-                </div>
-
-                <div style={{ margin: "2rem 0rem" }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    <b>Account type</b>
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={role}
-                    label="account_type"
-                    onChange={handleSelectChange}
-                  >
-                    <MenuItem value="user">User</MenuItem>
-                    <MenuItem value="driver">Driver</MenuItem>
-                    <MenuItem value="admin">Admin</MenuItem>
-                  </Select>
-                </div>
-
-                <div style={{ margin: "2rem 0rem" }}>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={deactivated}
-                        onChange={handleDeactivateChange}
-                      />
+                    value={values?.phone}
+                    onChange={(e) =>
+                      setValues({
+                        ...values,
+                        [e.target.name]: e.target.value,
+                      })
                     }
-                    label={`Deactivate this driver`}
                   />
-                  {deactivated && (
-                    <p style={{ color: "red" }}>
-                      You are deactivating this driver!
-                    </p>
-                  )}
+                </div>
+
+                <div style={{ margin: "2rem 0rem" }}>
+                  {/* <TextField
+                    fullWidth
+                    id="outlined-profile_image"
+                    label="Profile image"
+                    type="file"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    value={values?.phone}
+                  /> */}
+                  <img src={values?.profile_image} alt={values?.name} />
                 </div>
 
                 <Button
@@ -575,4 +433,4 @@ const EditDriver = () => {
   );
 };
 
-export default EditDriver;
+export default MyProfile;
