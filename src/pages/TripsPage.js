@@ -357,7 +357,9 @@ export default function TripsPage() {
                               </Stack>
                             </TableCell>
 
-                            <TableCell align="left">{user?.role}</TableCell>
+                            <TableCell align="left">
+                              {user?.account_type}
+                            </TableCell>
                             <TableCell align="left">
                               {pickup?.pickUpAddress.slice(0, 20) ||
                                 pickup?.address?.slice(0, 20)}
@@ -368,7 +370,7 @@ export default function TripsPage() {
                                 destination?.address?.slice(0, 20)}
                               ...
                             </TableCell>
-                            <TableCell align="left">$ {fare}</TableCell>
+                            <TableCell align="left">${fare}</TableCell>
                             <TableCell align="left">
                               {payment ? "True" : "False"}
                             </TableCell>

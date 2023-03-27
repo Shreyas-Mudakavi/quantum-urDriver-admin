@@ -352,7 +352,7 @@ export default function TransactionPage() {
                               {metadata?.description}
                             </TableCell>
                             <TableCell align="left">{status}</TableCell>
-                            <TableCell align="left">{amount}</TableCell>
+                            <TableCell align="left">${amount}</TableCell>
 
                             <TableCell align="left">
                               <div style={{ display: "flex" }}>

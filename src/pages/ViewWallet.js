@@ -19,6 +19,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 
 const ViewWallet = () => {
@@ -41,19 +43,12 @@ const ViewWallet = () => {
   const [deactivated, setDeactivated] = useState();
   const params = useParams();
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    // border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    height: "30rem",
-    overflow: "scroll",
-    borderRadius: "0.6rem",
+  const toastOptions = {
+    position: "bottom-center",
+    autoClose: 3000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "colored",
   };
 
   const styleTwo = {
@@ -125,9 +120,12 @@ const ViewWallet = () => {
         }
       );
 
+      toast.success("Ride details updated!", toastOptions);
       getUser();
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong. Please try again later", toastOptions);
+      getUser();
     }
     // editUser(params?.id);
 
@@ -398,6 +396,7 @@ const ViewWallet = () => {
           </Box>
         </Modal>
       </Container>
+      <ToastContainer />
     </>
   );
 };
