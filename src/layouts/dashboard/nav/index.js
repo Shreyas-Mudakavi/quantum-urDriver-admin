@@ -1,30 +1,42 @@
-import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 // @mui
-import { styled, alpha } from '@mui/material/styles';
-import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
+import { styled, alpha } from "@mui/material/styles";
+import {
+  Box,
+  Link,
+  Button,
+  Drawer,
+  Typography,
+  Avatar,
+  Stack,
+} from "@mui/material";
 // mock
 // hooks
-import useResponsive from '../../../hooks/useResponsive';
+import useResponsive from "../../../hooks/useResponsive";
 // components
-import Logo from '../../../components/logo';
-import Scrollbar from '../../../components/scrollbar';
-import NavSection from '../../../components/nav-section';
+import Logo from "../../../components/logo";
+import Scrollbar from "../../../components/scrollbar";
+import NavSection from "../../../components/nav-section";
 //
-import navConfig from './config';
-import { useSelector } from 'react-redux';
+import navConfig from "./config";
+import { useSelector } from "react-redux";
+import { bgGradient } from "../../../utils/cssStyles";
 
 // ----------------------------------------------------------------------
 
 const NAV_WIDTH = 280;
+// const drawerBackground = <bgGradient startColor={"black"} endColor={"white"} />;
+// const drawerBackground = "linear-gradient(to right bottom, #000, #9198e5)";
 
-const StyledAccount = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const StyledAccount = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(2, 2.5),
   borderRadius: Number(theme.shape.borderRadius) * 1.5,
-  backgroundColor: alpha(theme.palette.grey[500], 0.12),
+  // backgroundColor: alpha(theme.palette.grey[500], 0.12),
+  backgroundColor: "#181818",
 }));
 
 // ----------------------------------------------------------------------
@@ -36,9 +48,11 @@ Nav.propTypes = {
 
 export default function Nav({ openNav, onCloseNav }) {
   const { pathname } = useLocation();
-  const { userRole, userProfile, userName } = useSelector((state) => state.auth);
+  const { userRole, userProfile, userName } = useSelector(
+    (state) => state.auth
+  );
 
-  const isDesktop = useResponsive('up', 'lg');
+  const isDesktop = useResponsive("up", "lg");
 
   useEffect(() => {
     if (openNav) {
@@ -51,10 +65,14 @@ export default function Nav({ openNav, onCloseNav }) {
     <Scrollbar
       sx={{
         height: 1,
-        '& .simplebar-content': { height: 1, display: 'flex', flexDirection: 'column' },
+        "& .simplebar-content": {
+          height: 1,
+          display: "flex",
+          flexDirection: "column",
+        },
       }}
     >
-      <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
+      <Box sx={{ px: 2.5, py: 3, display: "inline-flex" }}>
         <Logo />
       </Box>
 
@@ -64,11 +82,11 @@ export default function Nav({ openNav, onCloseNav }) {
             <Avatar src={userProfile} alt="photoURL" />
 
             <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+              <Typography variant="subtitle2" sx={{ color: "white" }}>
                 {userName}
               </Typography>
 
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 {userRole}
               </Typography>
             </Box>
@@ -97,8 +115,8 @@ export default function Nav({ openNav, onCloseNav }) {
           PaperProps={{
             sx: {
               width: NAV_WIDTH,
-              bgcolor: 'background.default',
-              borderRightStyle: 'dashed',
+              background: "linear-gradient(#000, #1F2029)",
+              borderRightStyle: "dashed",
             },
           }}
         >
@@ -112,7 +130,10 @@ export default function Nav({ openNav, onCloseNav }) {
             keepMounted: true,
           }}
           PaperProps={{
-            sx: { width: NAV_WIDTH },
+            sx: {
+              width: NAV_WIDTH,
+              background: "linear-gradient(#000, #1F2029)",
+            },
           }}
         >
           {renderContent}

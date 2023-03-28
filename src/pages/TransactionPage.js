@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { filter } from "lodash";
 import { sentenceCase } from "change-case";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 // @mui
 import {
   Card,
@@ -89,8 +89,8 @@ function getComparator(order, orderBy) {
 }
 
 function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
+  const stabilizedThis = array?.map((el, index) => [el, index]);
+  stabilizedThis?.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
@@ -102,13 +102,32 @@ function applySortFilter(array, comparator, query) {
         _user?.user?.name?.toLowerCase().indexOf(query.toLowerCase()) !== -1
     );
   }
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis?.map((el) => el[0]);
 }
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        usersList: action.payload,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+  }
+};
+
 export default function TransactionPage() {
+  const [{ loading, usersList, error }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
+  });
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
-  const [usersList, setUsersList] = useState([]);
+  // const [usersList, setUsersList] = useState([]);
   const [openDelete, setOpenDelete] = useState(false);
   const [deleteId, setDeleteId] = useState();
 
@@ -122,7 +141,7 @@ export default function TransactionPage() {
 
   const [filterName, setFilterName] = useState("");
   const [filterType, setFilterType] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -140,7 +159,7 @@ export default function TransactionPage() {
   };
 
   const fetchTransactions = async (type) => {
-    setLoading(true);
+    dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.get(
         `http://3.239.229.120:5000/api/wallet/getAlltransactions/?type=${filterType}`,
@@ -148,12 +167,13 @@ export default function TransactionPage() {
           headers: { Authorization: token },
         }
       );
-      console.log("transaction data ", data);
-      setUsersList(data?.data?.transactions);
+      // console.log("transaction data ", data);
+      // setUsersList(data?.data?.transactions);
+      dispatch({ type: "FETCH_SUCCESS", payload: data?.data?.transactions });
     } catch (error) {
       console.log(error);
+      dispatch({ type: "FETCH_FAIL", payload: error });
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -263,7 +283,7 @@ export default function TransactionPage() {
     filterName
   );
 
-  const isNotFound = !filteredUsers.length && !!filterName;
+  const isNotFound = !filteredUsers?.length && !!filterName;
 
   return (
     <>

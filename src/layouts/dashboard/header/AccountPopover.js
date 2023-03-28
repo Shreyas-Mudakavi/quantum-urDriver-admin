@@ -92,6 +92,7 @@ export default function AccountPopover() {
             mt: 1.5,
             ml: 0.75,
             // width: 180,
+            backgroundColor: "black",
             "& .MuiMenuItem-root": {
               typography: "body2",
               borderRadius: 0.75,
@@ -100,7 +101,7 @@ export default function AccountPopover() {
         }}
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle2" noWrap>
+          <Typography variant="subtitle2" sx={{ color: "white" }} noWrap>
             {userName}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
@@ -110,7 +111,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <Stack sx={{ p: 1 }}>
+        <Stack sx={{ p: 1, color: "#A866EE" }}>
           {MENU_OPTIONS.map((option) => (
             <MenuItem
               key={option.label}
@@ -126,7 +127,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
+        <MenuItem onClick={handleLogout} sx={{ m: 1, color: "#A866EE" }}>
           Logout
         </MenuItem>
       </Popover>

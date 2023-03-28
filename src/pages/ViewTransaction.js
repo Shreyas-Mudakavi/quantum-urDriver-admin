@@ -247,10 +247,10 @@ const ViewTransaction = () => {
                   </div>
                   <div>
                     <div>
-                      <b>Verified</b>
+                      <b>Deactivated</b>
                     </div>
                     <p>
-                      {values?.verified ? (
+                      {deactivated ? (
                         <svg
                           style={{ width: "2rem" }}
                           xmlns="http://www.w3.org/2000/svg"
@@ -354,7 +354,7 @@ const ViewTransaction = () => {
                   </Grid>
                   <Grid item xs="auto" md={2}>
                     <div>
-                      <p>${status}</p>
+                      <p>{status}</p>
                     </div>
                   </Grid>
                 </Grid>
@@ -371,7 +371,7 @@ const ViewTransaction = () => {
                   </Grid>
                   <Grid item xs="auto" md={2}>
                     <div>
-                      <p>${type}</p>
+                      <p>{type}</p>
                     </div>
                   </Grid>
                 </Grid>
@@ -386,9 +386,9 @@ const ViewTransaction = () => {
                       <b>Descrription</b>
                     </div>
                   </Grid>
-                  <Grid item xs="auto" md={2}>
+                  <Grid item xs={12} md={2}>
                     <div>
-                      <p>${values?.description}</p>
+                      <p>{values?.description}</p>
                     </div>
                   </Grid>
                 </Grid>

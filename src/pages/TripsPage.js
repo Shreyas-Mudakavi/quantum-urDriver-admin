@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { filter } from "lodash";
 import { sentenceCase } from "change-case";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 // @mui
 import {
   Card,
@@ -10,30 +10,19 @@ import {
   Paper,
   Avatar,
   Button,
-  Popover,
   Checkbox,
   TableRow,
-  MenuItem,
   TableBody,
   TableCell,
   Container,
   Typography,
-  IconButton,
   TableContainer,
   TablePagination,
   Modal,
   Box,
-  TextField,
-  InputLabel,
-  Select,
-  AlertTitle,
-  Alert,
-  Switch,
   Skeleton,
 } from "@mui/material";
 // components
-import Label from "../components/label";
-import Iconify from "../components/iconify";
 import Scrollbar from "../components/scrollbar";
 // sections
 import { UserListHead, UserListToolbar } from "../sections/@dashboard/user";
@@ -90,8 +79,8 @@ function getComparator(order, orderBy) {
 }
 
 function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
+  const stabilizedThis = array?.map((el, index) => [el, index]);
+  stabilizedThis?.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
@@ -103,13 +92,32 @@ function applySortFilter(array, comparator, query) {
         _user?.user?.name?.toLowerCase().indexOf(query.toLowerCase()) !== -1
     );
   }
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis?.map((el) => el[0]);
 }
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        usersList: action.payload,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+  }
+};
+
 export default function TripsPage() {
+  const [{ loading, usersList, error }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
+  });
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
-  const [usersList, setUsersList] = useState([]);
+  // const [usersList, setUsersList] = useState([]);
   const [openDelete, setOpenDelete] = useState(false);
   const [deleteId, setDeleteId] = useState();
 
@@ -125,7 +133,7 @@ export default function TripsPage() {
   const [filterStatus, setFilterStatus] = useState("");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const handleFilterByStatus = (event) => {
     setPage(0);
@@ -141,7 +149,7 @@ export default function TripsPage() {
   };
 
   const fetchTrips = async () => {
-    setLoading(true);
+    dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.get(
         `http://3.239.229.120:5000/api/rides/all/?status=${filterStatus}`,
@@ -150,12 +158,13 @@ export default function TripsPage() {
         }
       );
 
-      console.log("trips ", data);
-      setUsersList(data?.data?.trips);
+      // console.log("trips ", data);
+      // setUsersList(data?.data?.trips);
+      dispatch({ type: "FETCH_SUCCESS", payload: data?.data?.trips });
     } catch (error) {
       console.log(error);
+      dispatch({ type: "FETCH_FAIL", payload: error });
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -263,7 +272,7 @@ export default function TripsPage() {
     filterName
   );
 
-  const isNotFound = !filteredUsers.length && !!filterName;
+  const isNotFound = !filteredUsers?.length && !!filterName;
 
   return (
     <>

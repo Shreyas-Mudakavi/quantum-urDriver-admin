@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { filter } from "lodash";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 // @mui
 import {
   Card,
@@ -78,8 +78,8 @@ function getComparator(order, orderBy) {
 }
 
 function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
+  const stabilizedThis = array?.map((el, index) => [el, index]);
+  stabilizedThis?.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
@@ -90,12 +90,12 @@ function applySortFilter(array, comparator, query) {
       (_user) => _user?.name?.toLowerCase().indexOf(query.toLowerCase()) !== -1
     );
   }
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis?.map((el) => el[0]);
 }
 
 function applySortRoleFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
+  const stabilizedThis = array?.map((el, index) => [el, index]);
+  stabilizedThis?.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
@@ -106,13 +106,32 @@ function applySortRoleFilter(array, comparator, query) {
       (_user) => _user?.role?.indexOf(query.toLowerCase()) !== -1
     );
   }
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis?.map((el) => el[0]);
 }
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        usersList: action.payload,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+  }
+};
+
 export default function UserPage() {
+  const [{ loading, usersList, error }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
+  });
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
-  const [usersList, setUsersList] = useState([]);
+  // const [usersList, setUsersList] = useState([]);
   const [openDelete, setOpenDelete] = useState(false);
 
   const [deleteUserId, setDeleteUserId] = useState();
@@ -122,13 +141,13 @@ export default function UserPage() {
 
   const [selected, setSelected] = useState([]);
 
-  const [orderBy, setOrderBy] = useState("name");
+  const [orderBy, setOrderBy] = useState("");
 
   const [filterName, setFilterName] = useState("");
   const [filterRole, setFilterRole] = useState("");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const styleTwo = {
     position: "absolute",
@@ -144,7 +163,7 @@ export default function UserPage() {
   };
 
   const fetchUsers = async () => {
-    setLoading(true);
+    dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.get(
         "http://3.239.229.120:5000/api/admin/users",
@@ -153,13 +172,14 @@ export default function UserPage() {
         }
       );
 
-      console.log(data);
+      // console.log(data);
 
-      setUsersList(data?.data?.users);
+      // setUsersList(data?.data?.users);
+      dispatch({ type: "FETCH_SUCCESS", payload: data?.data?.users });
     } catch (error) {
       console.log(error);
+      dispatch({ type: "FETCH_FAIL", payload: error });
     }
-    setLoading(false);
   };
 
   const deleteUser = async (id) => {
@@ -262,7 +282,7 @@ export default function UserPage() {
     applySortRoleFilter(usersList, getComparator(order, orderBy), filterRole);
 
   const isNotFound =
-    (!filteredUsers.length && !!filterName) ||
+    (!filteredUsers?.length && !!filterName) ||
     (!filteredRoleUsers?.length && !!filterRole);
 
   if (filteredRoleUsers) {
@@ -348,7 +368,7 @@ export default function UserPage() {
                           profile_image,
                           verified,
                           city,
-                          mobile,
+                          phone,
                           sex,
                           age,
                           createdAt,
@@ -441,7 +461,7 @@ export default function UserPage() {
                                     <Avatar />
                                   </Skeleton>
                                 ) : (
-                                  mobile
+                                  phone
                                 )}
                               </TableCell>
                               <TableCell align="left">
@@ -553,7 +573,7 @@ export default function UserPage() {
 
                     {emptyRows > 0 && (
                       <TableRow style={{ height: 53 * emptyRows }}>
-                        <TableCell colSpan={6} />
+                        <TableCell colSpan={6} style={{ color: "white" }} />
                       </TableRow>
                     )}
                   </TableBody>
@@ -561,7 +581,12 @@ export default function UserPage() {
                   {isNotFound && (
                     <TableBody>
                       <TableRow>
-                        <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                        <TableCell
+                          style={{ color: "white" }}
+                          align="center"
+                          colSpan={6}
+                          sx={{ py: 3 }}
+                        >
                           <Paper
                             sx={{
                               textAlign: "center",
@@ -591,6 +616,7 @@ export default function UserPage() {
           </Scrollbar>
 
           <TablePagination
+            style={{ color: "white" }}
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
             count={usersList?.length}

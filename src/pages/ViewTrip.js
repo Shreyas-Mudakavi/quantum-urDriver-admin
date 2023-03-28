@@ -233,7 +233,7 @@ const ViewTrip = () => {
               <Skeleton animation="wave" width={500} height={300} />
             ) : (
               <>
-                <Grid item xs="auto" md={2}>
+                <Grid item xs={12} md={2}>
                   <div>
                     <div>
                       <b>Name</b>
@@ -290,7 +290,7 @@ const ViewTrip = () => {
                     <p>{values?.pickupLong}</p>
                   </div> */}
                 </Grid>
-                <Grid item xs="auto" md={2}>
+                <Grid item xs={12} md={2}>
                   <div>
                     <div>
                       <b>Email</b>
@@ -351,7 +351,7 @@ const ViewTrip = () => {
                     <p>{status}</p>
                   </div>
                 </Grid>
-                <Grid item xs="auto" md={2}>
+                <Grid item xs={12} md={2}>
                   <div>
                     <div>
                       <b>Mobile No.</b>
@@ -417,7 +417,7 @@ const ViewTrip = () => {
                       <b>Pickup Address</b>
                     </div>
                   </Grid>
-                  <Grid item xs="auto" md={4}>
+                  <Grid item xs={12} md={4}>
                     <div>
                       <p>{values?.pickupAddr}</p>
                     </div>
@@ -434,7 +434,7 @@ const ViewTrip = () => {
                       <b>Pickup Latitude</b>
                     </div>
                   </Grid>
-                  <Grid item xs="auto" md={4}>
+                  <Grid item xs={12} md={4}>
                     <div>
                       <p>{values?.pickupLat}</p>
                     </div>
@@ -451,7 +451,7 @@ const ViewTrip = () => {
                       <b>Pickup Longitude</b>
                     </div>
                   </Grid>
-                  <Grid item xs="auto" md={4}>
+                  <Grid item xs={12} md={4}>
                     <div>
                       <p>{values?.pickupLong}</p>
                     </div>
@@ -468,7 +468,7 @@ const ViewTrip = () => {
                       <b>Destination Address</b>
                     </div>
                   </Grid>
-                  <Grid item xs="auto" md={4}>
+                  <Grid item xs={12} md={4}>
                     <div>
                       <p>{values?.destinationAddr}</p>
                     </div>
@@ -485,7 +485,7 @@ const ViewTrip = () => {
                       <b>Destination Latitude</b>
                     </div>
                   </Grid>
-                  <Grid item xs="auto" md={4}>
+                  <Grid item xs={12} md={4}>
                     <div>
                       <p>{values?.destinationLat}</p>
                     </div>
@@ -502,7 +502,7 @@ const ViewTrip = () => {
                       <b>Destination Longitude</b>
                     </div>
                   </Grid>
-                  <Grid item xs="auto" md={4}>
+                  <Grid item xs={12} md={4}>
                     <div>
                       <p>{values?.destinationLong}</p>
                     </div>
