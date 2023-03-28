@@ -268,7 +268,7 @@ export default function TripsPage() {
   return (
     <>
       <Helmet>
-        <title> Trip | UR DRIVER </title>
+        <title> Rides | UR DRIVER </title>
       </Helmet>
 
       <Container>
@@ -279,38 +279,45 @@ export default function TripsPage() {
           mb={5}
         >
           <Typography variant="h4" gutterBottom>
-            Trip
+            Rides
           </Typography>
           {/* <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
             New Trip
           </Button> */}
         </Stack>
 
-        {loading ? (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Skeleton variant="text" animation="wave" width={500}>
-              <Avatar />
-            </Skeleton>
-          </div>
-        ) : (
-          <Card>
-            <UserListToolbar
-              numSelected={selected.length}
-              filterName={filterName}
-              onFilterName={handleFilterByName}
-              filterStatus={filterStatus}
-              onFilterStatus={handleFilterByStatus}
-              fetchTrips={fetchTrips}
-            />
+        <Card>
+          <UserListToolbar
+            numSelected={selected.length}
+            filterName={filterName}
+            onFilterName={handleFilterByName}
+            filterStatus={filterStatus}
+            onFilterStatus={handleFilterByStatus}
+            fetchTrips={fetchTrips}
+          />
 
-            <Scrollbar>
-              <TableContainer sx={{ minWidth: 800 }}>
+          <Scrollbar>
+            <TableContainer sx={{ minWidth: 800 }}>
+              {loading ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                  }}
+                >
+                  <Skeleton variant="text" animation="wave" width={500}>
+                    <Avatar />
+                  </Skeleton>
+                  <Skeleton variant="text" animation="wave" width={500}>
+                    <Avatar />
+                  </Skeleton>
+                  <Skeleton variant="text" animation="wave" width={500}>
+                    <Avatar />
+                  </Skeleton>
+                </div>
+              ) : (
                 <Table>
                   <UserListHead
                     order={order}
@@ -500,20 +507,20 @@ export default function TripsPage() {
                     </TableBody>
                   )}
                 </Table>
-              </TableContainer>
-            </Scrollbar>
+              )}
+            </TableContainer>
+          </Scrollbar>
 
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
-              count={usersList?.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Card>
-        )}
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={usersList?.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Card>
       </Container>
 
       <Modal

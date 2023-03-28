@@ -293,30 +293,37 @@ export default function DriverPage() {
           </Button> */}
         </Stack>
 
-        {loading ? (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Skeleton variant="text" animation="wave" width={500}>
-              <Avatar />
-            </Skeleton>
-          </div>
-        ) : (
-          <Card>
-            <UserListToolbar
-              numSelected={selected.length}
-              filterRole={filterRole}
-              onFilterRole={handleFilterByRole}
-              filterName={filterName}
-              onFilterName={handleFilterByName}
-            />
+        <Card>
+          <UserListToolbar
+            numSelected={selected.length}
+            filterRole={filterRole}
+            onFilterRole={handleFilterByRole}
+            filterName={filterName}
+            onFilterName={handleFilterByName}
+          />
 
-            <Scrollbar>
-              <TableContainer sx={{ minWidth: 800 }}>
+          <Scrollbar>
+            <TableContainer sx={{ minWidth: 800 }}>
+              {loading ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                  }}
+                >
+                  <Skeleton variant="text" animation="wave" width={500}>
+                    <Avatar />
+                  </Skeleton>
+                  <Skeleton variant="text" animation="wave" width={500}>
+                    <Avatar />
+                  </Skeleton>
+                  <Skeleton variant="text" animation="wave" width={500}>
+                    <Avatar />
+                  </Skeleton>
+                </div>
+              ) : (
                 <Table>
                   <UserListHead
                     order={order}
@@ -644,20 +651,20 @@ export default function DriverPage() {
                     </TableBody>
                   )}
                 </Table>
-              </TableContainer>
-            </Scrollbar>
+              )}
+            </TableContainer>
+          </Scrollbar>
 
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
-              count={usersList?.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Card>
-        )}
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={usersList?.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Card>
       </Container>
 
       <Modal

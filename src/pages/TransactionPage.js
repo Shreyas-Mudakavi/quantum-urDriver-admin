@@ -283,31 +283,38 @@ export default function TransactionPage() {
           </Typography>
         </Stack>
 
-        {loading ? (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Skeleton variant="text" animation="wave" width={500}>
-              <Avatar />
-            </Skeleton>
-          </div>
-        ) : (
-          <Card>
-            <UserListToolbar
-              numSelected={selected.length}
-              filterName={filterName}
-              filterType={filterType}
-              onFilterType={handleFilterByType}
-              onFilterName={handleFilterByName}
-              fetchTransactions={fetchTransactions}
-            />
+        <Card>
+          <UserListToolbar
+            numSelected={selected.length}
+            filterName={filterName}
+            filterType={filterType}
+            onFilterType={handleFilterByType}
+            onFilterName={handleFilterByName}
+            fetchTransactions={fetchTransactions}
+          />
 
-            <Scrollbar>
-              <TableContainer sx={{ minWidth: 800 }}>
+          <Scrollbar>
+            <TableContainer sx={{ minWidth: 800 }}>
+              {loading ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                  }}
+                >
+                  <Skeleton variant="text" animation="wave" width={500}>
+                    <Avatar />
+                  </Skeleton>
+                  <Skeleton variant="text" animation="wave" width={500}>
+                    <Avatar />
+                  </Skeleton>
+                  <Skeleton variant="text" animation="wave" width={500}>
+                    <Avatar />
+                  </Skeleton>
+                </div>
+              ) : (
                 <Table>
                   <UserListHead
                     order={order}
@@ -480,20 +487,20 @@ export default function TransactionPage() {
                     </TableBody>
                   )}
                 </Table>
-              </TableContainer>
-            </Scrollbar>
+              )}
+            </TableContainer>
+          </Scrollbar>
 
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
-              count={usersList?.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Card>
-        )}
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={usersList?.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Card>
       </Container>
 
       <Modal
