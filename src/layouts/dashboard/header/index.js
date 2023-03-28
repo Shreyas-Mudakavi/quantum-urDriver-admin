@@ -11,7 +11,7 @@ import AccountPopover from "./AccountPopover";
 
 // ----------------------------------------------------------------------
 
-const NAV_WIDTH = 280;
+const NAV_WIDTH = 270;
 
 const HEADER_MOBILE = 64;
 
@@ -20,7 +20,7 @@ const HEADER_DESKTOP = 82;
 const StyledRoot = styled(AppBar)(({ theme }) => ({
   ...bgBlur({ direction: "to left" }),
   // background: "linear-gradient(#000, #1F2029)",
-  boxShadow: "none",
+  // boxShadow: "none",
   [theme.breakpoints.up("lg")]: {
     width: `calc(100% - ${NAV_WIDTH + 1}px)`,
   },
