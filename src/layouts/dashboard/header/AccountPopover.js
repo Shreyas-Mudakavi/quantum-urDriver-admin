@@ -92,7 +92,7 @@ export default function AccountPopover() {
             mt: 1.5,
             ml: 0.75,
             // width: 180,
-            backgroundColor: "black",
+            backgroundColor: "#121319",
             "& .MuiMenuItem-root": {
               typography: "body2",
               borderRadius: 0.75,
