@@ -1,12 +1,14 @@
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 // @mui
-import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography } from '@mui/material';
+import { useTheme } from "@mui/material/styles";
+import { Grid, Container, Typography } from "@mui/material";
 // components
-import Iconify from '../components/iconify';
+import Iconify from "../components/iconify";
 // sections
 // import {
-//   AppTasks,
+// import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+
 //   AppNewsUpdate,
 //   AppOrderTimeline,
 //   AppCurrentVisits,
@@ -24,17 +26,22 @@ export default function DashboardAppPage() {
 
   return (
     <>
-      <Helmet>
-        <title> Dashboard | UR DRIVERS </title>
-      </Helmet>
+      <motion.div
+        initial={{ x: "-100%" }}
+        animate={{ x: "0%" }}
+        exit={{ x: "100%" }}
+        transition={{ duration: 0.75, ease: "easeInOut" }}
+      >
+        <Helmet>
+          <title> Dashboard | UR DRIVERS </title>
+        </Helmet>
 
-      <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome back
-        </Typography>
-
-        
-      </Container>
+        <Container maxWidth="xl">
+          <Typography variant="h4" sx={{ mb: 5 }}>
+            Hi, Welcome back
+          </Typography>
+        </Container>
+      </motion.div>
     </>
   );
 }

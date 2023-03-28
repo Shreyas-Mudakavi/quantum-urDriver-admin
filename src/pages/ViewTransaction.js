@@ -22,6 +22,7 @@ import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
+import { motion } from "framer-motion";
 
 const ViewTransaction = () => {
   const { token } = useSelector((state) => state.auth);
@@ -150,366 +151,376 @@ const ViewTransaction = () => {
 
   return (
     <>
-      <Helmet>
-        <title> View Transaction | UR DRIVER </title>
-      </Helmet>
+      <motion.div
+        initial={{ x: "-100%" }}
+        animate={{ x: "0%" }}
+        exit={{ x: "100%" }}
+        transition={{ duration: 0.75, ease: "easeInOut" }}
+      >
+        <Helmet>
+          <title> View Transaction | UR DRIVER </title>
+        </Helmet>
 
-      <Container>
-        <Typography variant="h5" component="span">
-          {values?.name} details
-        </Typography>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          // className="w-6 h-6"
-          style={{ width: "2rem", marginLeft: "1rem", cursor: "pointer" }}
-          onClick={() => handleEditOpen()}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-          />
-        </svg>
-
-        <Divider />
-        <Box
-          component="div"
-          sx={{
-            border: "1px solid #E8EBEE",
-            width: "100%",
-            height: "100%",
-            p: 2,
-          }}
-        >
-          <Grid
-            container
-            spacing={{ xs: 2, md: 3 }}
-            direction={{ sm: "column", md: "row" }}
+        <Container>
+          <Typography variant="h5" component="span">
+            {values?.name} details
+          </Typography>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            // className="w-6 h-6"
+            style={{ width: "2rem", marginLeft: "1rem", cursor: "pointer" }}
+            onClick={() => handleEditOpen()}
           >
-            <Grid item xs={12} md={5}>
-              <div>
-                {loading ? (
-                  <Skeleton variant="circular" width={100} height={100}>
-                    <Avatar />
-                  </Skeleton>
-                ) : (
-                  <img
-                    src={values?.profile_image}
-                    alt={values?.name}
-                    style={{ width: "12rem" }}
-                  />
-                )}
-              </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+            />
+          </svg>
+
+          <Divider />
+          <Box
+            component="div"
+            sx={{
+              border: "1px solid #E8EBEE",
+              width: "100%",
+              height: "100%",
+              p: 2,
+            }}
+          >
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              direction={{ sm: "column", md: "row" }}
+            >
+              <Grid item xs={12} md={5}>
+                <div>
+                  {loading ? (
+                    <Skeleton variant="circular" width={100} height={100}>
+                      <Avatar />
+                    </Skeleton>
+                  ) : (
+                    <img
+                      src={values?.profile_image}
+                      alt={values?.name}
+                      style={{ width: "12rem" }}
+                    />
+                  )}
+                </div>
+              </Grid>
+              {loading ? (
+                <Skeleton animation="wave" width={500} height={300} />
+              ) : (
+                <>
+                  <Grid item xs="auto" md={2}>
+                    <div>
+                      <div>
+                        <b>Name</b>
+                      </div>
+                      <p>{values?.name}</p>
+                    </div>
+                    <div>
+                      <div>
+                        <b>Sex</b>
+                      </div>
+                      <p>{values?.sex}</p>
+                    </div>
+
+                    <div>
+                      <div>
+                        <b>Updated At</b>
+                      </div>
+                      <p>
+                        {moment(values?.updatedAt)
+                          .utc()
+                          .format("MMMM DD, YYYY")}
+                      </p>
+                    </div>
+                  </Grid>
+                  <Grid item xs="auto" md={2}>
+                    <div>
+                      <div>
+                        <b>Email</b>
+                      </div>
+                      <p>{values?.email}</p>
+                    </div>
+                    <div>
+                      <div>
+                        <b>City</b>
+                      </div>
+                      <p>{values?.city}</p>
+                    </div>
+                    <div>
+                      <div>
+                        <b>Deactivated</b>
+                      </div>
+                      <p>
+                        {deactivated ? (
+                          <svg
+                            style={{ width: "2rem" }}
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="not-verified"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M4.5 12.75l6 6 9-13.5"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            style={{ width: "2rem" }}
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-2 h-2"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        )}
+                      </p>
+                    </div>
+                  </Grid>
+                  <Grid item xs="auto" md={2}>
+                    <div>
+                      <div>
+                        <b>Mobile No.</b>
+                      </div>
+                      <p>{values?.phone}</p>
+                    </div>
+                    <div>
+                      <div>
+                        <b>Age</b>
+                      </div>
+                      <p>{values?.age}</p>
+                    </div>
+
+                    <div>
+                      <div>
+                        <b>Created At</b>
+                      </div>
+                      <p>
+                        {moment(values?.createdAt)
+                          .utc()
+                          .format("MMMM DD, YYYY")}
+                      </p>
+                    </div>
+                  </Grid>
+                </>
+              )}
             </Grid>
+
             {loading ? (
-              <Skeleton animation="wave" width={500} height={300} />
+              <Skeleton animation="wave" width="40%" />
             ) : (
               <>
-                <Grid item xs="auto" md={2}>
-                  <div>
+                <div style={{ marginTop: "5rem" }}>
+                  <div style={{ marginBottom: "2rem" }}>
                     <div>
-                      <b>Name</b>
+                      <b>Transaction details</b>
                     </div>
-                    <p>{values?.name}</p>
+                    <Divider component="div" />
                   </div>
-                  <div>
-                    <div>
-                      <b>Sex</b>
-                    </div>
-                    <p>{values?.sex}</p>
-                  </div>
-
-                  <div>
-                    <div>
-                      <b>Updated At</b>
-                    </div>
-                    <p>
-                      {moment(values?.updatedAt).utc().format("MMMM DD, YYYY")}
-                    </p>
-                  </div>
-                </Grid>
-                <Grid item xs="auto" md={2}>
-                  <div>
-                    <div>
-                      <b>Email</b>
-                    </div>
-                    <p>{values?.email}</p>
-                  </div>
-                  <div>
-                    <div>
-                      <b>City</b>
-                    </div>
-                    <p>{values?.city}</p>
-                  </div>
-                  <div>
-                    <div>
-                      <b>Deactivated</b>
-                    </div>
-                    <p>
-                      {deactivated ? (
-                        <svg
-                          style={{ width: "2rem" }}
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="not-verified"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M4.5 12.75l6 6 9-13.5"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          style={{ width: "2rem" }}
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-2 h-2"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      )}
-                    </p>
-                  </div>
-                </Grid>
-                <Grid item xs="auto" md={2}>
-                  <div>
-                    <div>
-                      <b>Mobile No.</b>
-                    </div>
-                    <p>{values?.phone}</p>
-                  </div>
-                  <div>
-                    <div>
-                      <b>Age</b>
-                    </div>
-                    <p>{values?.age}</p>
-                  </div>
-
-                  <div>
-                    <div>
-                      <b>Created At</b>
-                    </div>
-                    <p>
-                      {moment(values?.createdAt).utc().format("MMMM DD, YYYY")}
-                    </p>
-                  </div>
-                </Grid>
+                  <Grid
+                    container
+                    spacing={{ xs: 2, md: 4 }}
+                    alignItems={{ xs: "flex-start", md: "center" }}
+                    direction={{ sm: "column", md: "row" }}
+                  >
+                    <Grid item xs={12} md={3}>
+                      <div>
+                        <b>Transaction Amount</b>
+                      </div>
+                    </Grid>
+                    <Grid item xs="auto" md={2}>
+                      <div>
+                        <p>${values?.amount}</p>
+                      </div>
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    spacing={{ xs: 2, md: 4 }}
+                    alignItems={{ xs: "flex-start", md: "center" }}
+                    direction={{ sm: "column", md: "row" }}
+                  >
+                    <Grid item xs={12} md={3}>
+                      <div>
+                        <b>Status</b>
+                      </div>
+                    </Grid>
+                    <Grid item xs="auto" md={2}>
+                      <div>
+                        <p>{status}</p>
+                      </div>
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    spacing={{ xs: 2, md: 4 }}
+                    alignItems={{ xs: "flex-start", md: "center" }}
+                    direction={{ sm: "column", md: "row" }}
+                  >
+                    <Grid item xs={12} md={3}>
+                      <div>
+                        <b>Transaction type</b>
+                      </div>
+                    </Grid>
+                    <Grid item xs="auto" md={2}>
+                      <div>
+                        <p>{type}</p>
+                      </div>
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    spacing={{ xs: 2, md: 4 }}
+                    alignItems={{ xs: "flex-start", md: "center" }}
+                    direction={{ sm: "column", md: "row" }}
+                  >
+                    <Grid item xs={12} md={3}>
+                      <div>
+                        <b>Descrription</b>
+                      </div>
+                    </Grid>
+                    <Grid item xs={12} md={2}>
+                      <div>
+                        <p>{values?.description}</p>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </div>
               </>
             )}
-          </Grid>
-
-          {loading ? (
-            <Skeleton animation="wave" width="40%" />
-          ) : (
-            <>
-              <div style={{ marginTop: "5rem" }}>
-                <div style={{ marginBottom: "2rem" }}>
-                  <div>
-                    <b>Transaction details</b>
-                  </div>
-                  <Divider component="div" />
-                </div>
-                <Grid
-                  container
-                  spacing={{ xs: 2, md: 4 }}
-                  alignItems={{ xs: "flex-start", md: "center" }}
-                  direction={{ sm: "column", md: "row" }}
-                >
-                  <Grid item xs={12} md={3}>
-                    <div>
-                      <b>Transaction Amount</b>
-                    </div>
-                  </Grid>
-                  <Grid item xs="auto" md={2}>
-                    <div>
-                      <p>${values?.amount}</p>
-                    </div>
-                  </Grid>
-                </Grid>
-                <Grid
-                  container
-                  spacing={{ xs: 2, md: 4 }}
-                  alignItems={{ xs: "flex-start", md: "center" }}
-                  direction={{ sm: "column", md: "row" }}
-                >
-                  <Grid item xs={12} md={3}>
-                    <div>
-                      <b>Status</b>
-                    </div>
-                  </Grid>
-                  <Grid item xs="auto" md={2}>
-                    <div>
-                      <p>{status}</p>
-                    </div>
-                  </Grid>
-                </Grid>
-                <Grid
-                  container
-                  spacing={{ xs: 2, md: 4 }}
-                  alignItems={{ xs: "flex-start", md: "center" }}
-                  direction={{ sm: "column", md: "row" }}
-                >
-                  <Grid item xs={12} md={3}>
-                    <div>
-                      <b>Transaction type</b>
-                    </div>
-                  </Grid>
-                  <Grid item xs="auto" md={2}>
-                    <div>
-                      <p>{type}</p>
-                    </div>
-                  </Grid>
-                </Grid>
-                <Grid
-                  container
-                  spacing={{ xs: 2, md: 4 }}
-                  alignItems={{ xs: "flex-start", md: "center" }}
-                  direction={{ sm: "column", md: "row" }}
-                >
-                  <Grid item xs={12} md={3}>
-                    <div>
-                      <b>Descrription</b>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} md={2}>
-                    <div>
-                      <p>{values?.description}</p>
-                    </div>
-                  </Grid>
-                </Grid>
-              </div>
-            </>
-          )}
-        </Box>
-
-        <Modal
-          open={openEdit}
-          onClose={handleEditClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Edit Wallet
-            </Typography>
-            <Stack direction="column" spacing={3}>
-              <form onSubmit={handleEditSubmit}>
-                <div style={{ margin: "2rem 0rem" }}>
-                  <TextField
-                    fullWidth
-                    disabled
-                    name="amount"
-                    id="outlined-transaction-amount"
-                    label="Transaction Amount"
-                    type="number"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    value={values?.amount}
-                    onChange={(e) =>
-                      setValues({
-                        ...values,
-                        [e.target.name]: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-
-                <div style={{ margin: "2rem 0rem" }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Status
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={status}
-                    label="status"
-                    onChange={handleStatusChange}
-                  >
-                    <MenuItem value="PENDING">PENDING</MenuItem>
-                    <MenuItem value="TXN_FAILURE">TXN_FAILURE</MenuItem>
-                    <MenuItem value="TXN_SUCCESS">TXN_SUCCESS</MenuItem>
-                  </Select>
-                </div>
-
-                <div style={{ margin: "2rem 0rem" }}>
-                  <TextField
-                    disabled
-                    fullWidth
-                    name="description"
-                    id="outlined-description"
-                    label="Description"
-                    type="text"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    value={values?.description}
-                    onChange={(e) =>
-                      setValues({
-                        ...values,
-                        [e.target.name]: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-
-                <div style={{ margin: "2rem 0rem" }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    Transaction Type
-                  </InputLabel>
-                  <Select
-                    disabled
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={type}
-                    label="type"
-                    onChange={handleTypeChange}
-                  >
-                    <MenuItem value="Credit">Credit</MenuItem>
-                    <MenuItem value="Debit">Debit</MenuItem>
-                  </Select>
-                </div>
-
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  size="medium"
-                >
-                  Update
-                </Button>
-
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="error"
-                  size="medium"
-                  onClick={handleEditClose}
-                  style={{ marginLeft: "1rem" }}
-                >
-                  Cancel
-                </Button>
-              </form>
-            </Stack>
           </Box>
-        </Modal>
-      </Container>
 
+          <Modal
+            open={openEdit}
+            onClose={handleEditClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Edit Wallet
+              </Typography>
+              <Stack direction="column" spacing={3}>
+                <form onSubmit={handleEditSubmit}>
+                  <div style={{ margin: "2rem 0rem" }}>
+                    <TextField
+                      fullWidth
+                      disabled
+                      name="amount"
+                      id="outlined-transaction-amount"
+                      label="Transaction Amount"
+                      type="number"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      value={values?.amount}
+                      onChange={(e) =>
+                        setValues({
+                          ...values,
+                          [e.target.name]: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
+                  <div style={{ margin: "2rem 0rem" }}>
+                    <InputLabel id="demo-simple-select-helper-label">
+                      Status
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-helper-label"
+                      id="demo-simple-select-helper"
+                      value={status}
+                      label="status"
+                      onChange={handleStatusChange}
+                    >
+                      <MenuItem value="PENDING">PENDING</MenuItem>
+                      <MenuItem value="TXN_FAILURE">TXN_FAILURE</MenuItem>
+                      <MenuItem value="TXN_SUCCESS">TXN_SUCCESS</MenuItem>
+                    </Select>
+                  </div>
+
+                  <div style={{ margin: "2rem 0rem" }}>
+                    <TextField
+                      disabled
+                      fullWidth
+                      name="description"
+                      id="outlined-description"
+                      label="Description"
+                      type="text"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      value={values?.description}
+                      onChange={(e) =>
+                        setValues({
+                          ...values,
+                          [e.target.name]: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
+                  <div style={{ margin: "2rem 0rem" }}>
+                    <InputLabel id="demo-simple-select-helper-label">
+                      Transaction Type
+                    </InputLabel>
+                    <Select
+                      disabled
+                      labelId="demo-simple-select-helper-label"
+                      id="demo-simple-select-helper"
+                      value={type}
+                      label="type"
+                      onChange={handleTypeChange}
+                    >
+                      <MenuItem value="Credit">Credit</MenuItem>
+                      <MenuItem value="Debit">Debit</MenuItem>
+                    </Select>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    size="medium"
+                  >
+                    Update
+                  </Button>
+
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="error"
+                    size="medium"
+                    onClick={handleEditClose}
+                    style={{ marginLeft: "1rem" }}
+                  >
+                    Cancel
+                  </Button>
+                </form>
+              </Stack>
+            </Box>
+          </Modal>
+        </Container>
+      </motion.div>
       <ToastContainer />
     </>
   );
