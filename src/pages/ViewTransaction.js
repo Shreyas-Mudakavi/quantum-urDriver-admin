@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import {
   Container,
   Divider,
@@ -24,27 +25,30 @@ import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import { motion } from "framer-motion";
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        transaction: action.payload,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+  }
+};
+
 const ViewTransaction = () => {
+  const [{ loading, transaction, error }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
+  });
   const { token } = useSelector((state) => state.auth);
   const [openEdit, setOpenEdit] = useState(false);
   const [status, setStatus] = useState();
-  const [loading, setLoading] = useState(false);
-  const [type, setType] = useState();
-  const [deactivated, setDeactivated] = useState();
 
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    city: "",
-    createdAt: "",
-    updatedAt: "",
-    amount: "",
-    description: "",
-    profile_image: "",
-    phone: "",
-    sex: "",
-    age: "",
-  });
   const params = useParams();
 
   const toastOptions = {
@@ -80,12 +84,8 @@ const ViewTransaction = () => {
     setStatus(e.target.value);
   };
 
-  const handleTypeChange = (e) => {
-    setType(e.target.value);
-  };
-
   const getUser = async (id) => {
-    setLoading(true);
+    dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.get(
         `http://3.239.229.120:5000/api/admin/transaction/${params?.id}`,
@@ -94,30 +94,14 @@ const ViewTransaction = () => {
         }
       );
 
-      console.log("user ", data);
+      console.log("transaction ", data);
 
-      setValues({
-        name: data?.data?.transaction?.user?.name,
-        email: data?.data?.transaction?.user?.email,
-        sex: data?.data?.transaction?.user?.sex,
-        age: data?.data?.transaction?.user?.age,
-        profile_image: data?.data?.transaction?.user?.profile_image,
-        phone: data?.data?.transaction?.user?.phone,
-        city: data?.data?.transaction?.user?.city,
-        createdAt: data?.data?.transaction?.createdAt,
-        updatedAt: data?.data?.transaction?.updatedAt,
-        amount: data?.data?.transaction?.amount,
-        description: data?.data?.transaction?.metadata?.description,
-      });
-
-      setDeactivated(data?.data?.transaction?.user?.deactivated);
+      dispatch({ type: "FETCH_SUCCESS", payload: data?.data?.transaction });
       setStatus(data?.data?.transaction?.status);
-      setType(data?.data?.transaction?.type);
     } catch (error) {
       console.log(error);
+      dispatch({ type: "FETCH_FAIL", payload: error });
     }
-
-    setLoading(false);
   };
 
   const handleEditSubmit = async (e) => {
@@ -163,7 +147,7 @@ const ViewTransaction = () => {
 
         <Container>
           <Typography variant="h5" component="span">
-            {values?.name} details
+            {transaction?.user?.name} details
           </Typography>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -205,8 +189,8 @@ const ViewTransaction = () => {
                     </Skeleton>
                   ) : (
                     <img
-                      src={values?.profile_image}
-                      alt={values?.name}
+                      src={transaction?.user?.profile_image}
+                      alt={transaction?.user?.name}
                       style={{ width: "12rem" }}
                     />
                   )}
@@ -221,13 +205,13 @@ const ViewTransaction = () => {
                       <div>
                         <b>Name</b>
                       </div>
-                      <p>{values?.name}</p>
+                      <p>{transaction?.user?.name}</p>
                     </div>
                     <div>
                       <div>
                         <b>Sex</b>
                       </div>
-                      <p>{values?.sex}</p>
+                      <p>{transaction?.user?.sex}</p>
                     </div>
 
                     <div>
@@ -235,7 +219,7 @@ const ViewTransaction = () => {
                         <b>Updated At</b>
                       </div>
                       <p>
-                        {moment(values?.updatedAt)
+                        {moment(transaction?.updatedAt)
                           .utc()
                           .format("MMMM DD, YYYY")}
                       </p>
@@ -246,20 +230,20 @@ const ViewTransaction = () => {
                       <div>
                         <b>Email</b>
                       </div>
-                      <p>{values?.email}</p>
+                      <p>{transaction?.user?.email}</p>
                     </div>
                     <div>
                       <div>
                         <b>City</b>
                       </div>
-                      <p>{values?.city}</p>
+                      <p>{transaction?.user?.city}</p>
                     </div>
                     <div>
                       <div>
                         <b>Deactivated</b>
                       </div>
                       <p>
-                        {deactivated ? (
+                        {transaction?.user?.deactivated ? (
                           <svg
                             style={{ width: "2rem" }}
                             xmlns="http://www.w3.org/2000/svg"
@@ -300,13 +284,13 @@ const ViewTransaction = () => {
                       <div>
                         <b>Mobile No.</b>
                       </div>
-                      <p>{values?.phone}</p>
+                      <p>{transaction?.user?.phone}</p>
                     </div>
                     <div>
                       <div>
                         <b>Age</b>
                       </div>
-                      <p>{values?.age}</p>
+                      <p>{transaction?.user?.age}</p>
                     </div>
 
                     <div>
@@ -314,7 +298,7 @@ const ViewTransaction = () => {
                         <b>Created At</b>
                       </div>
                       <p>
-                        {moment(values?.createdAt)
+                        {moment(transaction?.createdAt)
                           .utc()
                           .format("MMMM DD, YYYY")}
                       </p>
@@ -348,7 +332,7 @@ const ViewTransaction = () => {
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <p>${values?.amount}</p>
+                        <p>${transaction?.amount}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -382,7 +366,7 @@ const ViewTransaction = () => {
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <p>{type}</p>
+                        <p>{transaction?.type}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -394,12 +378,12 @@ const ViewTransaction = () => {
                   >
                     <Grid item xs={12} md={3}>
                       <div>
-                        <b>Descrription</b>
+                        <b>Description</b>
                       </div>
                     </Grid>
                     <Grid item xs={12} md={2}>
                       <div>
-                        <p>{values?.description}</p>
+                        <p>{transaction?.metadata?.description}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -416,7 +400,7 @@ const ViewTransaction = () => {
           >
             <Box sx={style}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Edit Wallet
+                Edit transaction
               </Typography>
               <Stack direction="column" spacing={3}>
                 <form onSubmit={handleEditSubmit}>
@@ -431,13 +415,7 @@ const ViewTransaction = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.amount}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
+                      value={transaction?.amount}
                     />
                   </div>
 
@@ -469,31 +447,23 @@ const ViewTransaction = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.description}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
+                      value={transaction?.metadata?.description}
                     />
                   </div>
 
                   <div style={{ margin: "2rem 0rem" }}>
-                    <InputLabel id="demo-simple-select-helper-label">
-                      Transaction Type
-                    </InputLabel>
-                    <Select
+                    <TextField
                       disabled
-                      labelId="demo-simple-select-helper-label"
-                      id="demo-simple-select-helper"
-                      value={type}
-                      label="type"
-                      onChange={handleTypeChange}
-                    >
-                      <MenuItem value="Credit">Credit</MenuItem>
-                      <MenuItem value="Debit">Debit</MenuItem>
-                    </Select>
+                      fullWidth
+                      name="type"
+                      id="outlined-description"
+                      label="Type"
+                      type="text"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      value={transaction?.type}
+                    />
                   </div>
 
                   <Button

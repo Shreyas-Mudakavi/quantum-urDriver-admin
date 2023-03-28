@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import {
   Container,
   Divider,
@@ -26,26 +27,45 @@ import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import { motion } from "framer-motion";
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        driver: action.payload,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+  }
+};
+
 const EditDriver = () => {
-  const { token } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    city: "",
-    license_no: "",
-    license_image: "",
-    vehicle: "",
-    profile_image: "",
-    phone: "",
-    verified: "",
-    createdAt: "",
-    updatedAt: "",
-    sex: "",
-    age: "",
+  const [{ loading, driver, error }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
   });
-  const [role, setRole] = useState("");
+  const { token } = useSelector((state) => state.auth);
+  // const [loading, setLoading] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  // const [values, setValues] = useState({
+  //   name: "",
+  //   email: "",
+  //   city: "",
+  //   license_no: "",
+  //   license_image: "",
+  //   vehicle: "",
+  //   profile_image: "",
+  //   phone: "",
+  //   verified: "",
+  //   createdAt: "",
+  //   updatedAt: "",
+  //   sex: "",
+  //   age: "",
+  // });
+  const [account_type, setAccount_Type] = useState("");
   const [deactivated, setDeactivated] = useState();
   const params = useParams();
 
@@ -73,7 +93,7 @@ const EditDriver = () => {
   };
 
   const handleSelectChange = (e) => {
-    setRole(e.target.value);
+    setAccount_Type(e.target.value);
   };
 
   const handleDeactivateChange = (e) => {
@@ -89,16 +109,12 @@ const EditDriver = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("update");
-
     editDriver(params?.id);
 
     setOpenEdit(false);
   };
 
   const editDriver = async (id) => {
-    const account_type = role;
-
     try {
       const { data } = await axios.put(
         `http://3.239.229.120:5000/api/admin/user/${id}`,
@@ -111,7 +127,6 @@ const EditDriver = () => {
       console.log("upadted! ", data);
       toast.success("Driver details updated!", toastOptions);
       getUser();
-      //   fetchUsers();
     } catch (error) {
       console.log(error);
       toast.success(
@@ -122,7 +137,7 @@ const EditDriver = () => {
   };
 
   const getUser = async (id) => {
-    setLoading(true);
+    dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.get(
         `http://3.239.229.120:5000/api/admin/user/${params?.id}`,
@@ -133,28 +148,28 @@ const EditDriver = () => {
 
       console.log("user ", data);
 
-      setValues({
-        name: data?.data?.user?.name,
-        email: data?.data?.user?.email,
-        city: data?.data?.user?.city,
-        profile_image: data?.data?.user?.profile_image,
-        license_image: data?.data?.user?.license?.image,
-        license_no: data?.data?.user?.license?.license_no,
-        phone: data?.data?.user?.phone,
-        createdAt: data?.data?.user?.createdAt,
-        updatedAt: data?.data?.user?.updatedAt,
-        sex: data?.data?.user?.sex,
-        age: data?.data?.user?.age,
-        vehicle: data?.data?.user?.vehicle,
-      });
+      // setValues({
+      //   name: data?.data?.user?.name,
+      //   email: data?.data?.user?.email,
+      //   city: data?.data?.user?.city,
+      //   profile_image: data?.data?.user?.profile_image,
+      //   license_image: data?.data?.user?.license?.image,
+      //   license_no: data?.data?.user?.license?.license_no,
+      //   phone: data?.data?.user?.phone,
+      //   createdAt: data?.data?.user?.createdAt,
+      //   updatedAt: data?.data?.user?.updatedAt,
+      //   sex: data?.data?.user?.sex,
+      //   age: data?.data?.user?.age,
+      //   vehicle: data?.data?.user?.vehicle,
+      // });
 
-      setRole(data?.data?.user?.account_type);
+      dispatch({ type: "FETCH_SUCCESS", payload: data?.data?.user });
+      setAccount_Type(data?.data?.user?.account_type);
       setDeactivated(data?.data?.user?.deactivated);
     } catch (error) {
       console.log(error);
+      dispatch({ type: "FETCH_FAIL", payload: error });
     }
-
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -175,7 +190,7 @@ const EditDriver = () => {
 
         <Container>
           <Typography variant="h5" component="span">
-            {values?.name} details
+            {driver?.name} details
           </Typography>
           <>
             <svg
@@ -223,8 +238,8 @@ const EditDriver = () => {
                     </Skeleton>
                   ) : (
                     <img
-                      src={values?.profile_image}
-                      alt={values?.name}
+                      src={driver?.profile_image}
+                      alt={driver?.name}
                       style={{ width: "12rem" }}
                     />
                   )}
@@ -239,20 +254,20 @@ const EditDriver = () => {
                       <div>
                         <b>Name</b>
                       </div>
-                      <p>{values?.name}</p>
+                      <p>{driver?.name}</p>
                     </div>
                     <div>
                       <div>
                         <b>Account type</b>
                       </div>
-                      <p>{role}</p>
+                      <p>{account_type}</p>
                     </div>
 
                     <div>
                       <div>
                         <b>Sex</b>
                       </div>
-                      <p>{values?.sex}</p>
+                      <p>{driver?.sex}</p>
                     </div>
 
                     <div>
@@ -260,7 +275,7 @@ const EditDriver = () => {
                         <b>Updated At</b>
                       </div>
                       <p>
-                        {moment(values?.updatedAt)
+                        {moment(driver?.updatedAt)
                           .utc()
                           .format("MMMM DD, YYYY")}
                       </p>
@@ -279,13 +294,13 @@ const EditDriver = () => {
                       <div>
                         <b>Email</b>
                       </div>
-                      <p>{values?.email}</p>
+                      <p>{driver?.email}</p>
                     </div>
                     <div>
                       <div>
                         <b>City</b>
                       </div>
-                      <p>{values?.city}</p>
+                      <p>{driver?.city}</p>
                     </div>
                     <div>
                       <div>
@@ -333,7 +348,7 @@ const EditDriver = () => {
                       <div>
                         <b>Mobile No.</b>
                       </div>
-                      <p>{values?.phone}</p>
+                      <p>{driver?.phone}</p>
                     </div>
 
                     <div>
@@ -341,7 +356,7 @@ const EditDriver = () => {
                         <b>Created At</b>
                       </div>
                       <p>
-                        {moment(values?.createdAt)
+                        {moment(driver?.createdAt)
                           .utc()
                           .format("MMMM DD, YYYY")}
                       </p>
@@ -350,7 +365,7 @@ const EditDriver = () => {
                       <div>
                         <b>Age</b>
                       </div>
-                      <p>{values?.age}</p>
+                      <p>{driver?.age}</p>
                     </div>
                   </Grid>
                 </>
@@ -375,15 +390,15 @@ const EditDriver = () => {
                   >
                     <Grid item xs={12} md={3}>
                       <img
-                        src={values?.license_image}
-                        alt={values?.name}
+                        src={driver?.license?.image}
+                        alt={driver?.name}
                         style={{ width: "12rem" }}
                       />
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
                         <b>License No.</b>
-                        <p>{values?.license_no}</p>
+                        <p>{driver?.license?.license_no}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -406,7 +421,7 @@ const EditDriver = () => {
                         <div>
                           <b>Brand</b>
                         </div>
-                        <p>{values?.vehicle?.information?.brand}</p>
+                        <p>{driver?.vehicle?.information?.brand}</p>
                       </div>
                     </Grid>
                     <Grid item xs="auto" md={2}>
@@ -414,7 +429,7 @@ const EditDriver = () => {
                         <div>
                           <b>Model</b>
                         </div>
-                        <p>{values?.vehicle?.information?.model}</p>
+                        <p>{driver?.vehicle?.information?.model}</p>
                       </div>
                     </Grid>
                     <Grid item xs="auto" md={2}>
@@ -422,7 +437,7 @@ const EditDriver = () => {
                         <div>
                           <b>Registration No.</b>
                         </div>
-                        <p>{values?.vehicle?.information?.registration_no}</p>
+                        <p>{driver?.vehicle?.information?.registration_no}</p>
                       </div>
                     </Grid>
                     <Grid item xs="auto" md={2}>
@@ -430,7 +445,7 @@ const EditDriver = () => {
                         <div>
                           <b>Wheels</b>
                         </div>
-                        <p>{values?.vehicle?.wheels}</p>
+                        <p>{driver?.vehicle?.wheels}</p>
                       </div>
                     </Grid>
                     <Grid item xs="auto" md={2}>
@@ -438,7 +453,7 @@ const EditDriver = () => {
                         <div>
                           <b>Type</b>
                         </div>
-                        <p>{values?.vehicle?.type}</p>
+                        <p>{driver?.vehicle?.type}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -472,7 +487,7 @@ const EditDriver = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.name}
+                      value={driver?.name}
                     />
                   </div>
 
@@ -486,40 +501,40 @@ const EditDriver = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.city}
+                      value={driver?.city}
                     />
                   </div>
                   <div style={{ margin: "2rem 0rem" }}>
                     <b>License</b>
                     <img
-                      src={values?.license_image}
-                      alt={values?.name}
+                      src={driver?.license?.image}
+                      alt={driver?.name}
                       width={150}
                     />
                   </div>
                   <div style={{ margin: "2rem 0rem" }}>
                     <b>License no.</b>
-                    <p>{values?.license_no}</p>
+                    <p>{driver?.license?.license_no}</p>
                   </div>
                   <div style={{ margin: "2rem 0rem" }}>
                     <b>Vehicle brand</b>
-                    <p>{values?.vehicle?.information?.brand}</p>
+                    <p>{driver?.vehicle?.information?.brand}</p>
                   </div>
                   <div style={{ margin: "2rem 0rem" }}>
                     <b>Vehicle model</b>
-                    <p>{values?.vehicle?.information?.model}</p>
+                    <p>{driver?.vehicle?.information?.model}</p>
                   </div>
                   <div style={{ margin: "2rem 0rem" }}>
                     <b>Vehicle registration no</b>
-                    <p>{values?.vehicle?.information?.registration_no}</p>
+                    <p>{driver?.vehicle?.information?.registration_no}</p>
                   </div>
                   <div style={{ margin: "2rem 0rem" }}>
                     <b>Vehicle wheels</b>
-                    <p>{values?.vehicle?.wheels}</p>
+                    <p>{driver?.vehicle?.wheels}</p>
                   </div>
                   <div style={{ margin: "2rem 0rem" }}>
                     <b>Vehicle type</b>
-                    <p>{values?.vehicle?.type}</p>
+                    <p>{driver?.vehicle?.type}</p>
                   </div>
 
                   <div style={{ margin: "2rem 0rem" }}>
@@ -529,7 +544,7 @@ const EditDriver = () => {
                     <Select
                       labelId="demo-simple-select-helper-label"
                       id="demo-simple-select-helper"
-                      value={role}
+                      value={account_type}
                       label="account_type"
                       onChange={handleSelectChange}
                     >
@@ -539,7 +554,7 @@ const EditDriver = () => {
                     </Select>
                   </div>
 
-                  <div style={{ margin: "2rem 0rem" }}>
+                  {/* <div style={{ margin: "2rem 0rem" }}>
                     <FormControlLabel
                       control={
                         <Switch
@@ -554,7 +569,7 @@ const EditDriver = () => {
                         You are deactivating this driver!
                       </p>
                     )}
-                  </div>
+                  </div> */}
 
                   <Button
                     type="submit"

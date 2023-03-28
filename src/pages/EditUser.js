@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import {
   Container,
   Divider,
@@ -26,24 +27,29 @@ import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import { motion } from "framer-motion";
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        user: action.payload,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+  }
+};
+
 const EditUser = () => {
-  const { token } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
-  const [expiryDate, setExpiryDate] = useState();
-  const [values, setValues] = useState({
-    name: "",
-    city: "",
-    profile_image: "",
-    phone: "",
-    verified: "",
-    createdAt: "",
-    updatedAt: "",
-    sex: "",
-    age: 0,
-    email: "",
+  const [{ loading, user, error }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
   });
-  const [role, setRole] = useState("");
+  const { token } = useSelector((state) => state.auth);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [account_type, setAccount_Type] = useState("");
   const [deactivated, setDeactivated] = useState();
   const params = useParams();
 
@@ -71,15 +77,11 @@ const EditUser = () => {
   };
 
   const handleSelectChange = (e) => {
-    setRole(e.target.value);
+    setAccount_Type(e.target.value);
   };
 
   const handleDeactivateChange = (e) => {
     setDeactivated(e.target.checked);
-  };
-
-  const handleDateChange = (e) => {
-    setExpiryDate(e.target.value);
   };
 
   const handleEditClose = () => setOpenEdit(false);
@@ -91,28 +93,12 @@ const EditUser = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("update");
-
     editUser(params?.id);
 
     setOpenEdit(false);
   };
 
-  console.log(deactivated);
-
   const editUser = async (id) => {
-    const {
-      firstname,
-      city,
-      lastname,
-      license,
-      panCard,
-      profilePic,
-      registration,
-    } = values;
-
-    const account_type = role;
-
     try {
       console.log("deac", deactivated);
       const { data } = await axios.put(
@@ -127,7 +113,6 @@ const EditUser = () => {
 
       toast.success("User updated!", toastOptions);
       getUser();
-      //   fetchUsers();
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong. Please try again later", toastOptions);
@@ -135,7 +120,7 @@ const EditUser = () => {
   };
 
   const getUser = async (id) => {
-    setLoading(true);
+    dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.get(
         `http://3.239.229.120:5000/api/admin/user/${params?.id}`,
@@ -144,33 +129,22 @@ const EditUser = () => {
         }
       );
 
-      console.log("user ", data);
+      // console.log("user ", data);
 
-      setValues({
-        name: data?.data?.user?.name,
-        email: data?.data?.user?.email,
-        city: data?.data?.user?.city,
-        profile_image: data?.data?.user?.profile_image,
-        phone: data?.data?.user?.phone,
-        // verified: true,
-        createdAt: data?.data?.user?.createdAt,
-        updatedAt: data?.data?.user?.updatedAt,
-        sex: data?.data?.user?.sex,
-        age: data?.data?.user?.age,
-      });
-
-      setRole(data?.data?.user?.account_type);
+      dispatch({ type: "FETCH_SUCCESS", payload: data?.data?.user });
+      setAccount_Type(data?.data?.user?.account_type);
       setDeactivated(data?.data?.user?.deactivated);
     } catch (error) {
       console.log(error);
+      dispatch({ type: "FETCH_FAIL", payload: error });
     }
-
-    setLoading(false);
   };
 
   useEffect(() => {
     getUser();
   }, []);
+
+  console.log(account_type);
 
   return (
     <>
@@ -186,7 +160,7 @@ const EditUser = () => {
 
         <Container>
           <Typography variant="h5" component="span">
-            {values?.name} details
+            {user?.name} details
           </Typography>
           <>
             <svg
@@ -234,8 +208,8 @@ const EditUser = () => {
                     </Skeleton>
                   ) : (
                     <img
-                      src={values?.profile_image}
-                      alt={values?.name}
+                      src={user?.profile_image}
+                      alt={user?.name}
                       style={{ width: "12rem" }}
                     />
                   )}
@@ -250,14 +224,14 @@ const EditUser = () => {
                       <div>
                         <b>Name</b>
                       </div>
-                      <p>{values?.name}</p>
+                      <p>{user?.name}</p>
                     </div>
 
                     <div>
                       <div>
                         <b>Account type</b>
                       </div>
-                      <p>{role}</p>
+                      <p>{user?.account_type}</p>
                     </div>
 
                     <div>
@@ -265,38 +239,28 @@ const EditUser = () => {
                         <b>Updated At</b>
                       </div>
                       <p>
-                        {moment(values?.updatedAt)
-                          .utc()
-                          .format("MMMM DD, YYYY")}
+                        {moment(user?.updatedAt).utc().format("MMMM DD, YYYY")}
                       </p>
                     </div>
                     <div>
                       <div>
                         <b>Sex</b>
                       </div>
-                      <p>{values?.sex}</p>
+                      <p>{user?.sex}</p>
                     </div>
-                    {/* {values?.license && (
-                <div>
-                  <Button variant="contained" size="sm" onClick={handleVerifyOpen}>
-                    Verify!
-                  </Button>
-                  <img src={values?.license} alt={values?.firstname} style={{ width: '12rem' }} />
-                </div>
-              )} */}
                   </Grid>
                   <Grid item md={2}>
                     <div>
                       <div>
                         <b>Email</b>
                       </div>
-                      <p>{values?.email}</p>
+                      <p>{user?.email}</p>
                     </div>
                     <div>
                       <div>
                         <b>City</b>
                       </div>
-                      <p>{values?.city}</p>
+                      <p>{user?.city}</p>
                     </div>
                     <div>
                       <div>
@@ -344,7 +308,7 @@ const EditUser = () => {
                       <div>
                         <b>Mobile No.</b>
                       </div>
-                      <p>{values?.phone}</p>
+                      <p>{user?.phone}</p>
                     </div>
 
                     <div>
@@ -352,9 +316,7 @@ const EditUser = () => {
                         <b>Created At</b>
                       </div>
                       <p>
-                        {moment(values?.createdAt)
-                          .utc()
-                          .format("MMMM DD, YYYY")}
+                        {moment(user?.createdAt).utc().format("MMMM DD, YYYY")}
                       </p>
                     </div>
 
@@ -362,7 +324,7 @@ const EditUser = () => {
                       <div>
                         <b>Age</b>
                       </div>
-                      <p>{values?.age}</p>
+                      <p>{user?.age}</p>
                     </div>
                   </Grid>
                 </>
@@ -395,7 +357,7 @@ const EditUser = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.name}
+                      value={user?.name}
                     />
                   </div>
                   <div style={{ margin: "2rem 0rem" }}>
@@ -408,7 +370,7 @@ const EditUser = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.city}
+                      value={user?.city}
                     />
                   </div>
                   <div style={{ margin: "2rem 0rem" }}>
@@ -421,7 +383,7 @@ const EditUser = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.sex}
+                      value={user?.sex}
                     />
                   </div>
                   <div style={{ margin: "2rem 0rem" }}>
@@ -434,7 +396,7 @@ const EditUser = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.age}
+                      value={user?.age}
                     />
                   </div>
 
@@ -445,8 +407,8 @@ const EditUser = () => {
                     <Select
                       labelId="demo-simple-select-helper-label"
                       id="demo-simple-select-helper"
-                      value={role}
-                      label="role"
+                      value={account_type}
+                      label="account_type"
                       onChange={handleSelectChange}
                     >
                       <MenuItem value="user">User</MenuItem>

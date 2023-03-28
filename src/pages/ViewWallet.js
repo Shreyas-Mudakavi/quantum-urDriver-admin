@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import {
   Container,
   Divider,
@@ -24,24 +25,42 @@ import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import { motion } from "framer-motion";
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        wallet: action.payload,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+  }
+};
+
 const ViewWallet = () => {
+  const [{ loading, wallet, error }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
+  });
   const { token } = useSelector((state) => state.auth);
   const [openEdit, setOpenEdit] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    city: "",
-    phone: "",
-    profile_image: "",
-    createdAt: "",
-    updatedAt: "",
-    balance: "",
-    sex: "",
-    age: "",
-  });
-  const [role, setRole] = useState("");
-  const [deactivated, setDeactivated] = useState();
+  // const [loading, setLoading] = useState(false);
+  // const [values, setValues] = useState({
+  //   name: "",
+  //   email: "",
+  //   city: "",
+  //   phone: "",
+  //   profile_image: "",
+  //   createdAt: "",
+  //   updatedAt: "",
+  //   balance: "",
+  //   sex: "",
+  //   age: "",
+  // });
+  const [balance, setBalance] = useState(0);
   const params = useParams();
 
   const toastOptions = {
@@ -73,7 +92,7 @@ const ViewWallet = () => {
   };
 
   const getUser = async (id) => {
-    setLoading(true);
+    dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.get(
         `http://3.239.229.120:5000/api/admin/wallet/${params?.id}`,
@@ -84,32 +103,30 @@ const ViewWallet = () => {
 
       console.log("user ", data);
 
-      setValues({
-        name: data?.data?.wallet?.user?.name,
-        email: data?.data?.wallet?.user?.email,
-        city: data?.data?.wallet?.user?.city,
-        profile_image: data?.data?.wallet?.user?.profile_image,
-        phone: data?.data?.wallet?.user?.phone,
-        sex: data?.data?.wallet?.user?.sex,
-        age: data?.data?.wallet?.user?.age,
-        createdAt: data?.data?.wallet?.createdAt,
-        updatedAt: data?.data?.wallet?.updatedAt,
-        balance: data?.data?.wallet?.balance,
-      });
+      // setValues({
+      //   name: data?.data?.wallet?.user?.name,
+      //   email: data?.data?.wallet?.user?.email,
+      //   city: data?.data?.wallet?.user?.city,
+      //   profile_image: data?.data?.wallet?.user?.profile_image,
+      //   phone: data?.data?.wallet?.user?.phone,
+      //   sex: data?.data?.wallet?.user?.sex,
+      //   age: data?.data?.wallet?.user?.age,
+      //   createdAt: data?.data?.wallet?.createdAt,
+      //   updatedAt: data?.data?.wallet?.updatedAt,
+      //   balance: data?.data?.wallet?.balance,
+      // });
 
-      setRole(data?.data?.wallet?.user?.account_type);
-      setDeactivated(data?.data?.wallet?.user?.deactivated);
+      dispatch({ type: "FETCH_SUCCESS", payload: data?.data?.wallet });
+      setBalance(data?.data?.wallet?.balance);
     } catch (error) {
       console.log(error);
+      dispatch({ type: "FETCH_FAIL", payload: error });
     }
-    setLoading(false);
   };
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("update");
-    const { balance } = values;
     try {
       const { data } = await axios.put(
         `http://3.239.229.120:5000/api/admin/wallet/${params?.id}`,
@@ -151,7 +168,7 @@ const ViewWallet = () => {
 
         <Container>
           <Typography variant="h5" component="span">
-            {values?.name} details
+            {wallet?.user?.name} details
           </Typography>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -193,8 +210,8 @@ const ViewWallet = () => {
                     </Skeleton>
                   ) : (
                     <img
-                      src={values?.profile_image}
-                      alt={values?.name}
+                      src={wallet?.user?.profile_image}
+                      alt={wallet?.user?.name}
                       style={{ width: "12rem" }}
                     />
                   )}
@@ -209,19 +226,19 @@ const ViewWallet = () => {
                       <div>
                         <b>Name</b>
                       </div>
-                      <p>{values?.name}</p>
+                      <p>{wallet?.user?.name}</p>
                     </div>
                     <div>
                       <div>
                         <b>Account type</b>
                       </div>
-                      <p>{role}</p>
+                      <p>{wallet?.user?.account_type}</p>
                     </div>
                     <div>
                       <div>
                         <b>Sex</b>
                       </div>
-                      <p>{values?.sex}</p>
+                      <p>{wallet?.user?.sex}</p>
                     </div>
 
                     <div>
@@ -229,7 +246,7 @@ const ViewWallet = () => {
                         <b>Updated At</b>
                       </div>
                       <p>
-                        {moment(values?.updatedAt)
+                        {moment(wallet?.updatedAt)
                           .utc()
                           .format("MMMM DD, YYYY")}
                       </p>
@@ -240,20 +257,20 @@ const ViewWallet = () => {
                       <div>
                         <b>Email</b>
                       </div>
-                      <p>{values?.email}</p>
+                      <p>{wallet?.user?.email}</p>
                     </div>
                     <div>
                       <div>
                         <b>City</b>
                       </div>
-                      <p>{values?.city}</p>
+                      <p>{wallet?.user?.city}</p>
                     </div>
                     <div>
                       <div>
                         <b>Deactivated</b>
                       </div>
                       <p>
-                        {deactivated ? (
+                        {wallet?.user?.deactivated ? (
                           <svg
                             style={{ width: "2rem" }}
                             xmlns="http://www.w3.org/2000/svg"
@@ -294,7 +311,7 @@ const ViewWallet = () => {
                       <div>
                         <b>Mobile No.</b>
                       </div>
-                      <p>{values?.phone}</p>
+                      <p>{wallet?.user?.phone}</p>
                     </div>
 
                     <div>
@@ -302,7 +319,7 @@ const ViewWallet = () => {
                         <b>Created At</b>
                       </div>
                       <p>
-                        {moment(values?.createdAt)
+                        {moment(wallet?.createdAt)
                           .utc()
                           .format("MMMM DD, YYYY")}
                       </p>
@@ -312,7 +329,7 @@ const ViewWallet = () => {
                       <div>
                         <b>Age</b>
                       </div>
-                      <p>{values?.age}</p>
+                      <p>{wallet?.user?.age}</p>
                     </div>
                   </Grid>
                 </>
@@ -342,7 +359,7 @@ const ViewWallet = () => {
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <p>${values?.balance}</p>
+                        <p>${balance}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -373,13 +390,8 @@ const ViewWallet = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.balance}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
+                      value={balance}
+                      onChange={(e) => setBalance(e.target.value)}
                     />
                   </div>
 

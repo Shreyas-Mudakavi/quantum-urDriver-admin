@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import {
   Container,
   Divider,
@@ -24,36 +25,31 @@ import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import { motion } from "framer-motion";
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        ride: action.payload,
+        loading: false,
+      };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+  }
+};
+
 const ViewTrip = () => {
+  const [{ loading, ride, error }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: "",
+  });
   const { token } = useSelector((state) => state.auth);
   const [openEdit, setOpenEdit] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    city: "",
-    sex: "",
-    age: "",
-    profile_image: "",
-    phone: "",
-    createdAt: "",
-    updatedAt: "",
-    fare: "",
-    otp: "",
-    // status: '',
-    destinationAddr: "",
-    destinationLat: "",
-    destinationLong: "",
-    pickupAddr: "",
-    pickupLat: "",
-    pickupLong: "",
-    driver: "",
-  });
-  const [role, setRole] = useState("");
-  const [status, setStatus] = useState();
+  const [status, setStatus] = useState("");
   const [mode, setMode] = useState("");
-  const [deactivated, setDeactivated] = useState();
-  const [payment, setPayment] = useState(false);
+  const [payment, setPayment] = useState();
 
   const params = useParams();
 
@@ -99,7 +95,7 @@ const ViewTrip = () => {
   };
 
   const getUser = async (id) => {
-    setLoading(true);
+    dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.get(
         `http://3.239.229.120:5000/api/rides/${params?.id}`,
@@ -108,40 +104,18 @@ const ViewTrip = () => {
         }
       );
 
-      console.log("trip ", data);
+      console.log("ride ", data);
 
-      setValues({
-        driver: data?.data?.trip?.driver,
-        name: data?.data?.trip?.user?.name,
-        email: data?.data?.trip?.user?.email,
-        sex: data?.data?.trip?.user?.sex,
-        age: data?.data?.trip?.user?.age,
-        city: data?.data?.trip?.user?.city,
-        profilePic: data?.data?.trip?.user?.profile_image,
-        phone: data?.data?.trip?.user?.phone,
-        createdAt: data?.data?.trip?.createdAt,
-        updatedAt: data?.data?.trip?.updatedAt,
-        fare: data?.data?.trip?.fare,
-        destinationAddr: data?.data?.trip?.destination?.destinationAddress,
-        pickupAddr: data?.data?.trip?.pickup?.pickUpAddress,
-        destinationLat: data?.data?.trip?.destination?.latLng?.latitude,
-        destinationLong: data?.data?.trip?.destination?.latLng?.longitude,
-        pickupLat: data?.data?.trip?.pickup?.latLng?.latitude,
-        pickupLong: data?.data?.trip?.pickup?.latLng?.longitude,
-        otp: data?.data?.trip?.otp,
-      });
-
-      setRole(data?.data?.trip?.user?.account_type);
-      setDeactivated(data?.data?.trip?.user?.deactivated);
+      dispatch({ type: "FETCH_SUCCESS", payload: data?.data?.trip });
       setStatus(data?.data?.trip?.status);
       setPayment(data?.data?.trip?.payment);
-      setMode(data?.data?.trip?.mode);
+      setMode(data?.data?.trip?.mode || "");
     } catch (error) {
       console.log(error);
+      dispatch({ type: "FETCH_FAIL", payload: error });
     }
-    setLoading(false);
   };
-  console.log(payment);
+
   const handleEditSubmit = async (e) => {
     e.preventDefault();
 
@@ -158,6 +132,7 @@ const ViewTrip = () => {
         }
       );
 
+      console.log("updated ride ", data);
       toast.success("Ride details updated!", toastOptions);
       getUser();
     } catch (error) {
@@ -186,7 +161,7 @@ const ViewTrip = () => {
 
         <Container>
           <Typography variant="h5" component="span">
-            {values?.name}
+            {ride?.user?.name}
           </Typography>
 
           <svg
@@ -229,8 +204,8 @@ const ViewTrip = () => {
                     </Skeleton>
                   ) : (
                     <img
-                      src={values?.profile_image}
-                      alt={values?.name}
+                      src={ride?.user?.profile_image}
+                      alt={ride?.user?.name}
                       style={{ width: "12rem" }}
                     />
                   )}
@@ -245,19 +220,19 @@ const ViewTrip = () => {
                       <div>
                         <b>Name</b>
                       </div>
-                      <p>{values?.name}</p>
+                      <p>{ride?.user?.name}</p>
                     </div>
                     <div>
                       <div>
                         <b>Account type</b>
                       </div>
-                      <p>{role}</p>
+                      <p>{ride?.user?.account_type}</p>
                     </div>
                     <div>
                       <div>
                         <b>Sex</b>
                       </div>
-                      <p>{values?.sex}</p>
+                      <p>{ride?.user?.sex}</p>
                     </div>
 
                     <div>
@@ -265,9 +240,7 @@ const ViewTrip = () => {
                         <b>Updated At</b>
                       </div>
                       <p>
-                        {moment(values?.updatedAt)
-                          .utc()
-                          .format("MMMM DD, YYYY")}
+                        {moment(ride?.updatedAt).utc().format("MMMM DD, YYYY")}
                       </p>
                     </div>
 
@@ -275,49 +248,28 @@ const ViewTrip = () => {
                       <div>
                         <b>OTP</b>
                       </div>
-                      <p>{values?.otp}</p>
+                      <p>{ride?.otp}</p>
                     </div>
-
-                    {/* <div style={{ marginTop: "6rem" }}>
-                    <div>
-                      <b>Pickup Address</b>
-                    </div>
-                    <p>{values?.pickupAddr}</p>
-                  </div>
-
-                  <div style={{ marginTop: "6rem" }}>
-                    <div>
-                      <b>Pickup Lat</b>
-                    </div>
-                    <p>{values?.pickupLat}</p>
-                  </div>
-
-                  <div>
-                    <div>
-                      <b>Pickup Long</b>
-                    </div>
-                    <p>{values?.pickupLong}</p>
-                  </div> */}
                   </Grid>
                   <Grid item xs={12} md={2}>
                     <div>
                       <div>
                         <b>Email</b>
                       </div>
-                      <p>{values?.email}</p>
+                      <p>{ride?.user?.email}</p>
                     </div>
                     <div>
                       <div>
                         <b>City</b>
                       </div>
-                      <p>{values?.city}</p>
+                      <p>{ride?.user?.city}</p>
                     </div>
                     <div>
                       <div>
                         <b>Deactivated</b>
                       </div>
                       <p>
-                        {deactivated ? (
+                        {ride?.user?.deactivated ? (
                           <svg
                             style={{ width: "2rem" }}
                             xmlns="http://www.w3.org/2000/svg"
@@ -365,7 +317,7 @@ const ViewTrip = () => {
                       <div>
                         <b>Mobile No.</b>
                       </div>
-                      <p>{values?.phone}</p>
+                      <p>{ride?.user?.phone}</p>
                     </div>
 
                     <div>
@@ -373,9 +325,7 @@ const ViewTrip = () => {
                         <b>Created At</b>
                       </div>
                       <p>
-                        {moment(values?.createdAt)
-                          .utc()
-                          .format("MMMM DD, YYYY")}
+                        {moment(ride?.createdAt).utc().format("MMMM DD, YYYY")}
                       </p>
                     </div>
 
@@ -383,7 +333,7 @@ const ViewTrip = () => {
                       <div>
                         <b>Fare</b>
                       </div>
-                      <p>$ {values?.fare}</p>
+                      <p>$ {ride?.fare}</p>
                     </div>
 
                     <div>
@@ -430,7 +380,7 @@ const ViewTrip = () => {
                     </Grid>
                     <Grid item xs={12} md={4}>
                       <div>
-                        <p>{values?.pickupAddr}</p>
+                        <p>{ride?.pickup?.pickUpAddress}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -447,7 +397,7 @@ const ViewTrip = () => {
                     </Grid>
                     <Grid item xs={12} md={4}>
                       <div>
-                        <p>{values?.pickupLat}</p>
+                        <p>{ride?.pickup?.latLng?.latitude}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -464,7 +414,7 @@ const ViewTrip = () => {
                     </Grid>
                     <Grid item xs={12} md={4}>
                       <div>
-                        <p>{values?.pickupLong}</p>
+                        <p>{ride?.pickup?.latLng?.longitude}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -481,7 +431,7 @@ const ViewTrip = () => {
                     </Grid>
                     <Grid item xs={12} md={4}>
                       <div>
-                        <p>{values?.destinationAddr}</p>
+                        <p>{ride?.destination?.destinationAddress}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -498,7 +448,7 @@ const ViewTrip = () => {
                     </Grid>
                     <Grid item xs={12} md={4}>
                       <div>
-                        <p>{values?.destinationLat}</p>
+                        <p>{ride?.destination?.latLng?.latitude}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -515,7 +465,7 @@ const ViewTrip = () => {
                     </Grid>
                     <Grid item xs={12} md={4}>
                       <div>
-                        <p>{values?.destinationLong}</p>
+                        <p>{ride?.destination?.latLng?.longitude}</p>
                       </div>
                     </Grid>
                   </Grid>
@@ -532,7 +482,7 @@ const ViewTrip = () => {
           >
             <Box sx={style}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Edit Trip
+                Edit ride
               </Typography>
               <Stack direction="column" spacing={3}>
                 <form onSubmit={handleEditSubmit}>
@@ -547,13 +497,7 @@ const ViewTrip = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.pickupAddr}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
+                      value={ride?.pickup?.pickUpAddress}
                     />
                   </div>
 
@@ -568,13 +512,7 @@ const ViewTrip = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.destinationAddr}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
+                      value={ride?.destination?.destinationAddress}
                     />
                   </div>
 
@@ -589,13 +527,7 @@ const ViewTrip = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.pickupLat}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
+                      value={ride?.pickup?.latLng?.latitude}
                     />
                   </div>
 
@@ -610,13 +542,7 @@ const ViewTrip = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.pickupLong}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
+                      value={ride?.pickup?.latLng?.longitude}
                     />
                   </div>
 
@@ -631,13 +557,7 @@ const ViewTrip = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.destinationLat}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
+                      value={ride?.destination?.latLng?.latitude}
                     />
                   </div>
 
@@ -652,13 +572,7 @@ const ViewTrip = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.destinationLong}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
+                      value={ride?.destination?.latLng?.longitude}
                     />
                   </div>
 
@@ -673,13 +587,7 @@ const ViewTrip = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={values?.fare}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
+                      value={ride?.fare}
                     />
                   </div>
 
@@ -728,8 +636,7 @@ const ViewTrip = () => {
                       labelId="demo-simple-select-helper-label"
                       id="demo-simple-select-helper"
                       value={mode}
-                      label="payment"
-                      required
+                      label="mode"
                       onChange={handleModeChange}
                       displayEmpty
                     >
