@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { filter } from "lodash";
-import { sentenceCase } from "change-case";
 import { useEffect, useState, useReducer } from "react";
 // @mui
 import {
@@ -10,36 +9,25 @@ import {
   Paper,
   Avatar,
   Button,
-  Popover,
   Checkbox,
   TableRow,
-  MenuItem,
   TableBody,
   TableCell,
   Container,
   Typography,
-  IconButton,
   TableContainer,
   TablePagination,
   Modal,
   Box,
-  TextField,
-  InputLabel,
-  Select,
-  AlertTitle,
-  Alert,
-  Switch,
   Skeleton,
 } from "@mui/material";
 // components
-import Label from "../components/label";
-import Iconify from "../components/iconify";
 import Scrollbar from "../components/scrollbar";
 // sections
 import { UserListHead, UserListToolbar } from "../sections/@dashboard/user";
 // mock
 // import USERLIST from '../_mock/user';
-import axios from "axios";
+import axios from "../utils/axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -50,17 +38,11 @@ import { motion } from "framer-motion";
 
 const TABLE_HEAD = [
   { id: "name", label: "Name", alignRight: false },
-  // { id: 'role', label: 'Role', alignRight: false },
   { id: "type", label: "Type", alignRight: false },
   { id: "description", label: "Description", alignRight: false },
   { id: "status", label: "Status", alignRight: false },
   { id: "amount", label: "Amount", alignRight: false },
-  // { id: 'company', label: 'Company', alignRight: false },
-  //   { id: 'city', label: 'City', alignRight: false },
-  //   { id: 'mobile', label: 'Mobile', alignRight: false },
-  //   { id: 'isVerified', label: 'Verified', alignRight: false },
   { id: "actions", label: "Actions", alignRight: false },
-  // { id: 'status', label: 'Status', alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
@@ -128,7 +110,6 @@ export default function TransactionPage() {
   });
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
-  // const [usersList, setUsersList] = useState([]);
   const [openDelete, setOpenDelete] = useState(false);
   const [deleteId, setDeleteId] = useState();
 
@@ -142,7 +123,6 @@ export default function TransactionPage() {
 
   const [filterName, setFilterName] = useState("");
   const [filterType, setFilterType] = useState("");
-  // const [loading, setLoading] = useState(false);
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -163,7 +143,7 @@ export default function TransactionPage() {
     dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.get(
-        `http://3.239.229.120:5000/api/wallet/getAlltransactions/?type=${filterType}`,
+        `/api/wallet/getAlltransactions/?type=${filterType}`,
         {
           headers: { Authorization: token },
         }
@@ -183,12 +163,9 @@ export default function TransactionPage() {
 
   const deleteDetails = async (id) => {
     try {
-      const { data } = await axios.delete(
-        `http://3.239.229.120:5000/api/admin/transaction/${id}`,
-        {
-          headers: { Authorization: token },
-        }
-      );
+      const { data } = await axios.delete(`/api/admin/transaction/${id}`, {
+        headers: { Authorization: token },
+      });
 
       toast.success("Transactions details deleted!", toastOptions);
 

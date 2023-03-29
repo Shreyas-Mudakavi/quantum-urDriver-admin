@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { filter } from "lodash";
-import { sentenceCase } from "change-case";
 import { useEffect, useState, useReducer } from "react";
 // @mui
 import {
@@ -27,8 +26,7 @@ import Scrollbar from "../components/scrollbar";
 // sections
 import { UserListHead, UserListToolbar } from "../sections/@dashboard/user";
 // mock
-// import USERLIST from '../_mock/user';
-import axios from "axios";
+import axios from "../utils/axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -39,33 +37,56 @@ import { motion } from "framer-motion";
 
 const TABLE_HEAD = [
   { id: "name", label: "Name", alignRight: false },
-  { id: "role", label: "Account type", alignRight: false },
-  { id: "pickup", label: "Pickup Addr", alignRight: false },
-  { id: "destination", label: "Destination Addr", alignRight: false },
+  { id: "account_type", label: "Account type", alignRight: false },
+  { id: "pickUpAddress", label: "Pickup Addr", alignRight: false },
+  { id: "destinationAddress", label: "Destination Addr", alignRight: false },
   { id: "fare", label: "Fare", alignRight: false },
   { id: "payment", label: "Payment", alignRight: false },
   { id: "status", label: "Status", alignRight: false },
-  // { id: 'company', label: 'Company', alignRight: false },
-  //   { id: 'city', label: 'City', alignRight: false },
-  //   { id: 'mobile', label: 'Mobile', alignRight: false },
-  //   { id: 'isVerified', label: 'Verified', alignRight: false },
   { id: "actions", label: "Actions", alignRight: false },
-  // { id: 'status', label: 'Status', alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
 
 function descendingComparator(a, b, orderBy) {
   if (
-    orderBy === "name"
+    orderBy === "name" || orderBy === "account_type"
       ? b?.user[orderBy] < a?.user[orderBy]
       : b[orderBy] < a[orderBy]
   ) {
     return -1;
   }
   if (
-    orderBy === "name"
+    orderBy === "name" || orderBy === "account_type"
       ? b?.user[orderBy] > a?.user[orderBy]
+      : b[orderBy] > a[orderBy]
+  ) {
+    return 1;
+  }
+  if (
+    orderBy === "pickUpAddress"
+      ? b?.pickup[orderBy] > a?.pickup[orderBy]
+      : b[orderBy] > a[orderBy]
+  ) {
+    return 1;
+  }
+  if (
+    orderBy === "pickUpAddress"
+      ? b?.pickup[orderBy] < a?.pickup[orderBy]
+      : b[orderBy] < a[orderBy]
+  ) {
+    return -1;
+  }
+  if (
+    orderBy === "destinationAddress"
+      ? b?.destination[orderBy] < a?.destination[orderBy]
+      : b[orderBy] < a[orderBy]
+  ) {
+    return -1;
+  }
+  if (
+    orderBy === "destinationAddress"
+      ? b?.destination[orderBy] > a?.destination[orderBy]
       : b[orderBy] > a[orderBy]
   ) {
     return 1;
@@ -118,7 +139,6 @@ export default function TripsPage() {
   });
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
-  // const [usersList, setUsersList] = useState([]);
   const [openDelete, setOpenDelete] = useState(false);
   const [deleteId, setDeleteId] = useState();
 
@@ -134,7 +154,6 @@ export default function TripsPage() {
   const [filterStatus, setFilterStatus] = useState("");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  // const [loading, setLoading] = useState(false);
 
   const handleFilterByStatus = (event) => {
     setPage(0);
@@ -153,7 +172,7 @@ export default function TripsPage() {
     dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.get(
-        `http://3.239.229.120:5000/api/rides/all/?status=${filterStatus}`,
+        `/api/rides/all/?status=${filterStatus}`,
         {
           headers: { Authorization: token },
         }
@@ -174,12 +193,9 @@ export default function TripsPage() {
 
   const deleteDetails = async (id) => {
     try {
-      const { data } = await axios.delete(
-        `http://3.239.229.120:5000/api/rides/${id}`,
-        {
-          headers: { Authorization: token },
-        }
-      );
+      const { data } = await axios.delete(`/api/rides/${id}`, {
+        headers: { Authorization: token },
+      });
 
       toast.success("Ride details deleted!", toastOptions);
 
@@ -297,9 +313,6 @@ export default function TripsPage() {
             <Typography variant="h4" gutterBottom>
               Rides
             </Typography>
-            {/* <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New Trip
-          </Button> */}
           </Stack>
 
           <Card>
@@ -355,12 +368,10 @@ export default function TripsPage() {
                             _id,
                             user,
                             fare,
-                            otp,
                             payment,
                             pickup,
                             destination,
                             status,
-                            driver,
                           } = row;
                           const selectedUser = selected.indexOf(_id) !== -1;
 

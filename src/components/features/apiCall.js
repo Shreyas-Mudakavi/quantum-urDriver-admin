@@ -1,12 +1,5 @@
-import axios from "axios";
-import {
-  loginFailure,
-  loginStart,
-  loginSuccess,
-  registerFailure,
-  registerStart,
-  registerSuccess,
-} from "./authSlice";
+import axios from "../../utils/axios";
+import { loginFailure, loginStart, loginSuccess } from "./authSlice";
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
@@ -14,10 +7,7 @@ export const login = async (dispatch, user) => {
   const { email, password } = user;
 
   try {
-    const { data } = await axios.post(
-      "http://3.239.229.120:5000/api/admin/login",
-      { email, password }
-    );
+    const { data } = await axios.post("/api/admin/login", { email, password });
 
     dispatch(loginSuccess(data?.data));
   } catch (error) {

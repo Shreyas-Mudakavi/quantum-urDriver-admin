@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { filter } from "lodash";
-import { sentenceCase } from "change-case";
 import { useEffect, useState, useReducer } from "react";
 // @mui
 import {
@@ -25,7 +24,7 @@ import Scrollbar from "../components/scrollbar";
 import { UserListHead, UserListToolbar } from "../sections/@dashboard/user";
 // mock
 // import USERLIST from '../_mock/user';
-import axios from "axios";
+import axios from "../utils/axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -34,30 +33,26 @@ import { motion } from "framer-motion";
 
 const TABLE_HEAD = [
   { id: "name", label: "Name", alignRight: false },
-  { id: "role", label: "Account type", alignRight: false },
+  { id: "account_type", label: "Account type", alignRight: false },
   { id: "balance", label: "Balance", alignRight: false },
-  // { id: 'company', label: 'Company', alignRight: false },
-  //   { id: 'city', label: 'City', alignRight: false },
-  //   { id: 'mobile', label: 'Mobile', alignRight: false },
-  //   { id: 'isVerified', label: 'Verified', alignRight: false },
   { id: "actions", label: "Actions", alignRight: false },
-  // { id: 'status', label: 'Status', alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
 
 function descendingComparator(a, b, orderBy) {
-  // if (b?.user !== null && orderBy === 'name' ? b?.user[orderBy] < a?.user[orderBy] : b[orderBy] < a[orderBy]) {
-  //   return -1;
-  // }
-  // if (b?.user !== null && orderBy === 'name' ? b?.user[orderBy] > a?.user[orderBy] : b[orderBy] > a[orderBy]) {
-  //   return 1;
-  // }
-  // return 0;
-  if (b[orderBy] < a[orderBy]) {
+  if (
+    orderBy === "name" || orderBy === "account_type"
+      ? b?.user[orderBy] < a?.user[orderBy]
+      : b[orderBy] < a[orderBy]
+  ) {
     return -1;
   }
-  if (b[orderBy] > a[orderBy]) {
+  if (
+    orderBy === "name" || orderBy === "account_type"
+      ? b?.user[orderBy] > a?.user[orderBy]
+      : b[orderBy] > a[orderBy]
+  ) {
     return 1;
   }
   return 0;
@@ -108,7 +103,6 @@ export default function WalletPage() {
   });
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
-  // const [usersList, setUsersList] = useState([]);
 
   const [page, setPage] = useState(0);
 
@@ -121,17 +115,13 @@ export default function WalletPage() {
   const [filterName, setFilterName] = useState("");
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  // const [loading, setLoading] = useState(false);
 
   const fetchUsersWallet = async () => {
     dispatch({ type: "FETCH_REQUEST" });
     try {
-      const { data } = await axios.get(
-        "http://3.239.229.120:5000/api/wallet/getAllWallets",
-        {
-          headers: { Authorization: token },
-        }
-      );
+      const { data } = await axios.get("/api/wallet/getAllWallets", {
+        headers: { Authorization: token },
+      });
 
       // console.log("wallet ", data?.data?.wallets);
       // setUsersList(data?.data?.wallets);

@@ -16,7 +16,7 @@ import {
   Avatar,
 } from "@mui/material";
 import { Helmet } from "react-helmet-async";
-import axios from "axios";
+import axios from "../utils/axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -97,14 +97,11 @@ const ViewTrip = () => {
   const getUser = async (id) => {
     dispatch({ type: "FETCH_REQUEST" });
     try {
-      const { data } = await axios.get(
-        `http://3.239.229.120:5000/api/rides/${params?.id}`,
-        {
-          headers: { Authorization: token },
-        }
-      );
+      const { data } = await axios.get(`/api/rides/${params?.id}`, {
+        headers: { Authorization: token },
+      });
 
-      console.log("ride ", data);
+      // console.log("ride ", data);
 
       dispatch({ type: "FETCH_SUCCESS", payload: data?.data?.trip });
       setStatus(data?.data?.trip?.status);
@@ -121,7 +118,7 @@ const ViewTrip = () => {
 
     try {
       const { data } = await axios.put(
-        `http://3.239.229.120:5000/api/admin/rides/${params?.id}`,
+        `/api/admin/rides/${params?.id}`,
         {
           status,
           payment,
@@ -132,7 +129,7 @@ const ViewTrip = () => {
         }
       );
 
-      console.log("updated ride ", data);
+      // console.log("updated ride ", data);
       toast.success("Ride details updated!", toastOptions);
       getUser();
     } catch (error) {
@@ -160,27 +157,34 @@ const ViewTrip = () => {
         </Helmet>
 
         <Container>
-          <Typography variant="h5" component="span">
-            {ride?.user?.name}
-          </Typography>
+          {loading ? (
+            <Skeleton variant="text" width={100} animation="wave">
+              <Avatar />
+            </Skeleton>
+          ) : (
+            <>
+              <Typography variant="h5" component="span">
+                {ride?.user?.name}
+              </Typography>
 
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            // className="w-6 h-6"
-            style={{ width: "2rem", marginLeft: "1rem", cursor: "pointer" }}
-            onClick={() => handleEditOpen()}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-            />
-          </svg>
-
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                // className="w-6 h-6"
+                style={{ width: "2rem", marginLeft: "1rem", cursor: "pointer" }}
+                onClick={() => handleEditOpen()}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                />
+              </svg>
+            </>
+          )}
           <Divider />
           <Box
             component="div"
