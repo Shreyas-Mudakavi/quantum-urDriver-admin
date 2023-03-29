@@ -7,9 +7,15 @@ import {
   TableCell,
   TableHead,
   TableSortLabel,
+  styled,
 } from "@mui/material";
 
 // ----------------------------------------------------------------------
+
+const StyledRoot = styled("span")(({ theme }) => ({
+  color: "#ffff",
+  backgroundColor: "#1F1E25",
+}));
 
 const visuallyHidden = {
   border: 0,
@@ -47,9 +53,17 @@ export default function UserListHead({
   };
 
   return (
+    // <StyledRoot>
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        <TableCell
+          sx={{
+            color: "#ffff",
+            borderColor: "#343434",
+            backgroundColor: "#1F1E25",
+          }}
+          padding="checkbox"
+        >
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
@@ -58,6 +72,11 @@ export default function UserListHead({
         </TableCell>
         {headLabel.map((headCell) => (
           <TableCell
+            sx={{
+              color: "#B6B6B4",
+              backgroundColor: "#1F1E25",
+              borderColor: "#343434",
+            }}
             key={headCell.id}
             align={headCell.alignRight ? "right" : "left"}
             sortDirection={orderBy === headCell.id ? order : false}
@@ -79,5 +98,6 @@ export default function UserListHead({
         ))}
       </TableRow>
     </TableHead>
+    // </StyledRoot>
   );
 }

@@ -36,7 +36,7 @@ const StyledAccount = styled("div")(({ theme }) => ({
   padding: theme.spacing(2, 2.5),
   borderRadius: Number(theme.shape.borderRadius) * 1.5,
   // backgroundColor: alpha(theme.palette.grey[500], 0.12),
-  backgroundColor: "#181818",
+  backgroundColor: "#1B1B1B",
 }));
 
 // ----------------------------------------------------------------------
@@ -115,7 +115,8 @@ export default function Nav({ openNav, onCloseNav }) {
           PaperProps={{
             sx: {
               width: NAV_WIDTH,
-              background: "linear-gradient(#000, #1F2029)",
+              // background: "linear-gradient(#000, #1F2029)",
+              backgroundColor: "#1F1E25",
               borderRightStyle: "dashed",
             },
           }}
@@ -132,7 +133,8 @@ export default function Nav({ openNav, onCloseNav }) {
           PaperProps={{
             sx: {
               width: NAV_WIDTH,
-              background: "linear-gradient(#000, #1F2029)",
+              backgroundColor: "#1F1E25",
+              // background: "linear-gradient(#000, #1F2029)",
             },
           }}
         >

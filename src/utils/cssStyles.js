@@ -8,7 +8,7 @@ export function bgBlur(props) {
   const blur = props?.blur || 6;
   const opacity = props?.opacity || 0.8;
   const imgUrl = props?.imgUrl;
-  const direction = props?.direction || "to right";
+  const direction = props?.direction;
 
   if (imgUrl) {
     return {
@@ -29,11 +29,17 @@ export function bgBlur(props) {
     };
   }
 
+  if (direction) {
+    return {
+      background: `linear-gradient(${direction},  #30419B, #30419B)`,
+    };
+  }
+
   return {
     backdropFilter: `blur(${blur}px)`,
     WebkitBackdropFilter: `blur(${blur}px)`,
     // backgroundColor: alpha(color, opacity),
-    background: `linear-gradient(${direction},  #3A3838, #1F2029)`,
+    backgroundColor: color,
   };
 }
 

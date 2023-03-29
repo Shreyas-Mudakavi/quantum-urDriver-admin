@@ -213,15 +213,15 @@ export default function UserPage() {
             justifyContent="space-between"
             mb={5}
           >
-            <Typography variant="h4" gutterBottom>
-              User
+            <Typography variant="h4" gutterBottom sx={{ color: "#fff" }}>
+              Users
             </Typography>
             {/* <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button> */}
           </Stack>
 
-          <Card>
+          <Card style={{ backgroundColor: "#1F1E25" }}>
             <UserListToolbar
               numSelected={selected.length}
               filterName={filterName}
@@ -290,7 +290,13 @@ export default function UserPage() {
                                 role="checkbox"
                                 selected={selectedUser}
                               >
-                                <TableCell padding="checkbox">
+                                <TableCell
+                                  padding="checkbox"
+                                  sx={{
+                                    color: "text.secondary",
+                                    borderColor: "#46335f",
+                                  }}
+                                >
                                   <Checkbox
                                     checked={selectedUser}
                                     onChange={(event) =>
@@ -303,6 +309,10 @@ export default function UserPage() {
                                   component="th"
                                   scope="row"
                                   padding="none"
+                                  sx={{
+                                    color: "text.secondary",
+                                    borderColor: "#46335f",
+                                  }}
                                 >
                                   <Stack
                                     direction="row"
@@ -332,7 +342,13 @@ export default function UserPage() {
                                   </Stack>
                                 </TableCell>
 
-                                <TableCell align="left">
+                                <TableCell
+                                  align="left"
+                                  sx={{
+                                    color: "text.secondary",
+                                    borderColor: "#46335f",
+                                  }}
+                                >
                                   {loading ? (
                                     <Skeleton
                                       variant="text"
@@ -347,7 +363,13 @@ export default function UserPage() {
                                   )}
                                 </TableCell>
 
-                                <TableCell align="left">
+                                <TableCell
+                                  align="left"
+                                  sx={{
+                                    color: "text.secondary",
+                                    borderColor: "#46335f",
+                                  }}
+                                >
                                   {loading ? (
                                     <Skeleton
                                       variant="text"
@@ -361,7 +383,13 @@ export default function UserPage() {
                                     city
                                   )}
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell
+                                  align="left"
+                                  sx={{
+                                    color: "text.secondary",
+                                    borderColor: "#46335f",
+                                  }}
+                                >
                                   {loading ? (
                                     <Skeleton
                                       variant="text"
@@ -375,7 +403,13 @@ export default function UserPage() {
                                     phone
                                   )}
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell
+                                  align="left"
+                                  sx={{
+                                    color: "text.secondary",
+                                    borderColor: "#46335f",
+                                  }}
+                                >
                                   {loading ? (
                                     <Skeleton
                                       variant="text"
@@ -389,7 +423,13 @@ export default function UserPage() {
                                     sex
                                   )}
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell
+                                  align="left"
+                                  sx={{
+                                    color: "text.secondary",
+                                    borderColor: "#46335f",
+                                  }}
+                                >
                                   {loading ? (
                                     <Skeleton
                                       variant="text"
@@ -403,7 +443,13 @@ export default function UserPage() {
                                     age
                                   )}
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell
+                                  align="left"
+                                  sx={{
+                                    color: "text.secondary",
+                                    borderColor: "#46335f",
+                                  }}
+                                >
                                   {loading ? (
                                     <Skeleton
                                       variant="text"
@@ -422,13 +468,18 @@ export default function UserPage() {
 
                                 {/* <TableCell align="left">{verified ? 'Yes' : 'No'}</TableCell> */}
 
-                                <TableCell align="left">
+                                <TableCell
+                                  align="left"
+                                  sx={{
+                                    borderColor: "#46335f",
+                                  }}
+                                >
                                   <div style={{ display: "flex" }}>
                                     <div
                                       style={{
                                         margin: "0rem 1rem",
                                         width: "1.7rem",
-                                        color: "blue",
+                                        color: "#A866EE",
                                         cursor: "pointer",
                                       }}
                                       onClick={() =>
@@ -473,14 +524,19 @@ export default function UserPage() {
                       <TableBody>
                         <TableRow>
                           <TableCell
-                            style={{ color: "white" }}
+                            sx={{
+                              border: "none",
+                              py: 3,
+                            }}
                             align="center"
                             colSpan={6}
-                            sx={{ py: 3 }}
+                            // sx={{ py: 3 }}
                           >
                             <Paper
                               sx={{
                                 textAlign: "center",
+                                color: "text.secondary",
+                                backgroundColor: "#1F1E25",
                               }}
                             >
                               <Typography variant="h6" paragraph>

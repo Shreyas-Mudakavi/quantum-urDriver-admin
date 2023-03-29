@@ -26,6 +26,8 @@ const StyledRoot = styled(Toolbar)(({ theme }) => ({
 }));
 
 const StyledSearch = styled(OutlinedInput)(({ theme }) => ({
+  color: "#ffff",
+  backgroundColor: "#1F1E25",
   width: 240,
   transition: theme.transitions.create(["box-shadow", "width"], {
     easing: theme.transitions.easing.easeInOut,
@@ -66,8 +68,8 @@ export default function UserListToolbar({
     <StyledRoot
       sx={{
         ...(numSelected > 0 && {
-          color: "primary.main",
-          bgcolor: "primary.lighter",
+          color: "#ffff",
+          bgcolor: "#1F1E25",
         }),
       }}
     >
