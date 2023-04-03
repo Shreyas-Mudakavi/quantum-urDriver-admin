@@ -58,9 +58,17 @@ export default function UserListHead({
       <TableRow>
         <TableCell
           sx={{
-            color: "#ffff",
-            borderColor: "#343434",
-            backgroundColor: "#1F1E25",
+            // for purple theme
+            // color: "#7E4EFC",
+            // backgroundColor: "#EBEEF7",
+            // borderColor: "#7E4EFC",
+            color: "#276BC7",
+            backgroundColor: "#26303C",
+            borderColor: "#89CFF0",
+            // for black theme
+            // color: "#ffff",
+            // borderColor: "#343434",
+            // backgroundColor: "#1F1E25",
           }}
           padding="checkbox"
         >
@@ -73,9 +81,17 @@ export default function UserListHead({
         {headLabel.map((headCell) => (
           <TableCell
             sx={{
-              color: "#B6B6B4",
-              backgroundColor: "#1F1E25",
-              borderColor: "#343434",
+              color: "#6CA0DC",
+              backgroundColor: "#26303C",
+              borderColor: "#89CFF0",
+              // for theme purple
+              // color: "#7E4EFC",
+              // backgroundColor: "#EBEEF7",
+              // borderColor: "#7E4EFC",
+              // for black theme
+              // color: "#B6B6B4",
+              // backgroundColor: "#1F1E25",
+              // borderColor: "#343434",
             }}
             key={headCell.id}
             align={headCell.alignRight ? "right" : "left"}

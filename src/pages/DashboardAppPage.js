@@ -37,7 +37,7 @@ export default function DashboardAppPage() {
         </Helmet>
 
         <Container maxWidth="xl">
-          <Typography variant="h4" sx={{ mb: 5, color: "#ffff" }}>
+          <Typography variant="h4" sx={{ mb: 5, color: "#276BC7" }}>
             Hi, Welcome back
           </Typography>
         </Container>

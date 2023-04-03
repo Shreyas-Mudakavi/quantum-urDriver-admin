@@ -92,7 +92,9 @@ export default function AccountPopover() {
             mt: 1.5,
             ml: 0.75,
             // width: 180,
-            backgroundColor: "#1B1B1B",
+            // for purple theme
+            // backgroundColor: "#7E4EFC",
+            backgroundColor: "#161D28",
             boxShadow: "none",
             "& .MuiMenuItem-root": {
               typography: "body2",
@@ -102,17 +104,25 @@ export default function AccountPopover() {
         }}
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle2" sx={{ color: "white" }} noWrap>
+          <Typography variant="subtitle2" sx={{ color: "#276BC7" }} noWrap>
             {userName}
           </Typography>
-          <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
+          <Typography
+            variant="body2"
+            sx={{
+              // for purple theme
+              // color: "#BE93E4"
+              color: "text.secondary",
+            }}
+            noWrap
+          >
             {userEmail}
           </Typography>
         </Box>
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <Stack sx={{ p: 1, color: "#A866EE" }}>
+        <Stack sx={{ p: 1, color: "#276BC7" }}>
           {MENU_OPTIONS.map((option) => (
             <MenuItem
               key={option.label}
@@ -128,7 +138,15 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <MenuItem onClick={handleLogout} sx={{ m: 1, color: "#A866EE" }}>
+        <MenuItem
+          onClick={handleLogout}
+          sx={{
+            m: 1,
+            color: "#276BC7",
+            // for black theme
+            // color: "#A866EE"
+          }}
+        >
           Logout
         </MenuItem>
       </Popover>

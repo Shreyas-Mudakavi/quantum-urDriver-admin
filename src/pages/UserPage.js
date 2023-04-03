@@ -213,7 +213,7 @@ export default function UserPage() {
             justifyContent="space-between"
             mb={5}
           >
-            <Typography variant="h4" gutterBottom sx={{ color: "#fff" }}>
+            <Typography variant="h4" gutterBottom sx={{ color: "#276BC7" }}>
               Users
             </Typography>
             {/* <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
@@ -221,7 +221,7 @@ export default function UserPage() {
           </Button> */}
           </Stack>
 
-          <Card style={{ backgroundColor: "#1F1E25" }}>
+          <Card style={{ backgroundColor: "#26303C" }}>
             <UserListToolbar
               numSelected={selected.length}
               filterName={filterName}
@@ -293,8 +293,8 @@ export default function UserPage() {
                                 <TableCell
                                   padding="checkbox"
                                   sx={{
-                                    color: "text.secondary",
-                                    borderColor: "#46335f",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
                                   }}
                                 >
                                   <Checkbox
@@ -310,8 +310,8 @@ export default function UserPage() {
                                   scope="row"
                                   padding="none"
                                   sx={{
-                                    color: "text.secondary",
-                                    borderColor: "#46335f",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
                                   }}
                                 >
                                   <Stack
@@ -345,8 +345,8 @@ export default function UserPage() {
                                 <TableCell
                                   align="left"
                                   sx={{
-                                    color: "text.secondary",
-                                    borderColor: "#46335f",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
                                   }}
                                 >
                                   {loading ? (
@@ -366,8 +366,8 @@ export default function UserPage() {
                                 <TableCell
                                   align="left"
                                   sx={{
-                                    color: "text.secondary",
-                                    borderColor: "#46335f",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
                                   }}
                                 >
                                   {loading ? (
@@ -386,8 +386,8 @@ export default function UserPage() {
                                 <TableCell
                                   align="left"
                                   sx={{
-                                    color: "text.secondary",
-                                    borderColor: "#46335f",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
                                   }}
                                 >
                                   {loading ? (
@@ -406,8 +406,8 @@ export default function UserPage() {
                                 <TableCell
                                   align="left"
                                   sx={{
-                                    color: "text.secondary",
-                                    borderColor: "#46335f",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
                                   }}
                                 >
                                   {loading ? (
@@ -426,8 +426,8 @@ export default function UserPage() {
                                 <TableCell
                                   align="left"
                                   sx={{
-                                    color: "text.secondary",
-                                    borderColor: "#46335f",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
                                   }}
                                 >
                                   {loading ? (
@@ -446,8 +446,8 @@ export default function UserPage() {
                                 <TableCell
                                   align="left"
                                   sx={{
-                                    color: "text.secondary",
-                                    borderColor: "#46335f",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
                                   }}
                                 >
                                   {loading ? (
@@ -471,7 +471,7 @@ export default function UserPage() {
                                 <TableCell
                                   align="left"
                                   sx={{
-                                    borderColor: "#46335f",
+                                    borderColor: "#89CFF0",
                                   }}
                                 >
                                   <div style={{ display: "flex" }}>
@@ -479,7 +479,7 @@ export default function UserPage() {
                                       style={{
                                         margin: "0rem 1rem",
                                         width: "1.7rem",
-                                        color: "#A866EE",
+                                        color: "#6CA0DC",
                                         cursor: "pointer",
                                       }}
                                       onClick={() =>
@@ -515,7 +515,7 @@ export default function UserPage() {
 
                       {emptyRows > 0 && (
                         <TableRow style={{ height: 53 * emptyRows }}>
-                          <TableCell colSpan={6} style={{ color: "white" }} />
+                          <TableCell colSpan={6} style={{ color: "#6CA0DC" }} />
                         </TableRow>
                       )}
                     </TableBody>
@@ -535,8 +535,8 @@ export default function UserPage() {
                             <Paper
                               sx={{
                                 textAlign: "center",
-                                color: "text.secondary",
-                                backgroundColor: "#1F1E25",
+                                color: "#6CA0DC",
+                                backgroundColor: "transparent",
                               }}
                             >
                               <Typography variant="h6" paragraph>
@@ -561,7 +561,7 @@ export default function UserPage() {
             </Scrollbar>
 
             <TablePagination
-              style={{ color: "white" }}
+              style={{ color: "#6CA0DC" }}
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
               count={usersList?.length}

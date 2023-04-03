@@ -36,7 +36,10 @@ const StyledAccount = styled("div")(({ theme }) => ({
   padding: theme.spacing(2, 2.5),
   borderRadius: Number(theme.shape.borderRadius) * 1.5,
   // backgroundColor: alpha(theme.palette.grey[500], 0.12),
-  backgroundColor: "#1B1B1B",
+  // for purple theme
+  // backgroundColor: "#6838EE",
+  // the black theme
+  // backgroundColor: "#1B1B1B",
 }));
 
 // ----------------------------------------------------------------------
@@ -82,11 +85,18 @@ export default function Nav({ openNav, onCloseNav }) {
             <Avatar src={userProfile} alt="photoURL" />
 
             <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: "white" }}>
+              <Typography variant="subtitle2" sx={{ color: "#276BC7" }}>
                 {userName}
               </Typography>
 
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  // for purple theme
+                  // color: "#BE93E4"
+                  color: "text.secondary",
+                }}
+              >
                 {userRole}
               </Typography>
             </Box>
@@ -113,10 +123,17 @@ export default function Nav({ openNav, onCloseNav }) {
           open
           variant="permanent"
           PaperProps={{
+            // elevation: 12,
             sx: {
               width: NAV_WIDTH,
-              // background: "linear-gradient(#000, #1F2029)",
-              backgroundColor: "#1F1E25",
+              background:
+                "linear-gradient(to bottom, #050A13, #26303C 67%, #306BAF)",
+              // for purple theme
+              // backgroundColor: "#7E4EFC",
+              // borderTopRightRadius: "2rem",
+              // borderBottomRightRadius: "2rem",
+              // for black theme
+              // backgroundColor: "#1F1E25",
               borderRightStyle: "dashed",
             },
           }}
@@ -133,7 +150,15 @@ export default function Nav({ openNav, onCloseNav }) {
           PaperProps={{
             sx: {
               width: NAV_WIDTH,
-              backgroundColor: "#1F1E25",
+              // for purple theme
+              // backgroundColor: "#7E4EFC",
+              // borderTopRightRadius: "2rem",
+              // borderBottomRightRadius: "2rem",
+              background:
+                "linear-gradient(to bottom, #050A13, #26303C 67%, #306BAF)",
+              boxShadow: "none",
+              // for black theme
+              // backgroundColor: "#1F1E25",
               // background: "linear-gradient(#000, #1F2029)",
             },
           }}

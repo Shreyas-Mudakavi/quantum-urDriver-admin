@@ -141,8 +141,6 @@ const EditUser = () => {
     getUser();
   }, []);
 
-  console.log(account_type);
-
   return (
     <>
       <motion.div
@@ -162,7 +160,11 @@ const EditUser = () => {
             </Skeleton>
           ) : (
             <>
-              <Typography variant="h5" component="span">
+              <Typography
+                variant="h5"
+                component="span"
+                sx={{ color: "#276BC7" }}
+              >
                 {user?.name} details
               </Typography>
               <svg
@@ -172,7 +174,12 @@ const EditUser = () => {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 // className="w-6 h-6"
-                style={{ width: "2rem", marginLeft: "1rem", cursor: "pointer" }}
+                style={{
+                  width: "2rem",
+                  marginLeft: "1rem",
+                  cursor: "pointer",
+                  color: "#CCCCFF",
+                }}
                 onClick={() => handleEditOpen()}
               >
                 <path
@@ -183,11 +190,13 @@ const EditUser = () => {
               </svg>
             </>
           )}
-          <Divider />
+          {/* <Divider component="div" sx={{ marginBottom: "1rem" }} /> */}
           <Box
             component="div"
             sx={{
-              border: "1px solid #E8EBEE",
+              // border: "1px solid #212A35",
+              border: "1px solid #273546",
+              borderRadius: "0.6rem",
               width: "100%",
               height: "100%",
               p: 2,
@@ -213,7 +222,7 @@ const EditUser = () => {
                     <img
                       src={user?.profile_image}
                       alt={user?.name}
-                      style={{ width: "12rem" }}
+                      style={{ width: "12rem", color: "#6CA0DC" }}
                     />
                   )}
                 </div>
@@ -224,52 +233,52 @@ const EditUser = () => {
                 <>
                   <Grid item md={2}>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Name</b>
                       </div>
-                      <p>{user?.name}</p>
+                      <p style={{ color: "#6CA0DC" }}>{user?.name}</p>
                     </div>
 
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Account type</b>
                       </div>
-                      <p>{user?.account_type}</p>
+                      <p style={{ color: "#6CA0DC" }}>{user?.account_type}</p>
                     </div>
 
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Updated At</b>
                       </div>
-                      <p>
+                      <p style={{ color: "#6CA0DC" }}>
                         {moment(user?.updatedAt).utc().format("MMMM DD, YYYY")}
                       </p>
                     </div>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Sex</b>
                       </div>
-                      <p>{user?.sex}</p>
+                      <p style={{ color: "#6CA0DC" }}>{user?.sex}</p>
                     </div>
                   </Grid>
                   <Grid item md={2}>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Email</b>
                       </div>
-                      <p>{user?.email}</p>
+                      <p style={{ color: "#6CA0DC" }}>{user?.email}</p>
                     </div>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>City</b>
                       </div>
-                      <p>{user?.city}</p>
+                      <p style={{ color: "#6CA0DC" }}>{user?.city}</p>
                     </div>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Deactivated</b>
                       </div>
-                      <p>
+                      <p style={{ color: "#6CA0DC" }}>
                         {deactivated ? (
                           <svg
                             style={{ width: "2rem" }}
@@ -308,26 +317,26 @@ const EditUser = () => {
                   </Grid>
                   <Grid item sm={3} md={2}>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Mobile No.</b>
                       </div>
-                      <p>{user?.phone}</p>
+                      <p style={{ color: "#6CA0DC" }}>{user?.phone}</p>
                     </div>
 
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Created At</b>
                       </div>
-                      <p>
+                      <p style={{ color: "#6CA0DC" }}>
                         {moment(user?.createdAt).utc().format("MMMM DD, YYYY")}
                       </p>
                     </div>
 
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Age</b>
                       </div>
-                      <p>{user?.age}</p>
+                      <p style={{ color: "#6CA0DC" }}>{user?.age}</p>
                     </div>
                   </Grid>
                 </>

@@ -109,7 +109,7 @@ export default function DriverPage() {
 
   const [selected, setSelected] = useState([]);
 
-  const [orderBy, setOrderBy] = useState("name");
+  const [orderBy, setOrderBy] = useState("");
 
   const [filterName, setFilterName] = useState("");
 
@@ -211,12 +211,12 @@ export default function DriverPage() {
             justifyContent="space-between"
             mb={5}
           >
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" gutterBottom sx={{ color: "#276BC7" }}>
               Drivers
             </Typography>
           </Stack>
 
-          <Card>
+          <Card style={{ backgroundColor: "#26303C" }}>
             <UserListToolbar
               numSelected={selected.length}
               filterName={filterName}
@@ -287,7 +287,14 @@ export default function DriverPage() {
                                 role="checkbox"
                                 selected={selectedUser}
                               >
-                                <TableCell padding="checkbox">
+                                <TableCell
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  l
+                                  padding="checkbox"
+                                >
                                   <Checkbox
                                     checked={selectedUser}
                                     onChange={(event) =>
@@ -300,6 +307,10 @@ export default function DriverPage() {
                                   component="th"
                                   scope="row"
                                   padding="none"
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
                                 >
                                   <Stack
                                     direction="row"
@@ -313,33 +324,102 @@ export default function DriverPage() {
                                   </Stack>
                                 </TableCell>
 
-                                <TableCell align="left">
+                                <TableCell
+                                  align="left"
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
+                                >
                                   {account_type}
                                 </TableCell>
-                                <TableCell align="left">{email}</TableCell>
-                                <TableCell align="left">{city}</TableCell>
-                                <TableCell align="left">
+                                <TableCell
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  align="left"
+                                >
+                                  {email}
+                                </TableCell>
+                                <TableCell
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  align="left"
+                                >
+                                  {city}
+                                </TableCell>
+                                <TableCell
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  align="left"
+                                >
                                   {license?.license_no}
                                 </TableCell>
-                                <TableCell align="left">{phone}</TableCell>
-                                <TableCell align="left">{sex}</TableCell>
-                                <TableCell align="left">{age}</TableCell>
-                                <TableCell align="left">
+                                <TableCell
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  align="left"
+                                >
+                                  {phone}
+                                </TableCell>
+                                <TableCell
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  align="left"
+                                >
+                                  {sex}
+                                </TableCell>
+                                <TableCell
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  align="left"
+                                >
+                                  {age}
+                                </TableCell>
+                                <TableCell
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  align="left"
+                                >
                                   {moment(createdAt)
                                     .utc()
                                     .format("MMMM DD, YYYY")}
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell
+                                  sx={{
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  align="left"
+                                >
                                   {vehicle?.type}
                                 </TableCell>
 
-                                <TableCell align="left">
+                                <TableCell
+                                  sx={{
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  align="left"
+                                >
                                   <div style={{ display: "flex" }}>
                                     <div
                                       style={{
                                         margin: "0rem 1rem",
                                         width: "1.7rem",
-                                        color: "blue",
+                                        color: "#6CA0DC",
                                         cursor: "pointer",
                                       }}
                                       onClick={() =>
@@ -377,7 +457,7 @@ export default function DriverPage() {
 
                       {emptyRows > 0 && (
                         <TableRow style={{ height: 53 * emptyRows }}>
-                          <TableCell colSpan={6} />
+                          <TableCell colSpan={6} style={{ color: "#6CA0DC" }} />
                         </TableRow>
                       )}
                     </TableBody>
@@ -385,10 +465,16 @@ export default function DriverPage() {
                     {isNotFound && (
                       <TableBody>
                         <TableRow>
-                          <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                          <TableCell
+                            align="center"
+                            colSpan={6}
+                            sx={{ py: 3, border: "none" }}
+                          >
                             <Paper
                               sx={{
                                 textAlign: "center",
+                                color: "#6CA0DC",
+                                backgroundColor: "transparent",
                               }}
                             >
                               <Typography variant="h6" paragraph>
@@ -413,6 +499,7 @@ export default function DriverPage() {
             </Scrollbar>
 
             <TablePagination
+              style={{ color: "#6CA0DC" }}
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
               count={usersList?.length}
