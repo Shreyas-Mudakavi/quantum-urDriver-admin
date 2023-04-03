@@ -93,9 +93,9 @@ export default function AccountPopover() {
             ml: 0.75,
             // width: 180,
             // for purple theme
-            backgroundColor: "#7E4EFC",
+            // backgroundColor: "#7E4EFC",
             // for new-zealdn theme
-            // backgroundColor: "#161D28",
+            backgroundColor: "#161D28",
             boxShadow: "none",
             "& .MuiMenuItem-root": {
               typography: "body2",
@@ -109,8 +109,8 @@ export default function AccountPopover() {
             variant="subtitle2"
             sx={{
               // for new-zealnd theme
-              // color: "#276BC7"
-              color: "#fff",
+              color: "#276BC7",
+              // color: "#fff",
             }}
             noWrap
           >
@@ -120,9 +120,9 @@ export default function AccountPopover() {
             variant="body2"
             sx={{
               // for purple theme
-              color: "#BE93E4",
+              // color: "#BE93E4",
               // for new-zealdn theme
-              // color: "text.secondary",
+              color: "text.secondary",
             }}
             noWrap
           >
@@ -136,8 +136,8 @@ export default function AccountPopover() {
           sx={{
             p: 1,
             // for new-zealnd theme
-            // color: "#276BC7"
-            color: "#fff",
+            color: "#276BC7",
+            // color: "#fff",
           }}
         >
           {MENU_OPTIONS.map((option) => (
@@ -159,7 +159,7 @@ export default function AccountPopover() {
           onClick={handleLogout}
           sx={{
             m: 1,
-            color: "#fff",
+            color: "#276BC7",
             // for black theme
             // color: "#A866EE"
           }}

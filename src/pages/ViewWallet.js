@@ -143,7 +143,11 @@ const ViewWallet = () => {
             </Skeleton>
           ) : (
             <>
-              <Typography variant="h5" component="span">
+              <Typography
+                variant="h5"
+                component="span"
+                sx={{ color: "#276BC7" }}
+              >
                 {wallet?.user?.name} details
               </Typography>
               <svg
@@ -153,7 +157,12 @@ const ViewWallet = () => {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 // className="w-6 h-6"
-                style={{ width: "2rem", marginLeft: "1rem", cursor: "pointer" }}
+                style={{
+                  width: "2rem",
+                  marginLeft: "1rem",
+                  cursor: "pointer",
+                  color: "#CCCCFF",
+                }}
                 onClick={() => handleEditOpen()}
               >
                 <path
@@ -165,11 +174,11 @@ const ViewWallet = () => {
             </>
           )}
 
-          <Divider />
           <Box
             component="div"
             sx={{
-              border: "1px solid #E8EBEE",
+              border: "1px solid #273546",
+              borderRadius: "0.6rem",
               width: "100%",
               height: "100%",
               p: 2,
@@ -190,7 +199,7 @@ const ViewWallet = () => {
                     <img
                       src={wallet?.user?.profile_image}
                       alt={wallet?.user?.name}
-                      style={{ width: "12rem" }}
+                      style={{ width: "12rem", color: "#6CA0DC" }}
                     />
                   )}
                 </div>
@@ -201,29 +210,31 @@ const ViewWallet = () => {
                 <>
                   <Grid item xs="auto" md={2}>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Name</b>
                       </div>
-                      <p>{wallet?.user?.name}</p>
+                      <p style={{ color: "#6CA0DC" }}>{wallet?.user?.name}</p>
                     </div>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Account type</b>
                       </div>
-                      <p>{wallet?.user?.account_type}</p>
+                      <p style={{ color: "#6CA0DC" }}>
+                        {wallet?.user?.account_type}
+                      </p>
                     </div>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Sex</b>
                       </div>
-                      <p>{wallet?.user?.sex}</p>
+                      <p style={{ color: "#6CA0DC" }}>{wallet?.user?.sex}</p>
                     </div>
 
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Updated At</b>
                       </div>
-                      <p>
+                      <p style={{ color: "#6CA0DC" }}>
                         {moment(wallet?.updatedAt)
                           .utc()
                           .format("MMMM DD, YYYY")}
@@ -232,22 +243,22 @@ const ViewWallet = () => {
                   </Grid>
                   <Grid item xs="auto" md={2}>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Email</b>
                       </div>
-                      <p>{wallet?.user?.email}</p>
+                      <p style={{ color: "#6CA0DC" }}>{wallet?.user?.email}</p>
                     </div>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>City</b>
                       </div>
-                      <p>{wallet?.user?.city}</p>
+                      <p style={{ color: "#6CA0DC" }}>{wallet?.user?.city}</p>
                     </div>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Deactivated</b>
                       </div>
-                      <p>
+                      <p style={{ color: "#6CA0DC" }}>
                         {wallet?.user?.deactivated ? (
                           <svg
                             style={{ width: "2rem" }}
@@ -286,17 +297,17 @@ const ViewWallet = () => {
                   </Grid>
                   <Grid item xs="auto" md={2}>
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Mobile No.</b>
                       </div>
-                      <p>{wallet?.user?.phone}</p>
+                      <p style={{ color: "#6CA0DC" }}>{wallet?.user?.phone}</p>
                     </div>
 
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Created At</b>
                       </div>
-                      <p>
+                      <p style={{ color: "#6CA0DC" }}>
                         {moment(wallet?.createdAt)
                           .utc()
                           .format("MMMM DD, YYYY")}
@@ -304,10 +315,10 @@ const ViewWallet = () => {
                     </div>
 
                     <div>
-                      <div>
+                      <div style={{ color: "#CCCCFF" }}>
                         <b>Age</b>
                       </div>
-                      <p>{wallet?.user?.age}</p>
+                      <p style={{ color: "#6CA0DC" }}>{wallet?.user?.age}</p>
                     </div>
                   </Grid>
                 </>
@@ -319,7 +330,7 @@ const ViewWallet = () => {
               <>
                 <div style={{ marginTop: "5rem" }}>
                   <div style={{ marginBottom: "2rem" }}>
-                    <div>
+                    <div style={{ color: "#CCCCFF" }}>
                       <b>Balance</b>
                     </div>
                     <Divider component="div" />
@@ -331,13 +342,13 @@ const ViewWallet = () => {
                     direction={{ sm: "column", md: "row" }}
                   >
                     <Grid item xs={12} md={3}>
-                      <div>
+                      <div style={{ color: "#6CA0DC" }}>
                         <b>Current balance</b>
                       </div>
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <p>${balance}</p>
+                        <p style={{ color: "#6CA0DC" }}>${balance}</p>
                       </div>
                     </Grid>
                   </Grid>

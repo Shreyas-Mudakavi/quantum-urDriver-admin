@@ -23,6 +23,7 @@ import { motion } from "framer-motion";
 const StyledRoot = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     display: "flex",
+    background: "linear-gradient(to bottom right, #050A13, #26303C)",
   },
 }));
 
@@ -86,7 +87,7 @@ export default function LoginPage() {
 
           <Container maxWidth="sm">
             <StyledContent>
-              <Typography variant="h4" gutterBottom>
+              <Typography variant="h4" gutterBottom sx={{ color: "#CCCCFF" }}>
                 Sign in to UR DRIVERS
               </Typography>
 

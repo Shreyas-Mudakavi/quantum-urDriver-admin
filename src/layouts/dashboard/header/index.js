@@ -18,12 +18,12 @@ const HEADER_MOBILE = 64;
 const HEADER_DESKTOP = 82;
 
 const StyledRoot = styled(AppBar)(({ theme }) => ({
-  ...bgBlur({ color: "#F1F4F9" }),
+  // ...bgBlur({ color: "#F1F4F9" }),
   // the black theme
   // ...bgBlur({ color: "#151419" }),
   // for new-zealnd theme
-  // background: "linear-gradient(to right, #050A13, #26303C 67%, #306BAF)",
-  // boxShadow: "none",
+  background: "linear-gradient(to right, #050A13, #26303C 67%, #306BAF)",
+  boxShadow: "none",
 
   [theme.breakpoints.up("lg")]: {
     width: `calc(100% - ${NAV_WIDTH + 1}px)`,
@@ -52,9 +52,9 @@ export default function Header({ onOpenNav }) {
           onClick={onOpenNav}
           sx={{
             mr: 1,
-            color: "#A866EE",
+            // color: "#A866EE",
             // for new-zealand theme
-            // color: "#2D5A8E",
+            color: "#2D5A8E",
             display: { lg: "none" },
           }}
         >

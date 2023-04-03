@@ -59,13 +59,13 @@ export default function UserListHead({
         <TableCell
           sx={{
             // for purple theme
-            color: "#7E4EFC",
-            backgroundColor: "#EBEEF7",
-            borderColor: "#7E4EFC",
+            // color: "#7E4EFC",
+            // backgroundColor: "#EBEEF7",
+            // borderColor: "#7E4EFC",
             // for new-zeald theme
-            // color: "#276BC7",
-            // backgroundColor: "#26303C",
-            // borderColor: "#89CFF0",
+            color: "#6CA0DC",
+            backgroundColor: "#26303C",
+            borderColor: "#89CFF0",
             // for black theme
             // color: "#ffff",
             // borderColor: "#343434",
@@ -83,13 +83,13 @@ export default function UserListHead({
           <TableCell
             sx={{
               // for new-zealdnd theme
-              // color: "#6CA0DC",
-              // backgroundColor: "#26303C",
-              // borderColor: "#89CFF0",
+              color: "#6CA0DC",
+              backgroundColor: "#26303C",
+              borderColor: "#89CFF0",
               // for theme purple
-              color: "#7E4EFC",
-              backgroundColor: "#EBEEF7",
-              borderColor: "#7E4EFC",
+              // color: "#7E4EFC",
+              // backgroundColor: "#EBEEF7",
+              // borderColor: "#7E4EFC",
               // for black theme
               // color: "#B6B6B4",
               // backgroundColor: "#1F1E25",
@@ -100,6 +100,12 @@ export default function UserListHead({
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
+              sx={{
+                "&.Mui-active": {
+                  // for new-zealdnd theme
+                  color: "#6CA0DC",
+                },
+              }}
               hideSortIcon
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : "asc"}

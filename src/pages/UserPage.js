@@ -218,8 +218,8 @@ export default function UserPage() {
               gutterBottom
               sx={{
                 // for new-zealdn theme
-                // color: "#276BC7"
-                color: "#7E4EFC",
+                color: "#276BC7",
+                // color: "#7E4EFC",
               }}
             >
               Users
@@ -232,8 +232,8 @@ export default function UserPage() {
           <Card
             style={{
               // for new-zealnd theme
-              // backgroundColor: "#26303C"
-              backgroundColor: "#EBEEF7",
+              backgroundColor: "#26303C",
+              // backgroundColor: "#EBEEF7",
             }}
           >
             <UserListToolbar
@@ -308,10 +308,10 @@ export default function UserPage() {
                                   padding="checkbox"
                                   sx={{
                                     // for new-zealdn theme
-                                    // color: "#CCCCFF",
-                                    // borderColor: "#89CFF0",
-                                    color: "text.secondary",
-                                    borderColor: "#E3D8F4",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
                                   }}
                                 >
                                   <Checkbox
@@ -328,10 +328,10 @@ export default function UserPage() {
                                   padding="none"
                                   sx={{
                                     // for new-zealdn theme
-                                    // color: "#CCCCFF",
-                                    // borderColor: "#89CFF0",
-                                    color: "text.secondary",
-                                    borderColor: "#E3D8F4",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
                                   }}
                                 >
                                   <Stack
@@ -366,10 +366,10 @@ export default function UserPage() {
                                   align="left"
                                   sx={{
                                     // for new-zealand theme
-                                    // color: "#CCCCFF",
-                                    // borderColor: "#89CFF0",
-                                    color: "text.secondary",
-                                    borderColor: "#E3D8F4",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
                                   }}
                                 >
                                   {loading ? (
@@ -390,10 +390,10 @@ export default function UserPage() {
                                   align="left"
                                   sx={{
                                     // for new-zealand theme
-                                    // color: "#CCCCFF",
-                                    // borderColor: "#89CFF0",
-                                    color: "text.secondary",
-                                    borderColor: "#E3D8F4",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
                                   }}
                                 >
                                   {loading ? (
@@ -413,10 +413,10 @@ export default function UserPage() {
                                   align="left"
                                   sx={{
                                     // for new-zealand theme
-                                    // color: "#CCCCFF",
-                                    // borderColor: "#89CFF0",
-                                    color: "text.secondary",
-                                    borderColor: "#E3D8F4",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
                                   }}
                                 >
                                   {loading ? (
@@ -436,10 +436,10 @@ export default function UserPage() {
                                   align="left"
                                   sx={{
                                     // for new-zealand theme
-                                    // color: "#CCCCFF",
-                                    // borderColor: "#89CFF0",
-                                    color: "text.secondary",
-                                    borderColor: "#E3D8F4",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
                                   }}
                                 >
                                   {loading ? (
@@ -459,10 +459,10 @@ export default function UserPage() {
                                   align="left"
                                   sx={{
                                     // for new-zealand theme
-                                    // color: "#CCCCFF",
-                                    // borderColor: "#89CFF0",
-                                    color: "text.secondary",
-                                    borderColor: "#E3D8F4",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
                                   }}
                                 >
                                   {loading ? (
@@ -482,10 +482,10 @@ export default function UserPage() {
                                   align="left"
                                   sx={{
                                     // for new-zealand theme
-                                    // color: "#CCCCFF",
-                                    // borderColor: "#89CFF0",
-                                    color: "text.secondary",
-                                    borderColor: "#E3D8F4",
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
                                   }}
                                 >
                                   {loading ? (
@@ -509,7 +509,7 @@ export default function UserPage() {
                                 <TableCell
                                   align="left"
                                   sx={{
-                                    borderColor: "#E3D8F4",
+                                    borderColor: "#89CFF0",
                                   }}
                                 >
                                   <div style={{ display: "flex" }}>
@@ -517,7 +517,7 @@ export default function UserPage() {
                                       style={{
                                         margin: "0rem 1rem",
                                         width: "1.7rem",
-                                        color: "#7E4EFC",
+                                        color: "#6CA0DC",
                                         cursor: "pointer",
                                       }}
                                       onClick={() =>
@@ -553,7 +553,7 @@ export default function UserPage() {
 
                       {emptyRows > 0 && (
                         <TableRow style={{ height: 53 * emptyRows }}>
-                          <TableCell colSpan={6} style={{ color: "#7E4EFC" }} />
+                          <TableCell colSpan={6} style={{ color: "#6CA0DC" }} />
                         </TableRow>
                       )}
                     </TableBody>
@@ -573,7 +573,7 @@ export default function UserPage() {
                             <Paper
                               sx={{
                                 textAlign: "center",
-                                color: "#7E4EFC",
+                                color: "#6CA0DC",
                                 backgroundColor: "transparent",
                               }}
                             >
@@ -599,7 +599,7 @@ export default function UserPage() {
             </Scrollbar>
 
             <TablePagination
-              style={{ color: "#7E4EFC" }}
+              style={{ color: "#6CA0DC" }}
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
               count={usersList?.length}

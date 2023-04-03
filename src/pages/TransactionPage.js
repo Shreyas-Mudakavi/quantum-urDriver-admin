@@ -282,12 +282,26 @@ export default function TransactionPage() {
             justifyContent="space-between"
             mb={5}
           >
-            <Typography variant="h4" gutterBottom>
+            <Typography
+              variant="h4"
+              gutterBottom
+              sx={{
+                // for new-zealdn theme
+                color: "#276BC7",
+                // color: "#7E4EFC",
+              }}
+            >
               Transaction
             </Typography>
           </Stack>
 
-          <Card>
+          <Card
+            style={{
+              // for new-zealnd theme
+              backgroundColor: "#26303C",
+              // backgroundColor: "#EBEEF7",
+            }}
+          >
             <UserListToolbar
               numSelected={selected.length}
               filterName={filterName}
@@ -349,7 +363,16 @@ export default function TransactionPage() {
                                 role="checkbox"
                                 selected={selectedUser}
                               >
-                                <TableCell padding="checkbox">
+                                <TableCell
+                                  padding="checkbox"
+                                  sx={{
+                                    // for new-zealdn theme
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
+                                  }}
+                                >
                                   <Checkbox
                                     checked={selectedUser}
                                     onChange={(event) =>
@@ -359,6 +382,13 @@ export default function TransactionPage() {
                                 </TableCell>
 
                                 <TableCell
+                                  sx={{
+                                    // for new-zealdn theme
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
+                                  }}
                                   component="th"
                                   scope="row"
                                   padding="none"
@@ -379,20 +409,56 @@ export default function TransactionPage() {
                                 </TableCell>
 
                                 {/* <TableCell align="left">{user?.role}</TableCell> */}
-                                <TableCell align="left">{type}</TableCell>
-                                <TableCell align="left">
+                                <TableCell
+                                  sx={{
+                                    // for new-zealdn theme
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
+                                  }}
+                                  align="left"
+                                >
+                                  {type}
+                                </TableCell>
+                                <TableCell
+                                  sx={{
+                                    // for new-zealdn theme
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
+                                  }}
+                                  align="left"
+                                >
                                   {metadata?.description}
                                 </TableCell>
-                                <TableCell align="left">{status}</TableCell>
+                                <TableCell
+                                  sx={{
+                                    // for new-zealdn theme
+                                    color: "#CCCCFF",
+                                    borderColor: "#89CFF0",
+                                    // color: "text.secondary",
+                                    // borderColor: "#E3D8F4",
+                                  }}
+                                  align="left"
+                                >
+                                  {status}
+                                </TableCell>
                                 <TableCell align="left">${amount}</TableCell>
 
-                                <TableCell align="left">
+                                <TableCell
+                                  sx={{
+                                    borderColor: "#89CFF0",
+                                  }}
+                                  align="left"
+                                >
                                   <div style={{ display: "flex" }}>
                                     <div
                                       style={{
                                         margin: "0rem 1rem",
                                         width: "1.7rem",
-                                        color: "blue",
+                                        color: "#6CA0DC",
                                         cursor: "pointer",
                                       }}
                                       onClick={() =>
@@ -446,15 +512,6 @@ export default function TransactionPage() {
                                       </svg>
                                     </div>
                                   </div>
-                                  {/* 
-                              <Button
-                                variant="outlined"
-                                color="error"
-                                size="small"
-                                onClick={() => handleDeleteOpen(_id)}
-                              >
-                                Delete
-                              </Button> */}
                                 </TableCell>
                               </TableRow>
                             </>
@@ -463,7 +520,7 @@ export default function TransactionPage() {
 
                       {emptyRows > 0 && (
                         <TableRow style={{ height: 53 * emptyRows }}>
-                          <TableCell colSpan={6} />
+                          <TableCell colSpan={6} style={{ color: "#6CA0DC" }} />
                         </TableRow>
                       )}
                     </TableBody>
@@ -471,10 +528,16 @@ export default function TransactionPage() {
                     {isNotFound && (
                       <TableBody>
                         <TableRow>
-                          <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                          <TableCell
+                            align="center"
+                            colSpan={6}
+                            sx={{ py: 3, border: "none" }}
+                          >
                             <Paper
                               sx={{
                                 textAlign: "center",
+                                color: "#6CA0DC",
+                                backgroundColor: "transparent",
                               }}
                             >
                               <Typography variant="h6" paragraph>
@@ -498,6 +561,7 @@ export default function TransactionPage() {
             </Scrollbar>
 
             <TablePagination
+              style={{ color: "#6CA0DC" }}
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
               count={usersList?.length}

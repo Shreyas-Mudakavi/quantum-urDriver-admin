@@ -27,11 +27,11 @@ const StyledRoot = styled(Toolbar)(({ theme }) => ({
 
 const StyledSearch = styled(OutlinedInput)(({ theme }) => ({
   // for theme purple
-  color: "#7E4EFC",
-  backgroundColor: "#EBEEF7",
+  // color: "#7E4EFC",
+  // backgroundColor: "#EBEEF7",
   // for new-zealdn theme
-  // color: "#6CA0DC",
-  // backgroundColor: "#26303C",
+  color: "#6CA0DC",
+  backgroundColor: "#26303C",
   // for black theme
   // color: "#ffff",
   // backgroundColor: "#1F1E25",
@@ -76,11 +76,11 @@ export default function UserListToolbar({
       sx={{
         ...(numSelected > 0 && {
           // for theme purple
-          color: "#7E4EFC",
-          bgcolor: "#EBEEF7",
+          // color: "#7E4EFC",
+          // bgcolor: "#EBEEF7",
           // for new-zealand theme
-          // color: "#89CFF0",
-          // bgcolor: "#26303C",
+          color: "#89CFF0",
+          bgcolor: "#26303C",
           // for black theme
           // color: "#ffff",
           // bgcolor: "#1F1E25",
@@ -109,6 +109,7 @@ export default function UserListToolbar({
           {location.pathname === "/dashboard/transaction" && (
             <>
               <Select
+                sx={{ color: "#6CA0DC" }}
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 value={filterType}
@@ -116,22 +117,17 @@ export default function UserListToolbar({
                 onChange={onFilterType}
                 displayEmpty
               >
-                <MenuItem value="" onClick={() => fetchTransactions()}>
-                  Select Type
-                </MenuItem>
+                <MenuItem value="">Select Type</MenuItem>
                 <Divider as="div" />
-                <MenuItem value="Credit" onClick={() => fetchTransactions()}>
-                  Credit
-                </MenuItem>
-                <MenuItem value="Debit" onClick={() => fetchTransactions()}>
-                  Debit
-                </MenuItem>
+                <MenuItem value="Credit">Credit</MenuItem>
+                <MenuItem value="Debit">Debit</MenuItem>
               </Select>
             </>
           )}
           {location.pathname === "/dashboard/trip" && (
             <>
               <Select
+                sx={{ color: "#6CA0DC" }}
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 value={filterStatus}
@@ -139,9 +135,7 @@ export default function UserListToolbar({
                 onChange={onFilterStatus}
                 displayEmpty
               >
-                <MenuItem value="" onClick={() => fetchTrips()}>
-                  Select Status
-                </MenuItem>
+                <MenuItem value="">Select Status</MenuItem>
                 <Divider as="div" />
                 <MenuItem value="ongoing">On-going</MenuItem>
                 <MenuItem value="completed">Completed</MenuItem>
@@ -153,7 +147,7 @@ export default function UserListToolbar({
       )}
 
       {numSelected > 0 && (
-        <Tooltip title="Delete">
+        <Tooltip sx={{ color: "#6CA0DC" }} title="Delete">
           <IconButton>
             <Iconify icon="eva:trash-2-fill" />
           </IconButton>

@@ -1,41 +1,64 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // @mui
-import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox, Button } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import {
+  Link,
+  Stack,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Checkbox,
+  Button,
+  CircularProgress,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 // components
-import Iconify from '../../../components/iconify';
+import Iconify from "../../../components/iconify";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
 // import { login } from 'src/components/features/apiCall';
-import { login } from '../../../components/features/apiCall';
+import { login } from "../../../components/features/apiCall";
 
 // ----------------------------------------------------------------------
 
+const styles = {
+  input: {
+    "&:-webkit-autofill": {
+      WebkitBoxShadow: "0 0 0 1000px white inset",
+      fontSize: "30px",
+    },
+  },
+  input2: {
+    WebkitBoxShadow: "0 0 0 1000px white inset",
+  },
+};
+
 export default function LoginForm() {
   const navigate = useNavigate();
-  const { isFetching, error, errMsg, token } = useSelector((state) => state.auth);
+  const { isFetching, error, errMsg, token } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
   const [loggedIn, setLoggedIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const toastOptions = {
-    position: 'bottom-center',
+    position: "bottom-center",
     autoClose: 3000,
     pauseOnHover: true,
     draggable: true,
-    theme: 'colored',
+    theme: "dark",
   };
 
   useEffect(() => {
     if (token) {
-      navigate('/dashboard', { replace: true });
+      navigate("/dashboard", { replace: true });
     }
   }, [token, navigate]);
 
@@ -65,23 +88,51 @@ export default function LoginForm() {
     <>
       <Stack spacing={3}>
         <form onSubmit={handleSubmit}>
-          <div style={{ paddingBottom: '2rem' }}>
-            <TextField fullWidth name="email" label="email@mail.com" type="email" required onChange={handleChange} />
+          <div style={{ paddingBottom: "2rem" }}>
+            <TextField
+              fullWidth
+              name="email"
+              sx={{
+                // "&.Mui-focused": {
+                //   backgroundColor: "transparent",
+                // },
+                input: {
+                  // WebkitBoxShadow: "0 0 0 1000px transparent inset",
+                  "&:-webkit-autofill": {
+                    WebkitBoxShadow: "0 0 0 1000px #CCCCFF inset",
+                  },
+                  color: "#6CA0DC",
+                },
+              }}
+              inputProps={{}}
+              label="email@mail.com"
+              type="email"
+              required
+              onChange={handleChange}
+            />
           </div>
 
-          <div style={{ paddingBottom: '2rem' }}>
+          <div style={{ paddingBottom: "2rem" }}>
             <TextField
               fullWidth
               required
+              sx={{ input: { color: "#6CA0DC" } }}
               name="password"
               label="Password"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               onChange={handleChange}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                      <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      <Iconify
+                        icon={
+                          showPassword ? "eva:eye-fill" : "eva:eye-off-fill"
+                        }
+                      />
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -90,7 +141,7 @@ export default function LoginForm() {
           </div>
           {isFetching ? (
             <Button disabled fullWidth size="large" variant="contained">
-              Loading....
+              <CircularProgress color="primary" />
             </Button>
           ) : (
             <Button fullWidth size="large" type="submit" variant="contained">

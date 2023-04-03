@@ -42,8 +42,8 @@ export default function DashboardAppPage() {
             sx={{
               mb: 5,
               // for new-zealand theme
-              // color: "#276BC7"
-              color: "#7E4EFC",
+              color: "#276BC7",
+              // color: "#7E4EFC",
             }}
           >
             Hi, Welcome back
