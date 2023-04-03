@@ -90,33 +90,41 @@ export default function LoginForm() {
         <form onSubmit={handleSubmit}>
           <div style={{ paddingBottom: "2rem" }}>
             <TextField
+              id="outlined-basic"
               fullWidth
               name="email"
               sx={{
-                // "&.Mui-focused": {
-                //   backgroundColor: "transparent",
-                // },
                 input: {
-                  // WebkitBoxShadow: "0 0 0 1000px transparent inset",
                   "&:-webkit-autofill": {
-                    WebkitBoxShadow: "0 0 0 1000px #CCCCFF inset",
+                    WebkitBoxShadow: "0 0 0 1000px #181F2A inset",
+                    WebkitTextFillColor: "#6CA0DC",
                   },
                   color: "#6CA0DC",
                 },
               }}
-              inputProps={{}}
               label="email@mail.com"
               type="email"
               required
               onChange={handleChange}
+              variant="outlined"
             />
           </div>
 
           <div style={{ paddingBottom: "2rem" }}>
             <TextField
+              id="outlined-basic2"
+              variant="outlined"
               fullWidth
               required
-              sx={{ input: { color: "#6CA0DC" } }}
+              sx={{
+                input: {
+                  "&:-webkit-autofill": {
+                    WebkitBoxShadow: "0 0 0 1000px #181F2A inset",
+                    WebkitTextFillColor: "#6CA0DC",
+                  },
+                  color: "#6CA0DC",
+                },
+              }}
               name="password"
               label="Password"
               type={showPassword ? "text" : "password"}
