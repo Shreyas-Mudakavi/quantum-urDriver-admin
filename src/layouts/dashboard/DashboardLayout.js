@@ -22,10 +22,11 @@ const Main = styled("div")(({ theme }) => ({
   overflow: "auto",
   minHeight: "100%",
   // for purple theme
-  // backgroundColor: "#F1F4F9",
+  backgroundColor: "#F1F4F9",
   // for black theme
   // backgroundColor: "#151419",
-  background: "linear-gradient(to bottom right, #050A13, #26303C)",
+  // for new-zealnd theme
+  // background: "linear-gradient(to bottom right, #050A13, #26303C)",
   paddingTop: APP_BAR_MOBILE + 24,
   paddingBottom: theme.spacing(10),
   [theme.breakpoints.up("lg")]: {

@@ -59,12 +59,13 @@ export default function UserListHead({
         <TableCell
           sx={{
             // for purple theme
-            // color: "#7E4EFC",
-            // backgroundColor: "#EBEEF7",
-            // borderColor: "#7E4EFC",
-            color: "#276BC7",
-            backgroundColor: "#26303C",
-            borderColor: "#89CFF0",
+            color: "#7E4EFC",
+            backgroundColor: "#EBEEF7",
+            borderColor: "#7E4EFC",
+            // for new-zeald theme
+            // color: "#276BC7",
+            // backgroundColor: "#26303C",
+            // borderColor: "#89CFF0",
             // for black theme
             // color: "#ffff",
             // borderColor: "#343434",
@@ -81,13 +82,14 @@ export default function UserListHead({
         {headLabel.map((headCell) => (
           <TableCell
             sx={{
-              color: "#6CA0DC",
-              backgroundColor: "#26303C",
-              borderColor: "#89CFF0",
+              // for new-zealdnd theme
+              // color: "#6CA0DC",
+              // backgroundColor: "#26303C",
+              // borderColor: "#89CFF0",
               // for theme purple
-              // color: "#7E4EFC",
-              // backgroundColor: "#EBEEF7",
-              // borderColor: "#7E4EFC",
+              color: "#7E4EFC",
+              backgroundColor: "#EBEEF7",
+              borderColor: "#7E4EFC",
               // for black theme
               // color: "#B6B6B4",
               // backgroundColor: "#1F1E25",

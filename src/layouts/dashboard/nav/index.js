@@ -37,7 +37,7 @@ const StyledAccount = styled("div")(({ theme }) => ({
   borderRadius: Number(theme.shape.borderRadius) * 1.5,
   // backgroundColor: alpha(theme.palette.grey[500], 0.12),
   // for purple theme
-  // backgroundColor: "#6838EE",
+  backgroundColor: "#6838EE",
   // the black theme
   // backgroundColor: "#1B1B1B",
 }));
@@ -85,7 +85,14 @@ export default function Nav({ openNav, onCloseNav }) {
             <Avatar src={userProfile} alt="photoURL" />
 
             <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: "#276BC7" }}>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  // for new-zealand theme
+                  // color: "#276BC7"
+                  color: "#fff",
+                }}
+              >
                 {userName}
               </Typography>
 
@@ -93,8 +100,8 @@ export default function Nav({ openNav, onCloseNav }) {
                 variant="body2"
                 sx={{
                   // for purple theme
-                  // color: "#BE93E4"
-                  color: "text.secondary",
+                  color: "#BE93E4",
+                  // color: "text.secondary",
                 }}
               >
                 {userRole}
@@ -126,15 +133,16 @@ export default function Nav({ openNav, onCloseNav }) {
             // elevation: 12,
             sx: {
               width: NAV_WIDTH,
-              background:
-                "linear-gradient(to bottom, #050A13, #26303C 67%, #306BAF)",
+              // for new-zealand theme
+              // background:
+              //   "linear-gradient(to bottom, #050A13, #26303C 67%, #306BAF)",
               // for purple theme
-              // backgroundColor: "#7E4EFC",
-              // borderTopRightRadius: "2rem",
-              // borderBottomRightRadius: "2rem",
+              backgroundColor: "#7E4EFC",
+              borderTopRightRadius: "2rem",
+              borderBottomRightRadius: "2rem",
               // for black theme
               // backgroundColor: "#1F1E25",
-              borderRightStyle: "dashed",
+              // borderRightStyle: "dashed",
             },
           }}
         >
@@ -151,11 +159,12 @@ export default function Nav({ openNav, onCloseNav }) {
             sx: {
               width: NAV_WIDTH,
               // for purple theme
-              // backgroundColor: "#7E4EFC",
-              // borderTopRightRadius: "2rem",
-              // borderBottomRightRadius: "2rem",
-              background:
-                "linear-gradient(to bottom, #050A13, #26303C 67%, #306BAF)",
+              backgroundColor: "#7E4EFC",
+              borderTopRightRadius: "2rem",
+              borderBottomRightRadius: "2rem",
+              // for new-zealand theme
+              // background:
+              //   "linear-gradient(to bottom, #050A13, #26303C 67%, #306BAF)",
               boxShadow: "none",
               // for black theme
               // backgroundColor: "#1F1E25",

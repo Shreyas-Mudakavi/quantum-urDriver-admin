@@ -38,15 +38,16 @@ function NavItem({ item }) {
       to={path}
       sx={{
         // for purple themek
-        // color: "#fff",
-        // bgcolor: "#6838EE",
+        color: "#fff",
+        bgcolor: "#6838EE",
         "&.active": {
-          // color: "#fff",
+          color: "#fff",
           // for black theme
           // color: "#A866EE",
-          color: "#276BC7",
+          // for new-zealand theme
+          // color: "#276BC7",
           // for purple theme
-          // bgcolor: "#7E4EFC",
+          bgcolor: "#7E4EFC",
           fontWeight: "fontWeightBold",
         },
       }}

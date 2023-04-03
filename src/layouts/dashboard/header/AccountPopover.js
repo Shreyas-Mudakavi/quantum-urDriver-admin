@@ -93,8 +93,9 @@ export default function AccountPopover() {
             ml: 0.75,
             // width: 180,
             // for purple theme
-            // backgroundColor: "#7E4EFC",
-            backgroundColor: "#161D28",
+            backgroundColor: "#7E4EFC",
+            // for new-zealdn theme
+            // backgroundColor: "#161D28",
             boxShadow: "none",
             "& .MuiMenuItem-root": {
               typography: "body2",
@@ -104,15 +105,24 @@ export default function AccountPopover() {
         }}
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle2" sx={{ color: "#276BC7" }} noWrap>
+          <Typography
+            variant="subtitle2"
+            sx={{
+              // for new-zealnd theme
+              // color: "#276BC7"
+              color: "#fff",
+            }}
+            noWrap
+          >
             {userName}
           </Typography>
           <Typography
             variant="body2"
             sx={{
               // for purple theme
-              // color: "#BE93E4"
-              color: "text.secondary",
+              color: "#BE93E4",
+              // for new-zealdn theme
+              // color: "text.secondary",
             }}
             noWrap
           >
@@ -122,7 +132,14 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <Stack sx={{ p: 1, color: "#276BC7" }}>
+        <Stack
+          sx={{
+            p: 1,
+            // for new-zealnd theme
+            // color: "#276BC7"
+            color: "#fff",
+          }}
+        >
           {MENU_OPTIONS.map((option) => (
             <MenuItem
               key={option.label}
@@ -142,7 +159,7 @@ export default function AccountPopover() {
           onClick={handleLogout}
           sx={{
             m: 1,
-            color: "#276BC7",
+            color: "#fff",
             // for black theme
             // color: "#A866EE"
           }}

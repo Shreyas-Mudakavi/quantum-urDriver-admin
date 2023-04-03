@@ -37,7 +37,15 @@ export default function DashboardAppPage() {
         </Helmet>
 
         <Container maxWidth="xl">
-          <Typography variant="h4" sx={{ mb: 5, color: "#276BC7" }}>
+          <Typography
+            variant="h4"
+            sx={{
+              mb: 5,
+              // for new-zealand theme
+              // color: "#276BC7"
+              color: "#7E4EFC",
+            }}
+          >
             Hi, Welcome back
           </Typography>
         </Container>

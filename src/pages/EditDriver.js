@@ -164,7 +164,7 @@ const EditDriver = () => {
               <Typography
                 variant="h5"
                 component="span"
-                sx={{ color: "#276BC7" }}
+                sx={{ color: "#7E4EFC" }}
               >
                 {driver?.name} details
               </Typography>
@@ -179,7 +179,9 @@ const EditDriver = () => {
                   width: "2rem",
                   marginLeft: "1rem",
                   cursor: "pointer",
-                  color: "#CCCCFF",
+                  // for new-zealdn theme
+                  // color: "#CCCCFF",
+                  color: "#000",
                 }}
                 onClick={() => handleEditOpen()}
               >
@@ -195,7 +197,7 @@ const EditDriver = () => {
           <Box
             component="div"
             sx={{
-              border: "1px solid #273546",
+              border: "1px solid #E3D8F4",
               borderRadius: "0.6rem",
               width: "100%",
               height: "100%",
@@ -222,7 +224,7 @@ const EditDriver = () => {
                     <img
                       src={driver?.profile_image}
                       alt={driver?.name}
-                      style={{ width: "12rem", color: "#6CA0DC" }}
+                      style={{ width: "12rem", color: "#7E4EFC" }}
                     />
                   )}
                 </div>
@@ -233,30 +235,36 @@ const EditDriver = () => {
                 <>
                   <Grid item md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div
+                        style={{
+                          // for new-zealdn theme
+                          // color: "#CCCCFF"
+                          color: "#7E4EFC",
+                        }}
+                      >
                         <b>Name</b>
                       </div>
-                      <p style={{ color: "#6CA0DC" }}>{driver?.name}</p>
+                      <p style={{ color: "#808080" }}>{driver?.name}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div style={{ color: "#7E4EFC" }}>
                         <b>Account type</b>
                       </div>
-                      <p style={{ color: "#6CA0DC" }}>{account_type}</p>
+                      <p style={{ color: "#808080" }}>{account_type}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div style={{ color: "#7E4EFC" }}>
                         <b>Sex</b>
                       </div>
-                      <p style={{ color: "#6CA0DC" }}>{driver?.sex}</p>
+                      <p style={{ color: "#808080" }}>{driver?.sex}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div style={{ color: "#7E4EFC" }}>
                         <b>Updated At</b>
                       </div>
-                      <p style={{ color: "#6CA0DC" }}>
+                      <p style={{ color: "#808080" }}>
                         {moment(driver?.updatedAt)
                           .utc()
                           .format("MMMM DD, YYYY")}
@@ -265,22 +273,22 @@ const EditDriver = () => {
                   </Grid>
                   <Grid item md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div style={{ color: "#7E4EFC" }}>
                         <b>Email</b>
                       </div>
-                      <p style={{ color: "#6CA0DC" }}>{driver?.email}</p>
+                      <p style={{ color: "#808080" }}>{driver?.email}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div style={{ color: "#7E4EFC" }}>
                         <b>City</b>
                       </div>
-                      <p style={{ color: "#6CA0DC" }}>{driver?.city}</p>
+                      <p style={{ color: "#808080" }}>{driver?.city}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div style={{ color: "#7E4EFC" }}>
                         <b>Deactivated</b>
                       </div>
-                      <p style={{ color: "#6CA0DC" }}>
+                      <p style={{ color: "#808080" }}>
                         {deactivated ? (
                           <svg
                             style={{ width: "2rem" }}
@@ -319,27 +327,27 @@ const EditDriver = () => {
                   </Grid>
                   <Grid item sm={3} md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div style={{ color: "#7E4EFC" }}>
                         <b>Mobile No.</b>
                       </div>
-                      <p style={{ color: "#6CA0DC" }}>{driver?.phone}</p>
+                      <p style={{ color: "#808080" }}>{driver?.phone}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div style={{ color: "#7E4EFC" }}>
                         <b>Created At</b>
                       </div>
-                      <p style={{ color: "#6CA0DC" }}>
+                      <p style={{ color: "#808080" }}>
                         {moment(driver?.createdAt)
                           .utc()
                           .format("MMMM DD, YYYY")}
                       </p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div style={{ color: "#7E4EFC" }}>
                         <b>Age</b>
                       </div>
-                      <p style={{ color: "#6CA0DC" }}>{driver?.age}</p>
+                      <p style={{ color: "#808080" }}>{driver?.age}</p>
                     </div>
                   </Grid>
                 </>
@@ -351,7 +359,7 @@ const EditDriver = () => {
               <>
                 <div style={{ marginTop: "5rem" }}>
                   <div style={{ marginBottom: "2rem" }}>
-                    <div style={{ color: "#CCCCFF" }}>
+                    <div style={{ color: "#7E4EFC" }}>
                       <b>License Details</b>
                     </div>
                     <Divider component="div" />
@@ -371,8 +379,8 @@ const EditDriver = () => {
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <b style={{ color: "#CCCCFF" }}>License No.</b>
-                        <p style={{ color: "#6CA0DC" }}>
+                        <b style={{ color: "#7E4EFC" }}>License No.</b>
+                        <p style={{ color: "#808080" }}>
                           {driver?.license?.license_no}
                         </p>
                       </div>
@@ -381,7 +389,7 @@ const EditDriver = () => {
                 </div>
                 <div style={{ marginTop: "5rem" }}>
                   <div style={{ marginBottom: "3rem" }}>
-                    <div style={{ color: "#CCCCFF" }}>
+                    <div style={{ color: "#7E4EFC" }}>
                       <b>Vehicle Details</b>
                     </div>
                     <Divider component="div" />
@@ -394,50 +402,56 @@ const EditDriver = () => {
                   >
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div style={{ color: "#7E4EFC" }}>
                           <b>Brand</b>
                         </div>
-                        <p style={{ color: "#6CA0DC" }}>
+                        <p style={{ color: "#808080" }}>
                           {driver?.vehicle?.information?.brand}
                         </p>
                       </div>
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div style={{ color: "#7E4EFC" }}>
                           <b>Model</b>
                         </div>
-                        <p style={{ color: "#6CA0DC" }}>
+                        <p style={{ color: "#808080" }}>
                           {driver?.vehicle?.information?.model}
                         </p>
                       </div>
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div style={{ color: "#7E4EFC" }}>
                           <b>Registration No.</b>
                         </div>
-                        <p style={{ color: "#6CA0DC" }}>
+                        <p style={{ color: "#808080" }}>
                           {driver?.vehicle?.information?.registration_no}
                         </p>
                       </div>
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div style={{ color: "#7E4EFC" }}>
                           <b>Wheels</b>
                         </div>
-                        <p style={{ color: "#6CA0DC" }}>
+                        <p style={{ color: "#808080" }}>
                           {driver?.vehicle?.wheels}
                         </p>
                       </div>
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div style={{ color: "#7E4EFC" }}>
                           <b>Type</b>
                         </div>
-                        <p style={{ color: "#6CA0DC" }}>
+                        <p
+                          style={{
+                            // for new-zealand theme
+                            // color: "#6CA0DC"
+                            color: "#808080",
+                          }}
+                        >
                           {driver?.vehicle?.type}
                         </p>
                       </div>

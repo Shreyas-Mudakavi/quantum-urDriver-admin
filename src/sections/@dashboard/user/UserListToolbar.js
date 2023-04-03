@@ -27,10 +27,11 @@ const StyledRoot = styled(Toolbar)(({ theme }) => ({
 
 const StyledSearch = styled(OutlinedInput)(({ theme }) => ({
   // for theme purple
-  // color: "#7E4EFC",
-  // backgroundColor: "#EBEEF7",
-  color: "#6CA0DC",
-  backgroundColor: "#26303C",
+  color: "#7E4EFC",
+  backgroundColor: "#EBEEF7",
+  // for new-zealdn theme
+  // color: "#6CA0DC",
+  // backgroundColor: "#26303C",
   // for black theme
   // color: "#ffff",
   // backgroundColor: "#1F1E25",
@@ -75,10 +76,11 @@ export default function UserListToolbar({
       sx={{
         ...(numSelected > 0 && {
           // for theme purple
-          // color: "#7E4EFC",
-          // bgcolor: "#EBEEF7",
-          color: "#89CFF0",
-          bgcolor: "#26303C",
+          color: "#7E4EFC",
+          bgcolor: "#EBEEF7",
+          // for new-zealand theme
+          // color: "#89CFF0",
+          // bgcolor: "#26303C",
           // for black theme
           // color: "#ffff",
           // bgcolor: "#1F1E25",
