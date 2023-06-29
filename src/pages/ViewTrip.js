@@ -184,7 +184,6 @@ const ViewTrip = () => {
                   width: "2rem",
                   marginLeft: "1rem",
                   cursor: "pointer",
-                  color: "#CCCCFF",
                 }}
                 onClick={() => handleEditOpen()}
               >
@@ -200,7 +199,7 @@ const ViewTrip = () => {
           <Box
             component="div"
             sx={{
-              border: "1px solid #273546",
+              border: "1px solid #CCCCFF",
               borderRadius: "0.6rem",
               width: "100%",
               height: "100%",
@@ -233,13 +232,13 @@ const ViewTrip = () => {
                 <>
                   <Grid item xs={12} md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Name</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{ride?.user?.name}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Account type</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -247,14 +246,14 @@ const ViewTrip = () => {
                       </p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Sex</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{ride?.user?.sex}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Updated At</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -263,7 +262,7 @@ const ViewTrip = () => {
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>OTP</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{ride?.otp}</p>
@@ -271,19 +270,19 @@ const ViewTrip = () => {
                   </Grid>
                   <Grid item xs={12} md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Email</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{ride?.user?.email}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>City</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{ride?.user?.city}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Deactivated</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -324,7 +323,7 @@ const ViewTrip = () => {
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Status</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{status}</p>
@@ -332,14 +331,14 @@ const ViewTrip = () => {
                   </Grid>
                   <Grid item xs={12} md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Mobile No.</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{ride?.user?.phone}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Created At</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -348,14 +347,14 @@ const ViewTrip = () => {
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Fare</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>$ {ride?.fare}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Payment</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -365,7 +364,7 @@ const ViewTrip = () => {
 
                     {mode && (
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div>
                           <b>Payment Mode</b>
                         </div>
                         <p style={{ color: "#6CA0DC" }}>{mode}</p>
@@ -382,7 +381,7 @@ const ViewTrip = () => {
               <>
                 <div style={{ marginTop: "5rem" }}>
                   <div style={{ marginBottom: "2rem" }}>
-                    <div style={{ color: "#CCCCFF" }}>
+                    <div>
                       <b>Ride Details</b>
                     </div>
                     <Divider component="div" />

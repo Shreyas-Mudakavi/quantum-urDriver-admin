@@ -89,8 +89,8 @@ export default function Nav({ openNav, onCloseNav }) {
                 variant="subtitle2"
                 sx={{
                   // for new-zealand theme
-                  color: "#276BC7",
-                  // color: "#fff",
+                  // color: "#276BC7",
+                  color: "#fff",
                 }}
               >
                 {userName}
@@ -133,9 +133,10 @@ export default function Nav({ openNav, onCloseNav }) {
             // elevation: 12,
             sx: {
               width: NAV_WIDTH,
+              backgroundColor: "#202E41",
               // for new-zealand theme
-              background:
-                "linear-gradient(to bottom, #050A13, #26303C 67%, #306BAF)",
+              // background:
+              //   "linear-gradient(to bottom, #050A13, #26303C 67%, #306BAF)",
               // for purple theme
               // backgroundColor: "#7E4EFC",
               // borderTopRightRadius: "2rem",
@@ -163,8 +164,9 @@ export default function Nav({ openNav, onCloseNav }) {
               // borderTopRightRadius: "2rem",
               // borderBottomRightRadius: "2rem",
               // for new-zealand theme
-              background:
-                "linear-gradient(to bottom, #050A13, #26303C 67%, #306BAF)",
+              // background:
+              //   "linear-gradient(to bottom, #050A13, #26303C 67%, #306BAF)",
+              backgroundColor: "#202E41",
               boxShadow: "none",
               // for black theme
               // backgroundColor: "#1F1E25",

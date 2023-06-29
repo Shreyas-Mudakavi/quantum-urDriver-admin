@@ -26,7 +26,8 @@ const Main = styled("div")(({ theme }) => ({
   // for black theme
   // backgroundColor: "#151419",
   // for new-zealnd theme
-  background: "linear-gradient(to bottom right, #050A13, #26303C)",
+  // background: "linear-gradient(to bottom right, #050A13, #26303C)",
+  background: "#F0F2F5",
   paddingTop: APP_BAR_MOBILE + 24,
   paddingBottom: theme.spacing(10),
   [theme.breakpoints.up("lg")]: {

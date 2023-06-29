@@ -179,7 +179,7 @@ const EditDriver = () => {
                   width: "2rem",
                   marginLeft: "1rem",
                   cursor: "pointer",
-                  color: "#CCCCFF",
+                  // color: "#CCCCFF",
                 }}
                 onClick={() => handleEditOpen()}
               >
@@ -195,7 +195,7 @@ const EditDriver = () => {
           <Box
             component="div"
             sx={{
-              border: "1px solid #273546",
+              border: "1px solid #CCCCFF",
               borderRadius: "0.6rem",
               width: "100%",
               height: "100%",
@@ -233,27 +233,27 @@ const EditDriver = () => {
                 <>
                   <Grid item md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Name</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{driver?.name}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Account type</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{account_type}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Sex</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{driver?.sex}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Updated At</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -265,19 +265,19 @@ const EditDriver = () => {
                   </Grid>
                   <Grid item md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Email</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{driver?.email}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>City</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{driver?.city}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Deactivated</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -319,14 +319,14 @@ const EditDriver = () => {
                   </Grid>
                   <Grid item sm={3} md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Mobile No.</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{driver?.phone}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Created At</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -336,7 +336,7 @@ const EditDriver = () => {
                       </p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Age</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{driver?.age}</p>
@@ -351,7 +351,7 @@ const EditDriver = () => {
               <>
                 <div style={{ marginTop: "5rem" }}>
                   <div style={{ marginBottom: "2rem" }}>
-                    <div style={{ color: "#CCCCFF" }}>
+                    <div>
                       <b>License Details</b>
                     </div>
                     <Divider component="div" />
@@ -371,7 +371,7 @@ const EditDriver = () => {
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <b style={{ color: "#CCCCFF" }}>License No.</b>
+                        <b>License No.</b>
                         <p style={{ color: "#6CA0DC" }}>
                           {driver?.license?.license_no}
                         </p>
@@ -381,7 +381,7 @@ const EditDriver = () => {
                 </div>
                 <div style={{ marginTop: "5rem" }}>
                   <div style={{ marginBottom: "3rem" }}>
-                    <div style={{ color: "#CCCCFF" }}>
+                    <div>
                       <b>Vehicle Details</b>
                     </div>
                     <Divider component="div" />
@@ -394,7 +394,7 @@ const EditDriver = () => {
                   >
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div>
                           <b>Brand</b>
                         </div>
                         <p style={{ color: "#6CA0DC" }}>
@@ -404,7 +404,7 @@ const EditDriver = () => {
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div>
                           <b>Model</b>
                         </div>
                         <p style={{ color: "#6CA0DC" }}>
@@ -414,7 +414,7 @@ const EditDriver = () => {
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div>
                           <b>Registration No.</b>
                         </div>
                         <p style={{ color: "#6CA0DC" }}>
@@ -424,7 +424,7 @@ const EditDriver = () => {
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div>
                           <b>Wheels</b>
                         </div>
                         <p style={{ color: "#6CA0DC" }}>
@@ -434,7 +434,7 @@ const EditDriver = () => {
                     </Grid>
                     <Grid item xs="auto" md={2}>
                       <div>
-                        <div style={{ color: "#CCCCFF" }}>
+                        <div>
                           <b>Type</b>
                         </div>
                         <p style={{ color: "#6CA0DC" }}>

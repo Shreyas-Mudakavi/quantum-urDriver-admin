@@ -216,7 +216,9 @@ export default function DriverPage() {
             </Typography>
           </Stack>
 
-          <Card style={{ backgroundColor: "#26303C" }}>
+          <Card
+          // style={{ backgroundColor: "#26303C" }}
+          >
             <UserListToolbar
               numSelected={selected.length}
               filterName={filterName}
@@ -288,13 +290,15 @@ export default function DriverPage() {
                                 selected={selectedUser}
                               >
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   l
                                   padding="checkbox"
                                 >
@@ -310,13 +314,15 @@ export default function DriverPage() {
                                   component="th"
                                   scope="row"
                                   padding="none"
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   <Stack
                                     direction="row"
@@ -332,96 +338,112 @@ export default function DriverPage() {
 
                                 <TableCell
                                   align="left"
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   {account_type}
                                 </TableCell>
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {email}
                                 </TableCell>
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {city}
                                 </TableCell>
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {license?.license_no}
                                 </TableCell>
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {phone}
                                 </TableCell>
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {sex}
                                 </TableCell>
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {age}
                                 </TableCell>
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {moment(createdAt)
@@ -429,24 +451,28 @@ export default function DriverPage() {
                                     .format("MMMM DD, YYYY")}
                                 </TableCell>
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {vehicle?.type}
                                 </TableCell>
 
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdnd theme
-                                    borderColor: "#89CFF0",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdnd theme
+                                      // borderColor: "#89CFF0",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   <div style={{ display: "flex" }}>
@@ -492,7 +518,10 @@ export default function DriverPage() {
 
                       {emptyRows > 0 && (
                         <TableRow style={{ height: 53 * emptyRows }}>
-                          <TableCell colSpan={6} style={{ color: "#6CA0DC" }} />
+                          <TableCell
+                            colSpan={6}
+                            // style={{ color: "#6CA0DC" }}
+                          />
                         </TableRow>
                       )}
                     </TableBody>
@@ -509,7 +538,7 @@ export default function DriverPage() {
                               sx={{
                                 textAlign: "center",
                                 // for new-zealdn theme
-                                color: "#6CA0DC",
+                                // color: "#6CA0DC",
                                 // color: "#7E4EFC",
                                 backgroundColor: "transparent",
                               }}
@@ -536,11 +565,13 @@ export default function DriverPage() {
             </Scrollbar>
 
             <TablePagination
-              style={{
-                // for new-zeland theme
-                color: "#6CA0DC",
-                // color: "#7E4EFC",
-              }}
+              style={
+                {
+                  // for new-zeland theme
+                  // color: "#6CA0DC",
+                  // color: "#7E4EFC",
+                }
+              }
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
               count={usersList?.length}

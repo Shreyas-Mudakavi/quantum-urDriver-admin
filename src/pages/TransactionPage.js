@@ -296,11 +296,13 @@ export default function TransactionPage() {
           </Stack>
 
           <Card
-            style={{
-              // for new-zealnd theme
-              backgroundColor: "#26303C",
-              // backgroundColor: "#EBEEF7",
-            }}
+            style={
+              {
+                // for new-zealnd theme
+                // backgroundColor: "#26303C",
+                // backgroundColor: "#EBEEF7",
+              }
+            }
           >
             <UserListToolbar
               numSelected={selected.length}
@@ -365,13 +367,15 @@ export default function TransactionPage() {
                               >
                                 <TableCell
                                   padding="checkbox"
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   <Checkbox
                                     checked={selectedUser}
@@ -382,13 +386,15 @@ export default function TransactionPage() {
                                 </TableCell>
 
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   component="th"
                                   scope="row"
                                   padding="none"
@@ -410,37 +416,43 @@ export default function TransactionPage() {
 
                                 {/* <TableCell align="left">{user?.role}</TableCell> */}
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {type}
                                 </TableCell>
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {metadata?.description}
                                 </TableCell>
                                 <TableCell
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   {status}
@@ -448,9 +460,11 @@ export default function TransactionPage() {
                                 <TableCell align="left">${amount}</TableCell>
 
                                 <TableCell
-                                  sx={{
-                                    borderColor: "#89CFF0",
-                                  }}
+                                  sx={
+                                    {
+                                      // borderColor: "#89CFF0",
+                                    }
+                                  }
                                   align="left"
                                 >
                                   <div style={{ display: "flex" }}>
@@ -520,7 +534,7 @@ export default function TransactionPage() {
 
                       {emptyRows > 0 && (
                         <TableRow style={{ height: 53 * emptyRows }}>
-                          <TableCell colSpan={6} style={{ color: "#6CA0DC" }} />
+                          <TableCell colSpan={6} />
                         </TableRow>
                       )}
                     </TableBody>
@@ -536,7 +550,7 @@ export default function TransactionPage() {
                             <Paper
                               sx={{
                                 textAlign: "center",
-                                color: "#6CA0DC",
+
                                 backgroundColor: "transparent",
                               }}
                             >
@@ -561,7 +575,6 @@ export default function TransactionPage() {
             </Scrollbar>
 
             <TablePagination
-              style={{ color: "#6CA0DC" }}
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
               count={usersList?.length}

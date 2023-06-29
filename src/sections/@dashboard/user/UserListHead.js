@@ -63,13 +63,14 @@ export default function UserListHead({
             // backgroundColor: "#EBEEF7",
             // borderColor: "#7E4EFC",
             // for new-zeald theme
-            color: "#6CA0DC",
-            backgroundColor: "#26303C",
-            borderColor: "#89CFF0",
+            // color: "#6CA0DC",
+            // backgroundColor: "#26303C",
+            // borderColor: "#89CFF0",
             // for black theme
             // color: "#ffff",
             // borderColor: "#343434",
             // backgroundColor: "#1F1E25",
+            fontWeight: "bold",
           }}
           padding="checkbox"
         >
@@ -82,10 +83,11 @@ export default function UserListHead({
         {headLabel.map((headCell) => (
           <TableCell
             sx={{
+              color: "#000",
               // for new-zealdnd theme
-              color: "#6CA0DC",
-              backgroundColor: "#26303C",
-              borderColor: "#89CFF0",
+              // color: "#6CA0DC",
+              // backgroundColor: "#26303C",
+              // borderColor: "#89CFF0",
               // for theme purple
               // color: "#7E4EFC",
               // backgroundColor: "#EBEEF7",
@@ -103,7 +105,7 @@ export default function UserListHead({
               sx={{
                 "&.Mui-active": {
                   // for new-zealdnd theme
-                  color: "#6CA0DC",
+                  // color: "#6CA0DC",
                 },
               }}
               hideSortIcon

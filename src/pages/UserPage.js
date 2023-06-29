@@ -230,11 +230,13 @@ export default function UserPage() {
           </Stack>
 
           <Card
-            style={{
-              // for new-zealnd theme
-              backgroundColor: "#26303C",
-              // backgroundColor: "#EBEEF7",
-            }}
+            style={
+              {
+                // for new-zealnd theme
+                // backgroundColor: "#26303C",
+                // backgroundColor: "#EBEEF7",
+              }
+            }
           >
             <UserListToolbar
               numSelected={selected.length}
@@ -306,13 +308,15 @@ export default function UserPage() {
                               >
                                 <TableCell
                                   padding="checkbox"
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   <Checkbox
                                     checked={selectedUser}
@@ -326,13 +330,15 @@ export default function UserPage() {
                                   component="th"
                                   scope="row"
                                   padding="none"
-                                  sx={{
-                                    // for new-zealdn theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealdn theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   <Stack
                                     direction="row"
@@ -364,13 +370,15 @@ export default function UserPage() {
 
                                 <TableCell
                                   align="left"
-                                  sx={{
-                                    // for new-zealand theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealand theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   {loading ? (
                                     <Skeleton
@@ -388,13 +396,15 @@ export default function UserPage() {
 
                                 <TableCell
                                   align="left"
-                                  sx={{
-                                    // for new-zealand theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealand theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   {loading ? (
                                     <Skeleton
@@ -411,13 +421,15 @@ export default function UserPage() {
                                 </TableCell>
                                 <TableCell
                                   align="left"
-                                  sx={{
-                                    // for new-zealand theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealand theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   {loading ? (
                                     <Skeleton
@@ -434,13 +446,15 @@ export default function UserPage() {
                                 </TableCell>
                                 <TableCell
                                   align="left"
-                                  sx={{
-                                    // for new-zealand theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealand theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   {loading ? (
                                     <Skeleton
@@ -457,13 +471,15 @@ export default function UserPage() {
                                 </TableCell>
                                 <TableCell
                                   align="left"
-                                  sx={{
-                                    // for new-zealand theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealand theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   {loading ? (
                                     <Skeleton
@@ -480,13 +496,15 @@ export default function UserPage() {
                                 </TableCell>
                                 <TableCell
                                   align="left"
-                                  sx={{
-                                    // for new-zealand theme
-                                    color: "#CCCCFF",
-                                    borderColor: "#89CFF0",
-                                    // color: "text.secondary",
-                                    // borderColor: "#E3D8F4",
-                                  }}
+                                  sx={
+                                    {
+                                      // for new-zealand theme
+                                      // color: "#CCCCFF",
+                                      // borderColor: "#89CFF0",
+                                      // color: "text.secondary",
+                                      // borderColor: "#E3D8F4",
+                                    }
+                                  }
                                 >
                                   {loading ? (
                                     <Skeleton
@@ -508,9 +526,11 @@ export default function UserPage() {
 
                                 <TableCell
                                   align="left"
-                                  sx={{
-                                    borderColor: "#89CFF0",
-                                  }}
+                                  sx={
+                                    {
+                                      // borderColor: "#89CFF0",
+                                    }
+                                  }
                                 >
                                   <div style={{ display: "flex" }}>
                                     <div
@@ -553,7 +573,10 @@ export default function UserPage() {
 
                       {emptyRows > 0 && (
                         <TableRow style={{ height: 53 * emptyRows }}>
-                          <TableCell colSpan={6} style={{ color: "#6CA0DC" }} />
+                          <TableCell
+                            colSpan={6}
+                            // style={{ color: "#6CA0DC" }}
+                          />
                         </TableRow>
                       )}
                     </TableBody>
@@ -573,7 +596,7 @@ export default function UserPage() {
                             <Paper
                               sx={{
                                 textAlign: "center",
-                                color: "#6CA0DC",
+                                // color: "#6CA0DC",
                                 backgroundColor: "transparent",
                               }}
                             >
@@ -599,7 +622,7 @@ export default function UserPage() {
             </Scrollbar>
 
             <TablePagination
-              style={{ color: "#6CA0DC" }}
+              // style={{ color: "#6CA0DC" }}
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
               count={usersList?.length}

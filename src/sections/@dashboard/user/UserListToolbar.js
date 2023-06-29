@@ -30,8 +30,8 @@ const StyledSearch = styled(OutlinedInput)(({ theme }) => ({
   // color: "#7E4EFC",
   // backgroundColor: "#EBEEF7",
   // for new-zealdn theme
-  color: "#6CA0DC",
-  backgroundColor: "#26303C",
+  // color: "#6CA0DC",
+  // backgroundColor: "#26303C",
   // for black theme
   // color: "#ffff",
   // backgroundColor: "#1F1E25",
@@ -109,7 +109,7 @@ export default function UserListToolbar({
           {location.pathname === "/dashboard/transaction" && (
             <>
               <Select
-                sx={{ color: "#6CA0DC" }}
+                // sx={{ color: "#6CA0DC" }}
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 value={filterType}
@@ -127,7 +127,7 @@ export default function UserListToolbar({
           {location.pathname === "/dashboard/trip" && (
             <>
               <Select
-                sx={{ color: "#6CA0DC" }}
+                // sx={{ color: "#6CA0DC" }}
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 value={filterStatus}

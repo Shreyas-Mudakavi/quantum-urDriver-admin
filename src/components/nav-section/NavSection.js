@@ -42,12 +42,12 @@ function NavItem({ item }) {
         // bgcolor: "#6838EE",
         // for new-zealnd theme
         "&.active": {
-          // color: "#fff",
+          color: "#fff",
           // for black theme
           // color: "#A866EE",
           // for new-zealand theme
-          color: "#CCCCFF",
-          bgcolor: "#276BC7",
+          // color: "#CCCCFF",
+          // bgcolor: "#276BC7",
           // for purple theme
           // bgcolor: "#7E4EFC",
           fontWeight: "fontWeightBold",

@@ -161,7 +161,7 @@ const ViewWallet = () => {
                   width: "2rem",
                   marginLeft: "1rem",
                   cursor: "pointer",
-                  color: "#CCCCFF",
+                  // color: "#CCCCFF",
                 }}
                 onClick={() => handleEditOpen()}
               >
@@ -177,7 +177,7 @@ const ViewWallet = () => {
           <Box
             component="div"
             sx={{
-              border: "1px solid #273546",
+              border: "1px solid #CCCCFF",
               borderRadius: "0.6rem",
               width: "100%",
               height: "100%",
@@ -210,13 +210,13 @@ const ViewWallet = () => {
                 <>
                   <Grid item xs="auto" md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Name</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{wallet?.user?.name}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Account type</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -224,14 +224,14 @@ const ViewWallet = () => {
                       </p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Sex</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{wallet?.user?.sex}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Updated At</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -243,19 +243,19 @@ const ViewWallet = () => {
                   </Grid>
                   <Grid item xs="auto" md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Email</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{wallet?.user?.email}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>City</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{wallet?.user?.city}</p>
                     </div>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Deactivated</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -297,14 +297,14 @@ const ViewWallet = () => {
                   </Grid>
                   <Grid item xs="auto" md={2}>
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Mobile No.</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{wallet?.user?.phone}</p>
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Created At</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>
@@ -315,7 +315,7 @@ const ViewWallet = () => {
                     </div>
 
                     <div>
-                      <div style={{ color: "#CCCCFF" }}>
+                      <div>
                         <b>Age</b>
                       </div>
                       <p style={{ color: "#6CA0DC" }}>{wallet?.user?.age}</p>
@@ -330,7 +330,7 @@ const ViewWallet = () => {
               <>
                 <div style={{ marginTop: "5rem" }}>
                   <div style={{ marginBottom: "2rem" }}>
-                    <div style={{ color: "#CCCCFF" }}>
+                    <div>
                       <b>Balance</b>
                     </div>
                     <Divider component="div" />

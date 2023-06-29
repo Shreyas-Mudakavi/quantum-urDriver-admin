@@ -22,8 +22,10 @@ const StyledRoot = styled(AppBar)(({ theme }) => ({
   // the black theme
   // ...bgBlur({ color: "#151419" }),
   // for new-zealnd theme
-  background: "linear-gradient(to right, #050A13, #26303C 67%, #306BAF)",
-  boxShadow: "none",
+  // background: "linear-gradient(to right, #050A13, #26303C 67%, #306BAF)",
+  backgroundColor: "#fff",
+  boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+  // boxShadow: "none",
 
   [theme.breakpoints.up("lg")]: {
     width: `calc(100% - ${NAV_WIDTH + 1}px)`,

@@ -95,7 +95,8 @@ export default function AccountPopover() {
             // for purple theme
             // backgroundColor: "#7E4EFC",
             // for new-zealdn theme
-            backgroundColor: "#161D28",
+            // backgroundColor: "#161D28",
+            backgroundColor: "#fff",
             boxShadow: "none",
             "& .MuiMenuItem-root": {
               typography: "body2",
