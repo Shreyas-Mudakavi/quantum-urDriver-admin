@@ -48,6 +48,222 @@ export default function DashboardAppPage() {
           >
             Hi, Welcome back
           </Typography>
+
+          <div
+            style={{
+              backgroundColor: "#fff",
+              boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+              marginTop: "2rem",
+            }}
+          >
+            <p
+              style={{
+                padding: "0.8rem 1rem",
+                marginBottom: "0rem",
+                fontWeight: 700,
+              }}
+            >
+              Users
+            </p>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6} md={3} sx={{}}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    background:
+                      "linear-gradient(to bottom, #06C5F7, #2C59D0, #3C28BE)",
+                    margin: "1rem",
+                    padding: "1rem 1rem",
+                    fontSize: "1.2rem",
+                    color: "#fff",
+                    fontWeight: 600,
+                    borderRadius: "10px",
+                  }}
+                >
+                  <span>Total Clients</span>
+                  <span style={{ fontSize: "2rem", marginTop: "0.5rem" }}>
+                    1
+                  </span>
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={6} md={3}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    background:
+                      "linear-gradient(to bottom, #06C5F7, #2C59D0, #3C28BE)",
+                    margin: "1rem",
+                    padding: "1rem 1rem",
+                    fontSize: "1.2rem",
+                    color: "#fff",
+                    fontWeight: 600,
+                    borderRadius: "10px",
+                  }}
+                >
+                  <span>Total Clients</span>
+                  <span style={{ fontSize: "2rem", marginTop: "0.5rem" }}>
+                    1
+                  </span>
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={6} md={3}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    background:
+                      "linear-gradient(to bottom, #06C5F7, #2C59D0, #3C28BE)",
+                    margin: "1rem",
+                    padding: "1rem 1rem",
+                    fontSize: "1.2rem",
+                    color: "#fff",
+                    fontWeight: 600,
+                    borderRadius: "10px",
+                  }}
+                >
+                  <span>Something here</span>
+                  <span style={{ fontSize: "2rem", marginTop: "0.5rem" }}>
+                    1
+                  </span>
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={6} md={3}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    background:
+                      "linear-gradient(to bottom, #06C5F7, #2C59D0, #3C28BE)",
+                    margin: "1rem",
+                    padding: "1rem 1rem",
+                    fontSize: "1.2rem",
+                    color: "#fff",
+                    fontWeight: 600,
+                    borderRadius: "10px",
+                  }}
+                >
+                  <span>Something here</span>
+                  <span style={{ fontSize: "2rem", marginTop: "0.5rem" }}>
+                    1
+                  </span>
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+
+          <div
+            style={{
+              backgroundColor: "#fff",
+              boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+              marginTop: "2rem",
+            }}
+          >
+            <p
+              style={{
+                padding: "0.8rem 1rem",
+                marginBottom: "0rem",
+                fontWeight: 700,
+              }}
+            >
+              Drivers
+            </p>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6} md={3} sx={{}}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    background:
+                      "linear-gradient(to bottom, #06C5F7, #2C59D0, #3C28BE)",
+                    margin: "1rem",
+                    padding: "1rem 1rem",
+                    fontSize: "1.2rem",
+                    color: "#fff",
+                    fontWeight: 600,
+                    borderRadius: "10px",
+                  }}
+                >
+                  <span>Total Clients</span>
+                  <span style={{ fontSize: "2rem", marginTop: "0.5rem" }}>
+                    1
+                  </span>
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={6} md={3}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    background:
+                      "linear-gradient(to bottom, #06C5F7, #2C59D0, #3C28BE)",
+                    margin: "1rem",
+                    padding: "1rem 1rem",
+                    fontSize: "1.2rem",
+                    color: "#fff",
+                    fontWeight: 600,
+                    borderRadius: "10px",
+                  }}
+                >
+                  <span>Total Clients</span>
+                  <span style={{ fontSize: "2rem", marginTop: "0.5rem" }}>
+                    1
+                  </span>
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={6} md={3}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    background:
+                      "linear-gradient(to bottom, #06C5F7, #2C59D0, #3C28BE)",
+                    margin: "1rem",
+                    padding: "1rem 1rem",
+                    fontSize: "1.2rem",
+                    color: "#fff",
+                    fontWeight: 600,
+                    borderRadius: "10px",
+                  }}
+                >
+                  <span>Something here</span>
+                  <span style={{ fontSize: "2rem", marginTop: "0.5rem" }}>
+                    1
+                  </span>
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={6} md={3}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    background:
+                      "linear-gradient(to bottom, #06C5F7, #2C59D0, #3C28BE)",
+                    margin: "1rem",
+                    padding: "1rem 1rem",
+                    fontSize: "1.2rem",
+                    color: "#fff",
+                    fontWeight: 600,
+                    borderRadius: "10px",
+                  }}
+                >
+                  <span>Something here</span>
+                  <span style={{ fontSize: "2rem", marginTop: "0.5rem" }}>
+                    1
+                  </span>
+                </div>
+              </Grid>
+            </Grid>
+          </div>
         </Container>
       </motion.div>
     </>
